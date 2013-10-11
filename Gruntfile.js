@@ -128,10 +128,11 @@ module.exports = function(grunt) {
       },
       misc: {
         files: [
-          {expand: true, flatten: true, src: ["bower_components/modernizr/modernizr.min.js"], dest: 'dist/js/vendor/'},
+          {expand: true, flatten: true, src: ["submodules/h5bp/js/vendor/modernizr-2.6.2.min.js"], dest: 'dist/js/vendor/'},
           {expand: true, flatten: true, src: ["bower_components/jquery/jquery.min.js"], dest: 'dist/js/vendor/'},
-          {expand: true, flatten: true, src: ["docs-assets/js/html5shiv.js"], dest: 'dist/js/vendor/'},
-          {expand: true, flatten: true, src: ["docs-assets/js/respond.min.js"], dest: 'dist/js/vendor/'},
+          {expand: true, flatten: true, src: ["bower_components/respond/respond.min.js"], dest: 'dist/js/vendor/'},
+          {expand: true, flatten: true, src: ["bower_components/react/react.min.js"], dest: 'dist/js/vendor/'},
+          {expand: true, flatten: true, src: ["bower_components/html5shiv/html5shiv.js"], dest: 'dist/js/vendor/'},
           {expand: true, flatten: true, src: ["docs-assets/ico/*"], dest: 'dist/img/ico/'},
           {expand: true, flatten: true, src: ["img/*"], dest: 'dist/img/'}
         ]
@@ -139,7 +140,7 @@ module.exports = function(grunt) {
       aws: {
         files: [
           {expand: true, flatten: true, src: ["dist/js/vendor/modernizr-2.6.2.min.js"], dest: 'aws/scripts/vendor/'},
-          {expand: true, flatten: true, src: ["dist/js/vendor/jquery-1.10.2.min.js"], dest: 'aws/scripts/vendor/'},
+          {expand: true, flatten: true, src: ["dist/js/vendor/jquery.min.js"], dest: 'aws/scripts/vendor/'},
           {expand: true, flatten: true, src: ["dist/js/vendor/html5shiv.js"], dest: 'aws/scripts/vendor/'},
           {expand: true, flatten: true, src: ["dist/js/vendor/respond.min.js"], dest: 'aws/scripts/vendor/'},
           {expand: true, flatten: true, src: ["dist/js/bootstrap.min.js"], dest: 'aws/scripts/vendor/'},
