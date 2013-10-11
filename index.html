@@ -1,16 +1,97 @@
----
-layout: home
-title: Bootstrap
-base_url: "./"
----
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Byron Gibson</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<main class="bs-masthead" id="content" role="main">
-  <div class="container">
-    <h1>Bootstrap</h1>
-    <p class="lead">Sleek, intuitive, and powerful mobile first front-end framework for faster and easier web development.</p>
-    <p>
-      <a href="{{ site.download_dist }}" class="btn btn-outline-inverse btn-lg" onclick="_gaq.push(['_trackEvent', 'Jumbotron actions', 'Download', 'Download {{ site.current_version }}']);">Download Bootstrap</a>
-      <a href="{{ site.download_source }}" class="btn btn-outline-inverse btn-lg" onclick="_gaq.push(['_trackEvent', 'Jumbotron actions', 'Download', 'Download {{ site.current_version source }}']);">Download source</a>
-    </p>
-  </div>
-</main>
+    <!--- Place favicon.ico and apple-touch-icon.png in the root directory --->
+
+    <!--- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries --->
+    <!--[if lt IE 9]>
+      <script src="/scripts/vendor/html5shiv.js"></script>
+      <script src="/scripts/vendor/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/main.min.css">
+    <script src="scripts/vendor/modernizr-2.6.2.min.js"></script>
+</head>
+<body>
+    <!--[if lt IE 7]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!---<main class="bs-masthead" role="main">--->
+
+        <div class="row">
+
+            <!-- Navbar -->
+            <nav class="navbar navbar-default nav-stacked" role="navigation">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/"><img src="/images/lightningNA_75x83.jpg" alt="Me at the Lightening North American Championships" class="img-circle img-responsive"></a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse navbar-ex1-collapse">
+                    
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="blog">Blog</a></li>
+                        <li><a href="/lab">Lab</a></li>
+                        <li><a href="/work">Work</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </nav>
+        </div>
+
+        <div class="row">
+            <!-- left sidebar -->
+            <div class="col-md-3">
+                <div class="lift:Msgs?showAll=true"></div>
+            </div>
+
+            <!-- main -->
+            <div class="col-md-6">
+                <div id="content">The main content will get bound here</div>
+            </div>
+
+            <!-- right sidebar -->
+            <aside class="col-md-3">
+                <div>Social Media</div>
+                <div>Github, Coderwall</div>
+                <div>Contact</div>
+            </aside>
+        </div>
+    <!--</div>--><!---</main>--->
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="scripts/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+    <script src="scripts/vendor/bootstrap.min.js"></script>
+    <script src="scripts/plugins.min.js"></script>
+    <script src="scripts/main.min.js"></script>
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+    <script>
+        (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+        function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+        e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+        e.src='//www.google-analytics.com/analytics.js';
+        r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+        ga('create','UA-XXXXX-X');ga('send','pageview');
+    </script>
+</body>
+</html>

@@ -70,13 +70,20 @@ module.exports = function(grunt) {
       bootstrap: {
         src: ['<%= concat.bootstrap.dest %>'],
         dest: 'dist/js/<%= pkg.name %>.min.js'
+      },
+      main: {
+        src: ['js/main.js'],
+        dest: 'dist/js/main.min.js'
+      },
+      plugins: {
+        src: ['js/plugins.js'],
+        dest: 'dist/js/plugins.min.js'
       }
     },
 
     recess: {
       options: {
-        compile: true,
-        banner: '<%= banner %>'
+        compile: true
       },
       bootstrap: {
         src: ['less/bootstrap.less'],
@@ -99,6 +106,17 @@ module.exports = function(grunt) {
         },
         src: ['less/theme.less'],
         dest: 'dist/css/<%= pkg.name %>-theme.min.css'
+      },
+      main: {
+        src: ['less/main.less'],
+        dest: 'dist/css/main.css'
+      },
+      main_min: {
+        options: {
+          compress: true
+        },
+        src: ['less/main.less'],
+        dest: 'dist/css/main.min.css'
       }
     },
 
@@ -107,6 +125,29 @@ module.exports = function(grunt) {
         expand: true,
         src: ["fonts/*"],
         dest: 'dist/'
+      },
+      misc: {
+        files: [
+          {expand: true, flatten: true, src: ["submodules/h5bp/js/vendor/modernizr-2.6.2.min.js"], dest: 'dist/js/vendor'},
+          {expand: true, flatten: true, src: ["submodules/h5bp/js/vendor/jquery-1.10.2.min.js"], dest: 'dist/js/vendor'},
+          {expand: true, flatten: true, src: ["docs-assets/js/html5shiv.js"], dest: 'dist/js/vendor'},
+          {expand: true, flatten: true, src: ["docs-assets/js/respond.min.js"], dest: 'dist/js/vendor'},
+        ]
+      },
+      aws: {
+        files: [
+          {expand: true, flatten: true, src: ["dist/js/vendor/modernizr-2.6.2.min.js"], dest: 'aws/scripts/vendor'},
+          {expand: true, flatten: true, src: ["dist/js/vendor/jquery-1.10.2.min.js"], dest: 'aws/scripts/'},
+          {expand: true, flatten: true, src: ["dist/js/vendor/html5shiv.js"], dest: 'aws/scripts/'},
+          {expand: true, flatten: true, src: ["dist/js/vendor/respond.min.js"], dest: 'aws/scripts/'},
+          {expand: true, flatten: true, src: ["dist/js/bootstrap.min.js"], dest: 'aws/scripts/'},
+          {expand: true, flatten: true, src: ["dist/js/main.min.js"], dest: 'aws/scripts/'},
+          {expand: true, flatten: true, src: ["dist/js/plugins.min.js"], dest: 'aws/scripts/'},
+          {expand: true, flatten: true, src: ["dist/css/bootstrap.min.css"], dest: 'aws/styles/'},
+          {expand: true, flatten: true, src: ["dist/css/main.min.css"], dest: 'aws/styles/'},
+          {expand: true, flatten: true, src: ["dist/fonts/*"], dest: 'aws/fonts/'}
+          {expand: true, flatten: true, src: ["dist/images/*"], dest: 'aws/images/'}
+        ]
       }
     },
 
@@ -121,7 +162,8 @@ module.exports = function(grunt) {
       server: {
         options: {
           port: 3000,
-          base: '.'
+          base: '.',
+          keepalive: true
         }
       }
     },
@@ -154,7 +196,6 @@ module.exports = function(grunt) {
       }
     }
   });
-
 
   // These plugins provide necessary tasks.
   grunt.loadNpmTasks('browserstack-runner');
