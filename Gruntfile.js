@@ -128,8 +128,8 @@ module.exports = function(grunt) {
       },
       misc: {
         files: [
-          {expand: true, flatten: true, src: ["submodules/h5bp/js/vendor/modernizr-2.6.2.min.js"], dest: 'dist/js/vendor/'},
-          {expand: true, flatten: true, src: ["submodules/h5bp/js/vendor/jquery-1.10.2.min.js"], dest: 'dist/js/vendor/'},
+          {expand: true, flatten: true, src: ["bower_components/modernizr/modernizr.min.js"], dest: 'dist/js/vendor/'},
+          {expand: true, flatten: true, src: ["bower_components/jquery/jquery.min.js"], dest: 'dist/js/vendor/'},
           {expand: true, flatten: true, src: ["docs-assets/js/html5shiv.js"], dest: 'dist/js/vendor/'},
           {expand: true, flatten: true, src: ["docs-assets/js/respond.min.js"], dest: 'dist/js/vendor/'},
           {expand: true, flatten: true, src: ["docs-assets/ico/*"], dest: 'dist/img/ico/'},
@@ -204,7 +204,7 @@ module.exports = function(grunt) {
       },
       recess: {
         files: 'less/*.less',
-        tasks: ['recess']
+        tasks: ['recess', 'copy']
       }
     }
   });
@@ -244,10 +244,10 @@ module.exports = function(grunt) {
   grunt.registerTask('dist-css', ['recess']);
 
   // Fonts distribution task.
-  grunt.registerTask('dist-fonts', ['copy']);
+  grunt.registerTask('dist-all', ['copy']);
 
   // Full distribution task.
-  grunt.registerTask('dist', ['clean', 'dist-css', 'dist-js', 'dist-fonts']);
+  grunt.registerTask('dist', ['clean', 'dist-css', 'dist-js', 'dist-all']);
 
   // Default task.
   grunt.registerTask('default', ['test', 'dist', 'build-customizer']);
