@@ -41,7 +41,7 @@ module.exports = function(grunt) {
     concat: {
       options: {
         banner: '<%= banner %><%= jqueryCheck %>',
-        stripBanners: false
+        stripBanners: true
       },
       bootstrap: {
         src: [
@@ -128,25 +128,37 @@ module.exports = function(grunt) {
       },
       misc: {
         files: [
-          {expand: true, flatten: true, src: ["submodules/h5bp/js/vendor/modernizr-2.6.2.min.js"], dest: 'dist/js/vendor'},
-          {expand: true, flatten: true, src: ["submodules/h5bp/js/vendor/jquery-1.10.2.min.js"], dest: 'dist/js/vendor'},
-          {expand: true, flatten: true, src: ["docs-assets/js/html5shiv.js"], dest: 'dist/js/vendor'},
-          {expand: true, flatten: true, src: ["docs-assets/js/respond.min.js"], dest: 'dist/js/vendor'},
+          {expand: true, flatten: true, src: ["submodules/h5bp/js/vendor/modernizr-2.6.2.min.js"], dest: 'dist/js/vendor/'},
+          {expand: true, flatten: true, src: ["submodules/h5bp/js/vendor/jquery-1.10.2.min.js"], dest: 'dist/js/vendor/'},
+          {expand: true, flatten: true, src: ["docs-assets/js/html5shiv.js"], dest: 'dist/js/vendor/'},
+          {expand: true, flatten: true, src: ["docs-assets/js/respond.min.js"], dest: 'dist/js/vendor/'},
+          {expand: true, flatten: true, src: ["docs-assets/ico/*"], dest: 'dist/img/ico/'},
+          {expand: true, flatten: true, src: ["img/*"], dest: 'dist/img/'}
         ]
       },
       aws: {
         files: [
-          {expand: true, flatten: true, src: ["dist/js/vendor/modernizr-2.6.2.min.js"], dest: 'aws/scripts/vendor'},
-          {expand: true, flatten: true, src: ["dist/js/vendor/jquery-1.10.2.min.js"], dest: 'aws/scripts/'},
-          {expand: true, flatten: true, src: ["dist/js/vendor/html5shiv.js"], dest: 'aws/scripts/'},
-          {expand: true, flatten: true, src: ["dist/js/vendor/respond.min.js"], dest: 'aws/scripts/'},
-          {expand: true, flatten: true, src: ["dist/js/bootstrap.min.js"], dest: 'aws/scripts/'},
-          {expand: true, flatten: true, src: ["dist/js/main.min.js"], dest: 'aws/scripts/'},
+          {expand: true, flatten: true, src: ["dist/js/vendor/modernizr-2.6.2.min.js"], dest: 'aws/scripts/vendor/'},
+          {expand: true, flatten: true, src: ["dist/js/vendor/jquery-1.10.2.min.js"], dest: 'aws/scripts/vendor/'},
+          {expand: true, flatten: true, src: ["dist/js/vendor/html5shiv.js"], dest: 'aws/scripts/vendor/'},
+          {expand: true, flatten: true, src: ["dist/js/vendor/respond.min.js"], dest: 'aws/scripts/vendor/'},
+          {expand: true, flatten: true, src: ["dist/js/bootstrap.min.js"], dest: 'aws/scripts/vendor/'},
           {expand: true, flatten: true, src: ["dist/js/plugins.min.js"], dest: 'aws/scripts/'},
+          {expand: true, flatten: true, src: ["dist/js/main.min.js"], dest: 'aws/scripts/'},
+          {expand: true, flatten: true, src: ["dist/css/bootstrap-theme.min.css"], dest: 'aws/styles/'},
           {expand: true, flatten: true, src: ["dist/css/bootstrap.min.css"], dest: 'aws/styles/'},
           {expand: true, flatten: true, src: ["dist/css/main.min.css"], dest: 'aws/styles/'},
-          {expand: true, flatten: true, src: ["dist/fonts/*"], dest: 'aws/fonts/'}
-          {expand: true, flatten: true, src: ["dist/images/*"], dest: 'aws/images/'}
+          {expand: true, flatten: true, src: ["dist/fonts/*"], dest: 'aws/fonts/'},
+          {expand: true, flatten: true, src: ["dist/img/*"], dest: 'aws/images/'},
+          {expand: true, flatten: true, src: ["dist/img/ico/*.png"], dest: 'aws/images/ico'},
+          {expand: true, flatten: true, src: ["index.html"], dest: 'aws/'},
+          {expand: true, flatten: true, src: ["submodules/h5bp/css/normalize.css"], dest: 'aws/styles/'},
+          {expand: true, flatten: true, src: ["submodules/h5bp/404.html"], dest: 'aws/'},
+          {expand: true, flatten: true, src: ["submodules/h5bp/apple-touch-icon-precomposed.png"], dest: 'aws/'},
+          {expand: true, flatten: true, src: ["submodules/h5bp/crossdomain.xml"], dest: 'aws/'},
+          {expand: true, flatten: true, src: ["submodules/h5bp/favicon.ico"], dest: 'aws/'},
+          {expand: true, flatten: true, src: ["submodules/h5bp/humans.txt"], dest: 'aws/'},
+          {expand: true, flatten: true, src: ["submodules/h5bp/robots.txt"], dest: 'aws/'}
         ]
       }
     },
@@ -202,14 +214,14 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-connect');
-  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-qunit');
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-html-validation');
   grunt.loadNpmTasks('grunt-jekyll');
   grunt.loadNpmTasks('grunt-recess');
+  grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Docs HTML validation task
   grunt.registerTask('validate-html', ['jekyll', 'validation']);
@@ -235,7 +247,7 @@ module.exports = function(grunt) {
   grunt.registerTask('dist-fonts', ['copy']);
 
   // Full distribution task.
-  grunt.registerTask('dist', ['clean', 'dist-css', 'dist-fonts', 'dist-js']);
+  grunt.registerTask('dist', ['clean', 'dist-css', 'dist-js', 'dist-fonts']);
 
   // Default task.
   grunt.registerTask('default', ['test', 'dist', 'build-customizer']);
