@@ -122,18 +122,25 @@ module.exports = function(grunt) {
 
     copy: {
       fonts: {
-        expand: true,
-        src: ["fonts/*"],
-        dest: 'dist/'
       },
-      misc: {
+      dist: {
         files: [
+          {expand: true, flatten: true, src: ["fonts/*"], dest: 'dist/fonts/'},
+          {expand: true, flatten: true, src: ["index.html"], dest: 'dist/'},
+          {expand: true, flatten: true, src: ["submodules/h5bp/css/normalize.css"], dest: 'dist/css/'},
+          {expand: true, flatten: true, src: ["submodules/h5bp/404.html"], dest: 'dist/'},
+          {expand: true, flatten: true, src: ["submodules/h5bp/crossdomain.xml"], dest: 'dist/'},
+          {expand: true, flatten: true, src: ["submodules/h5bp/favicon.ico"], dest: 'dist/img/ico/h5bp'},
+          {expand: true, flatten: true, src: ["submodules/h5bp/humans.txt"], dest: 'dist/'},
+          {expand: true, flatten: true, src: ["submodules/h5bp/robots.txt"], dest: 'dist/'},
           {expand: true, flatten: true, src: ["submodules/h5bp/js/vendor/modernizr-2.6.2.min.js"], dest: 'dist/js/vendor/'},
+          {expand: true, flatten: true, src: ["submodules/h5bp/apple-touch-icon-precomposed.png"], dest: 'dist/img/ico/h5bp/'},
+          {expand: true, flatten: true, src: ["submodules/h5bp/favicon.ico"], dest: 'dist/img/ico/h5bp/'},
+          {expand: true, flatten: true, src: ["docs-assets/ico/*"], dest: 'dist/img/ico/bootstrap/'},
           {expand: true, flatten: true, src: ["bower_components/jquery/jquery.min.js"], dest: 'dist/js/vendor/'},
           {expand: true, flatten: true, src: ["bower_components/respond/respond.min.js"], dest: 'dist/js/vendor/'},
           {expand: true, flatten: true, src: ["bower_components/react/react.min.js"], dest: 'dist/js/vendor/'},
           {expand: true, flatten: true, src: ["bower_components/html5shiv/html5shiv.js"], dest: 'dist/js/vendor/'},
-          {expand: true, flatten: true, src: ["docs-assets/ico/*"], dest: 'dist/img/ico/'},
           {expand: true, flatten: true, src: ["img/*"], dest: 'dist/img/'}
         ]
       },
@@ -152,15 +159,16 @@ module.exports = function(grunt) {
           {expand: true, flatten: true, src: ["dist/css/main.min.css"], dest: 'aws/styles/'},
           {expand: true, flatten: true, src: ["dist/fonts/*"], dest: 'aws/fonts/'},
           {expand: true, flatten: true, src: ["dist/img/*"], dest: 'aws/images/'},
-          {expand: true, flatten: true, src: ["dist/img/ico/*.png"], dest: 'aws/images/ico'},
-          {expand: true, flatten: true, src: ["index.html"], dest: 'aws/'},
-          {expand: true, flatten: true, src: ["submodules/h5bp/css/normalize.css"], dest: 'aws/styles/'},
-          {expand: true, flatten: true, src: ["submodules/h5bp/404.html"], dest: 'aws/'},
-          {expand: true, flatten: true, src: ["submodules/h5bp/apple-touch-icon-precomposed.png"], dest: 'aws/'},
-          {expand: true, flatten: true, src: ["submodules/h5bp/crossdomain.xml"], dest: 'aws/'},
-          {expand: true, flatten: true, src: ["submodules/h5bp/favicon.ico"], dest: 'aws/'},
-          {expand: true, flatten: true, src: ["submodules/h5bp/humans.txt"], dest: 'aws/'},
-          {expand: true, flatten: true, src: ["submodules/h5bp/robots.txt"], dest: 'aws/'}
+          {expand: true, flatten: true, src: ["dist/img/ico/bootstrap/*"], dest: 'aws/images/ico/bootstrap/'},
+          {expand: true, flatten: true, src: ["dist/img/ico/h5bp/*"], dest: 'aws/images/ico/h5bp/'},
+          {expand: true, flatten: true, src: ["dist/css/normalize.css"], dest: 'aws/styles/'},
+          {expand: true, flatten: true, src: ["dist/img/ico/h5bp/apple-touch-icon-precomposed.png"], dest: 'aws/images/ico/h5bp'},
+          {expand: true, flatten: true, src: ["dist/img/ico/h5bp/favicon.ico"], dest: 'aws/images/ico/h5bp'},
+          {expand: true, flatten: true, src: ["dist/404.html"], dest: 'aws/'},
+          {expand: true, flatten: true, src: ["dist/crossdomain.xml"], dest: 'aws/'},
+          {expand: true, flatten: true, src: ["dist/humans.txt"], dest: 'aws/'},
+          {expand: true, flatten: true, src: ["dist/robots.txt"], dest: 'aws/'},
+          {expand: true, flatten: true, src: ["dist/index.html"], dest: 'aws/'},
         ]
       }
     },
