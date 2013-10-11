@@ -174,7 +174,7 @@ module.exports = function(grunt) {
       server: {
         options: {
           port: 3000,
-          base: '.',
+          base: './aws/',
           keepalive: true
         }
       }
