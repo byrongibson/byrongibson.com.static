@@ -142,6 +142,7 @@ module.exports = function(grunt) {
           {expand: true, flatten: true, src: ["dist/js/vendor/modernizr-2.6.2.min.js"], dest: 'aws/scripts/vendor/'},
           {expand: true, flatten: true, src: ["dist/js/vendor/jquery.min.js"], dest: 'aws/scripts/vendor/'},
           {expand: true, flatten: true, src: ["dist/js/vendor/html5shiv.js"], dest: 'aws/scripts/vendor/'},
+          {expand: true, flatten: true, src: ["dist/js/vendor/react.min.js"], dest: 'aws/scripts/vendor/'},
           {expand: true, flatten: true, src: ["dist/js/vendor/respond.min.js"], dest: 'aws/scripts/vendor/'},
           {expand: true, flatten: true, src: ["dist/js/bootstrap.min.js"], dest: 'aws/scripts/vendor/'},
           {expand: true, flatten: true, src: ["dist/js/plugins.min.js"], dest: 'aws/scripts/'},
