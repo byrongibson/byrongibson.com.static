@@ -43,7 +43,6 @@ module.exports = function(grunt) {
 
     concat: {
       options: {
-        banner: '<%= banner %><%= jqueryCheck %>',
         stripBanners: true
       },
       bootstrap: {
@@ -62,6 +61,14 @@ module.exports = function(grunt) {
           'js/affix.js'
         ],
         dest: 'dist/js/lib/<%= pkg.name %>.js'
+      },
+      html_index: {
+        src: [
+            'html/head.html',
+            'html/index.html',
+            'html/foot.html'
+        ],
+        dest: 'dist/index.html'
       }
     },
 
@@ -159,7 +166,6 @@ module.exports = function(grunt) {
           {expand: true, flatten: true, src: ["bower_components/react/react.min.js"], dest: 'dist/js/lib/'},
           {expand: true, flatten: true, src: ["docs-assets/ico/*"], dest: 'dist/img/ico/bootstrap/'},
           {expand: true, flatten: true, src: ["fonts/*"], dest: 'dist/fonts/'},
-          {expand: true, flatten: true, src: ["index.html"], dest: 'dist/'},
           {expand: true, flatten: true, src: ["img/*"], dest: 'dist/img/'}
         ]
       },
