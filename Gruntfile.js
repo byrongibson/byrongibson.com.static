@@ -14,7 +14,10 @@ module.exports = function(grunt) {
               ' * Copyright <%= grunt.template.today("yyyy") %> <%= pkg.author %>\n' +
               ' * Licensed under <%= _.pluck(pkg.licenses, "url").join(", ") %>\n' +
               ' *\n' +
-              ' * Designed and built with all the love in the world by @mdo and @fat.\n' +
+              ' * Bootstrap designed and built with all the love in the world by @mdo and @fat.\n' +
+              ' *\n' +
+              ' * Custom code by Byron Gibson:\n' +
+              ' * Namely main.less, main.js, main.min.css, main.min.js, and a few tweaks to Variables.less.\n' +
               ' */\n',
     jqueryCheck: 'if (typeof jQuery === "undefined") { throw new Error("Bootstrap requires jQuery") }\n\n',
 
@@ -58,18 +61,33 @@ module.exports = function(grunt) {
           'js/tab.js',
           'js/affix.js'
         ],
-        dest: 'dist/js/<%= pkg.name %>.js'
+        dest: 'dist/js/lib/<%= pkg.name %>.js'
       }
     },
 
     uglify: {
       options: {
-        banner: '<%= banner %>',
         report: 'min'
       },
       bootstrap: {
         src: ['<%= concat.bootstrap.dest %>'],
-        dest: 'dist/js/<%= pkg.name %>.min.js'
+        dest: 'dist/js/lib/<%= pkg.name %>.min.js'
+      },
+      modernizr: {
+        src: ['bower_components/modernizr/modernizr.js'],
+        dest: 'dist/js/lib/modernizr.min.js'
+      },
+      html5shiv: {
+        src: ['bower_components/html5shiv/dist/html5shiv.js'],
+        dest: 'dist/js/lib/html5shiv.min.js'
+      },
+      html5shivprintshiv: {
+        src: ['bower_components/html5shiv/dist/html5shiv-printshiv.js'],
+        dest: 'dist/js/lib/html5shiv-printshiv.min.js'
+      },
+      requirejs: {
+        src: ['bower_components/requirejs/require.js'],
+        dest: 'dist/js/require.min.js'
       },
       main: {
         src: ['js/main.js'],
@@ -87,25 +105,29 @@ module.exports = function(grunt) {
       },
       bootstrap: {
         src: ['less/bootstrap.less'],
-        dest: 'dist/css/<%= pkg.name %>.css'
+        dest: 'dist/css/lib/<%= pkg.name %>.css'
       },
       min: {
         options: {
           compress: true
         },
         src: ['less/bootstrap.less'],
-        dest: 'dist/css/<%= pkg.name %>.min.css'
+        dest: 'dist/css/lib/<%= pkg.name %>.min.css'
       },
       theme: {
         src: ['less/theme.less'],
-        dest: 'dist/css/<%= pkg.name %>-theme.css'
+        dest: 'dist/css/lib/<%= pkg.name %>-theme.css'
       },
       theme_min: {
         options: {
           compress: true
         },
         src: ['less/theme.less'],
-        dest: 'dist/css/<%= pkg.name %>-theme.min.css'
+        dest: 'dist/css/lib/<%= pkg.name %>-theme.min.css'
+      },
+      normalize: {
+        src: ['bower_components/html5-boilerplate/css/normalize.css'],
+        dest: 'dist/css/lib/normalize.min.css'
       },
       main: {
         src: ['less/main.less'],
@@ -125,7 +147,6 @@ module.exports = function(grunt) {
       },
       dist: {
         files: [
-          {expand: true, flatten: true, src: ["bower_components/html5-boilerplate/css/normalize.css"], dest: 'dist/css/'},
           {expand: true, flatten: true, src: ["bower_components/html5-boilerplate/404.html"], dest: 'dist/'},
           {expand: true, flatten: true, src: ["bower_components/html5-boilerplate/crossdomain.xml"], dest: 'dist/'},
           {expand: true, flatten: true, src: ["bower_components/html5-boilerplate/favicon.ico"], dest: 'dist/img/ico/h5bp'},
@@ -134,10 +155,8 @@ module.exports = function(grunt) {
           {expand: true, flatten: true, src: ["bower_components/html5-boilerplate/apple-touch-icon-precomposed.png"], dest: 'dist/img/ico/h5bp/'},
           {expand: true, flatten: true, src: ["bower_components/html5-boilerplate/favicon.ico"], dest: 'dist/img/ico/h5bp/'},
           {expand: true, flatten: true, src: ["bower_components/jquery/jquery.min.js"], dest: 'dist/js/lib/'},
-          {expand: true, flatten: true, src: ["bower_components/modernizr/modernizr.js"], dest: 'dist/js/lib/'},
           {expand: true, flatten: true, src: ["bower_components/respond/respond.min.js"], dest: 'dist/js/lib/'},
           {expand: true, flatten: true, src: ["bower_components/react/react.min.js"], dest: 'dist/js/lib/'},
-          {expand: true, flatten: true, src: ["bower_components/html5shiv/html5shiv.js"], dest: 'dist/js/lib/'},
           {expand: true, flatten: true, src: ["docs-assets/ico/*"], dest: 'dist/img/ico/bootstrap/'},
           {expand: true, flatten: true, src: ["fonts/*"], dest: 'dist/fonts/'},
           {expand: true, flatten: true, src: ["index.html"], dest: 'dist/'},
@@ -146,22 +165,24 @@ module.exports = function(grunt) {
       },
       aws: {
         files: [
-          {expand: true, flatten: true, src: ["dist/js/lib/modernizr-2.6.2.min.js"], dest: 'aws/scripts/lib/'},
+          {expand: true, flatten: true, src: ["dist/js/lib/modernizr.min.js"], dest: 'aws/scripts/lib/'},
           {expand: true, flatten: true, src: ["dist/js/lib/jquery.min.js"], dest: 'aws/scripts/lib/'},
-          {expand: true, flatten: true, src: ["dist/js/lib/html5shiv.js"], dest: 'aws/scripts/lib/'},
+          {expand: true, flatten: true, src: ["dist/js/lib/html5shiv.min.js"], dest: 'aws/scripts/lib/'},
+          {expand: true, flatten: true, src: ["dist/js/lib/html5shiv-printshiv.min.js"], dest: 'aws/scripts/lib/'},
           {expand: true, flatten: true, src: ["dist/js/lib/react.min.js"], dest: 'aws/scripts/lib/'},
           {expand: true, flatten: true, src: ["dist/js/lib/respond.min.js"], dest: 'aws/scripts/lib/'},
-          {expand: true, flatten: true, src: ["dist/js/bootstrap.min.js"], dest: 'aws/scripts/lib/'},
+          {expand: true, flatten: true, src: ["dist/js/lib/bootstrap.min.js"], dest: 'aws/scripts/lib/'},
+          {expand: true, flatten: true, src: ["dist/js/require.min.js"], dest: 'aws/scripts/'},
           {expand: true, flatten: true, src: ["dist/js/plugins.min.js"], dest: 'aws/scripts/'},
           {expand: true, flatten: true, src: ["dist/js/main.min.js"], dest: 'aws/scripts/'},
-          {expand: true, flatten: true, src: ["dist/css/bootstrap-theme.min.css"], dest: 'aws/styles/'},
-          {expand: true, flatten: true, src: ["dist/css/bootstrap.min.css"], dest: 'aws/styles/'},
+          {expand: true, flatten: true, src: ["dist/css/lib/bootstrap-theme.min.css"], dest: 'aws/styles/lib/'},
+          {expand: true, flatten: true, src: ["dist/css/lib/bootstrap.min.css"], dest: 'aws/styles/lib/'},
           {expand: true, flatten: true, src: ["dist/css/main.min.css"], dest: 'aws/styles/'},
           {expand: true, flatten: true, src: ["dist/fonts/*"], dest: 'aws/fonts/'},
           {expand: true, flatten: true, src: ["dist/img/*"], dest: 'aws/images/'},
           {expand: true, flatten: true, src: ["dist/img/ico/bootstrap/*"], dest: 'aws/images/ico/bootstrap/'},
           {expand: true, flatten: true, src: ["dist/img/ico/h5bp/*"], dest: 'aws/images/ico/h5bp/'},
-          {expand: true, flatten: true, src: ["dist/css/normalize.css"], dest: 'aws/styles/'},
+          {expand: true, flatten: true, src: ["dist/css/lib/normalize.min.css"], dest: 'aws/styles/lib/'},
           {expand: true, flatten: true, src: ["dist/img/ico/h5bp/apple-touch-icon-precomposed.png"], dest: 'aws/images/ico/h5bp'},
           {expand: true, flatten: true, src: ["dist/img/ico/h5bp/favicon.ico"], dest: 'aws/images/ico/h5bp'},
           {expand: true, flatten: true, src: ["dist/404.html"], dest: 'aws/'},
