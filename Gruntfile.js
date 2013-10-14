@@ -65,6 +65,7 @@ module.exports = function(grunt) {
       html_index: {
         src: [
             'html/head.html',
+            'html/header.html',
             'html/index.html',
             'html/foot.html'
         ],
