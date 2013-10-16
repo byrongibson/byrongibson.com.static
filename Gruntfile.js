@@ -93,6 +93,10 @@ module.exports = function(grunt) {
         src: ['bower_components/html5shiv/dist/html5shiv-printshiv.js'],
         dest: 'dist/js/lib/html5shiv-printshiv.min.js'
       },
+      JSXTransformer: {
+        src: ['bower_components/react/JSXTransformer.js'],
+        dest: 'dist/js/lib/JSXTransformer.min.js'
+      },
       requirejs: {
         src: ['bower_components/requirejs/require.js'],
         dest: 'dist/js/require.min.js'
@@ -178,6 +182,7 @@ module.exports = function(grunt) {
           {expand: true, flatten: true, src: ["dist/js/lib/html5shiv.min.js"], dest: 'aws/scripts/lib/'},
           {expand: true, flatten: true, src: ["dist/js/lib/html5shiv-printshiv.min.js"], dest: 'aws/scripts/lib/'},
           {expand: true, flatten: true, src: ["dist/js/lib/react.min.js"], dest: 'aws/scripts/lib/'},
+          {expand: true, flatten: true, src: ["dist/js/lib/JSXTransformer.min.js"], dest: 'aws/scripts/lib/'},
           {expand: true, flatten: true, src: ["dist/js/lib/d3.min.js"], dest: 'aws/scripts/lib/'},
           {expand: true, flatten: true, src: ["dist/js/lib/respond.min.js"], dest: 'aws/scripts/lib/'},
           {expand: true, flatten: true, src: ["dist/js/lib/bootstrap.min.js"], dest: 'aws/scripts/lib/'},
