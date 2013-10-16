@@ -2,7 +2,14 @@
 
 // async load libs
 // http://www.requirejs.org/docs/start.html
-require(["lib/bootstrap.min", "lib/jquery.min", "lib/react.min", "lib/d3.js", "plugins.min"], function(util) {
+require([
+    "lib/bootstrap.min", 
+    "lib/jquery.min", 
+    "lib/react.min", 
+    "lib/JSXTransformer.min", 
+    "lib/d3.min", 
+    "plugins.min"
+], function(util) {
     //This function is called when scripts/helper/util.js is loaded.
     //If util.js calls define(), then this function is not fired until
     //util's dependencies have loaded, and the util argument will hold
@@ -10,4 +17,9 @@ require(["lib/bootstrap.min", "lib/jquery.min", "lib/react.min", "lib/d3.js", "p
     
     // test load success 
     //alert("require.js loaded");
+
+    React.renderComponent(
+        React.DOM.h1(null, 'Hello World.'),
+        document.getElementById('helloworld')
+    );
 });
