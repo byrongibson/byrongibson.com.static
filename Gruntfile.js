@@ -165,6 +165,7 @@ module.exports = function(grunt) {
           {expand: true, flatten: true, src: ["bower_components/jquery/jquery.min.js"], dest: 'dist/js/lib/'},
           {expand: true, flatten: true, src: ["bower_components/respond/respond.min.js"], dest: 'dist/js/lib/'},
           {expand: true, flatten: true, src: ["bower_components/react/react.min.js"], dest: 'dist/js/lib/'},
+          {expand: true, flatten: true, src: ["bower_components/d3/d3.min.js"], dest: 'dist/js/lib/'},
           {expand: true, flatten: true, src: ["docs-assets/ico/*"], dest: 'dist/img/ico/bootstrap/'},
           {expand: true, flatten: true, src: ["fonts/*"], dest: 'dist/fonts/'},
           {expand: true, flatten: true, src: ["img/*"], dest: 'dist/img/'}
@@ -177,6 +178,7 @@ module.exports = function(grunt) {
           {expand: true, flatten: true, src: ["dist/js/lib/html5shiv.min.js"], dest: 'aws/scripts/lib/'},
           {expand: true, flatten: true, src: ["dist/js/lib/html5shiv-printshiv.min.js"], dest: 'aws/scripts/lib/'},
           {expand: true, flatten: true, src: ["dist/js/lib/react.min.js"], dest: 'aws/scripts/lib/'},
+          {expand: true, flatten: true, src: ["dist/js/lib/d3.min.js"], dest: 'aws/scripts/lib/'},
           {expand: true, flatten: true, src: ["dist/js/lib/respond.min.js"], dest: 'aws/scripts/lib/'},
           {expand: true, flatten: true, src: ["dist/js/lib/bootstrap.min.js"], dest: 'aws/scripts/lib/'},
           {expand: true, flatten: true, src: ["dist/js/require.min.js"], dest: 'aws/scripts/'},
