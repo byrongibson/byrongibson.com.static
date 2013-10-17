@@ -74,7 +74,7 @@ module.exports = function(grunt) {
       },
       html_error: {
         src: [
-            'src/html/head_error.html',
+            'src/html/head.html',
             'src/html/header.html',
             'src/html/error.html',
             'src/html/foot.html'
