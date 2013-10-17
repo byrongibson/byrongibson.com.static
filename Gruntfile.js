@@ -71,6 +71,15 @@ module.exports = function(grunt) {
             'src/html/foot.html'
         ],
         dest: 'dist/index.html'
+      },
+      html_error: {
+        src: [
+            'src/html/head_error.html',
+            'src/html/header.html',
+            'src/html/error.html',
+            'src/html/foot.html'
+        ],
+        dest: 'dist/error.html'
       }
     },
 
@@ -177,10 +186,31 @@ module.exports = function(grunt) {
       }
     },
 
+    htmlmin: {                                      // Task
+        dist: {                                     // Target
+            options: {                              // Target options: https://github.com/gruntjs/grunt-contrib-htmlmin
+                removeComments: true,
+                collapseWhitespace: true,
+                removeCommentsFromCDATA: true,
+                removeCDATASectionsFromCDATA: false,
+                collapseBooleanAttributes: false,
+                removeAttributeQuotes: false,
+                removeRedundantAttributes: false,
+                useShortDoctype: false,
+                removeEmptyAttributes: true,
+                removeOptionalTags: false,
+                removeEmptyElements: false
+            },
+            files: {                                        // Dictionary of files
+                'aws/index.html': 'dist/index.html',        // 'destination': 'source'
+                'aws/error.html': 'dist/error.html'
+            }
+        }
+    },
+
     copy: {
       dist: {
         files: [
-          {expand: true, flatten: true, src: ["bower_components/html5-boilerplate/404.html"], dest: 'dist/'},
           {expand: true, flatten: true, src: ["bower_components/html5-boilerplate/crossdomain.xml"], dest: 'dist/'},
           {expand: true, flatten: true, src: ["bower_components/html5-boilerplate/favicon.ico"], dest: 'dist/img/ico/h5bp'},
           {expand: true, flatten: true, src: ["bower_components/html5-boilerplate/humans.txt"], dest: 'dist/'},
@@ -216,11 +246,9 @@ module.exports = function(grunt) {
           {expand: true, flatten: true, src: ["dist/css/lib/normalize.css"], dest: 'aws/styles/lib/'},
           {expand: true, flatten: true, src: ["dist/img/ico/h5bp/apple-touch-icon-precomposed.png"], dest: 'aws/images/ico/h5bp'},
           {expand: true, flatten: true, src: ["dist/img/ico/h5bp/favicon.ico"], dest: 'aws/images/ico/h5bp'},
-          {expand: true, flatten: true, src: ["dist/404.html"], dest: 'aws/'},
           {expand: true, flatten: true, src: ["dist/crossdomain.xml"], dest: 'aws/'},
           {expand: true, flatten: true, src: ["dist/humans.txt"], dest: 'aws/'},
           {expand: true, flatten: true, src: ["dist/robots.txt"], dest: 'aws/'},
-          {expand: true, flatten: true, src: ["dist/index.html"], dest: 'aws/'},
         ]
       }
     },
@@ -280,8 +308,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-qunit');
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-html-validation');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-htmlmin');
+  grunt.loadNpmTasks('grunt-html-validation');
   grunt.loadNpmTasks('grunt-jekyll');
   grunt.loadNpmTasks('grunt-recess');
   /*grunt.loadNpmTasks('grunt-rename');*/
@@ -305,12 +334,15 @@ module.exports = function(grunt) {
 
   // CSS distribution task.
   grunt.registerTask('dist-css', ['recess']);
+  
+  // HTML distribution task.
+  grunt.registerTask('dist-html', ['htmlmin']);
 
   // Fonts distribution task.
   grunt.registerTask('dist-all', ['copy']);
 
   // Full distribution task.
-  grunt.registerTask('dist', ['clean', 'dist-css', 'dist-js', 'dist-all']);
+  grunt.registerTask('dist', ['clean', 'dist-css', 'dist-js', 'dist-html', 'dist-all']);
 
   // Default task.
   grunt.registerTask('default', ['test', 'dist', 'build-customizer']);

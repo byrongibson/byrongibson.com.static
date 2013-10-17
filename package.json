@@ -39,6 +39,8 @@
     "grunt-html-validation": "~0.1.5",
     "grunt-jekyll": "~0.4.0",
     "grunt-recess": "~0.4.0",
-    "grunt-rename": "~0.1.3"
+    "grunt-rename": "~0.1.3",
+    "grunt-contrib": "~0.8.0",
+    "less": "~1.4.2"
   }
 }
