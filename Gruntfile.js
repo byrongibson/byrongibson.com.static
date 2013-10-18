@@ -65,19 +65,19 @@ module.exports = function(grunt) {
       },
       html_index: {
         src: [
-            'src/html/head.html',
-            'src/html/header.html',
-            'src/html/index.html',
-            'src/html/foot.html'
+            'src/html/_head.html',
+            'src/html/_header.html',
+            'src/html/_index.html',
+            'src/html/_foot.html'
         ],
         dest: 'dist/index.html'
       },
       html_error: {
         src: [
-            'src/html/head.html',
-            'src/html/header.html',
-            'src/html/error.html',
-            'src/html/foot.html'
+            'src/html/_head.html',
+            'src/html/_header.html',
+            'src/html/_error.html',
+            'src/html/_foot.html'
         ],
         dest: 'dist/error.html'
       }
