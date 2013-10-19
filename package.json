@@ -43,6 +43,7 @@
     "grunt-contrib": "~0.8.0",
     "less": "~1.4.2",
     "uglifyjs": "~2.3.6",
-    "uglify-js": "~2.4.0"
+    "uglify-js": "~2.4.0",
+    "absurd": "0.0.36"
   }
 }
