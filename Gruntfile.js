@@ -218,6 +218,8 @@ module.exports = function(grunt) {
           {expand: true, flatten: true, src: ["bower_components/html5-boilerplate/favicon.ico"], dest: 'src/img/ico/h5bp/'},
           {expand: true, flatten: true, src: ["bower_components/bootstrap/docs-assets/ico/*"], dest: 'src/img/ico/bootstrap/'},
           {expand: true, flatten: true, src: ["src/fonts/*"], dest: 'dist/fonts/'},
+          {expand: true, flatten: true, src: ["src/img/ico/bootstrap/*"], dest: 'dist/img/ico/bootstrap'},
+          {expand: true, flatten: true, src: ["src/img/ico/h5bp/*"], dest: 'dist/img/ico/h5bp'},
           {expand: true, flatten: true, src: ["src/img/*"], dest: 'dist/img/'}
         ]
       },
@@ -269,10 +271,6 @@ module.exports = function(grunt) {
       }
     },
 
-    jekyll: {
-      docs: {}
-    },
-
     validation: {
       options: {
         reset: true
@@ -310,12 +308,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
   grunt.loadNpmTasks('grunt-html-validation');
-  grunt.loadNpmTasks('grunt-jekyll');
   grunt.loadNpmTasks('grunt-recess');
   /*grunt.loadNpmTasks('grunt-rename');*/
 
   // Docs HTML validation task
-  grunt.registerTask('validate-html', ['jekyll', 'validation']);
+  grunt.registerTask('validate-html', ['validation']);
 
   // Test task.
   var testSubtasks = ['dist-css', 'jshint', 'qunit', 'validate-html'];
@@ -344,26 +341,6 @@ module.exports = function(grunt) {
   grunt.registerTask('dist', ['clean', 'dist-css', 'dist-js', 'dist-html', 'dist-all']);
 
   // Default task.
-  grunt.registerTask('default', ['test', 'dist', 'build-customizer']);
+  grunt.registerTask('default', ['test', 'dist']);
 
-  // task for building customizer
-  grunt.registerTask('build-customizer', 'Add scripts/less files to customizer.', function () {
-    var fs = require('fs')
-
-    function getFiles(type) {
-      var files = {}
-      fs.readdirSync(type)
-        .filter(function (path) {
-          return type == 'fonts' ? true : new RegExp('\\.' + type + '$').test(path)
-        })
-        .forEach(function (path) {
-          var fullPath = type + '/' + path
-          return files[path] = (type == 'fonts' ? btoa(fs.readFileSync(fullPath)) : fs.readFileSync(fullPath, 'utf8'))
-        })
-      return 'var __' + type + ' = ' + JSON.stringify(files) + '\n'
-    }
-
-    var files = getFiles('js') + getFiles('less') + getFiles('fonts')
-    fs.writeFileSync('docs-assets/js/raw-files.js', files)
-  });
 };
