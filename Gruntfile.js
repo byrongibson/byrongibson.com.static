@@ -216,12 +216,12 @@ module.exports = function(grunt) {
       dist: {
         files: [
           {expand: true, flatten: true, src: ["bower_components/html5-boilerplate/crossdomain.xml"], dest: 'dist/'},
-          {expand: true, flatten: true, src: ["bower_components/html5-boilerplate/humans.txt"], dest: 'dist/'},
-          {expand: true, flatten: true, src: ["bower_components/html5-boilerplate/robots.txt"], dest: 'dist/'},
           {expand: true, flatten: true, src: ["bower_components/html5-boilerplate/apple-touch-icon-precomposed.png"], dest: 'src/img/ico/h5bp/'},
           {expand: true, flatten: true, src: ["bower_components/html5-boilerplate/favicon.ico"], dest: 'src/img/ico/h5bp/'},
           {expand: true, flatten: true, src: ["bower_components/bootstrap/docs-assets/ico/*"], dest: 'src/img/ico/bootstrap/'},
           {expand: true, flatten: true, src: ["src/fonts/*"], dest: 'dist/fonts/'},
+          {expand: true, flatten: true, src: ["src/html/humans.txt"], dest: 'dist/'},
+          {expand: true, flatten: true, src: ["src/html/robots.txt"], dest: 'dist/'},
           {expand: true, flatten: true, src: ["src/img/ico/bootstrap/*"], dest: 'dist/img/ico/bootstrap'},
           {expand: true, flatten: true, src: ["src/img/ico/h5bp/*"], dest: 'dist/img/ico/h5bp'},
           {expand: true, flatten: true, src: ["src/img/*"], dest: 'dist/img/'}
