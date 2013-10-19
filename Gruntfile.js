@@ -87,6 +87,10 @@ module.exports = function(grunt) {
       options: {
         report: 'min'
       },
+      jquery: {
+        src: 'bower_components/jquery/jquery.js',
+        dest: 'dist/js/lib/jquery.js'
+      },
       bootstrap: {
         src: ['<%= concat.bootstrap.dest %>'],
         dest: 'dist/js/lib/<%= pkg.name %>.js'

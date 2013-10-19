@@ -5,11 +5,17 @@
 require([
     "lib/jquery", 
     "lib/bootstrap", 
-    "lib/react", 
-    "lib/JSXTransformer", 
-    "lib/d3", 
-    "plugins"
-], function($, bootstrap, React, JSXTransformer, d3) {
+    "lib/react",
+    "lib/JSXTransformer",
+    "lib/d3"
+//    "plugins"
+], function(
+    $, 
+    bootstrap, 
+    React,
+    JSXTransformer,
+    d3
+    ) {
     //This function is called when scripts/helper/util.js is loaded.
     //If util.js calls define(), then this function is not fired until
     //util's dependencies have loaded, and the util argument will hold
