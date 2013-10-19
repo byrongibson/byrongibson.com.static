@@ -9,7 +9,22 @@ Allow: /
 User-Agent: Googlebot-Mobile
 Allow: /
 
+User-Agent: Googlebot-Image
+Allow: /
+
+User-Agent: Googlebot-News
+Allow: /
+
+User-Agent: Googlebot-Video
+Allow: /
+
+User-agent: AdsBot-Google
+Allow: /
+
 User-Agent: msnbot
+Allow: /
+
+User-Agent: msnbot-media
 Allow: /
 
 User-Agent: bingbot
@@ -31,6 +46,10 @@ Allow: /
 
 User-agent: DuckDuckBot
 Allow: / 
+
+# India search engine guruji.com
+User-agent: GurujiBot
+Allow: /
 
 # CommonCrawl
 User-agent: ccbot
