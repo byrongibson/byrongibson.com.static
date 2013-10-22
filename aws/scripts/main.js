@@ -1,1 +1,0 @@
-require(["lib/jquery","lib/bootstrap","lib/react","lib/JSXTransformer","lib/d3"],function(a,b,c){c.renderComponent(c.DOM.h1(null,"Hello World."),document.getElementById("helloworld"))});

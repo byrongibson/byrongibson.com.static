@@ -3,13 +3,14 @@
 
 # TEAM
 
-    <name> -- <role> -- <twitter>
+   Byron Gibson -- Maker -- @byrongibson
 
 # THANKS
 
-    <name>
+    All FOSS and everyone involved.
 
 # TECHNOLOGY COLOPHON
 
-    HTML5, CSS3
-    Normalize.css, jQuery, Modernizr
+    HTML5 Boilerplate
+    Twitter Bootstrap 3
+    jQuery, Modernizr, Requirejs, React, D3.js

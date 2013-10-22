@@ -44,6 +44,7 @@
     "less": "~1.4.2",
     "uglifyjs": "~2.3.6",
     "uglify-js": "~2.4.0",
-    "absurd": "0.0.36"
+    "absurd": "0.0.36",
+    "react-tools": "~0.5.0"
   }
 }
