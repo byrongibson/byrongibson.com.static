@@ -1,0 +1,1 @@
+require(["lib/jquery","lib/bootstrap","lib/react","lib/d3"],function(a,b,c){c.renderComponent(c.DOM.h1(null,"Hello World."),document.getElementById("helloworld"))});

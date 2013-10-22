@@ -23,15 +23,9 @@ require([
     // test load success 
     //alert("require.js loaded");
 
-    /*React.renderComponent(
+    React.renderComponent(
         React.DOM.h1(null, 'Hello World.'),
         document.getElementById('helloworld')
-    );*/
-
-
-    React.renderComponent(
-        <h1>Hello, world!</h1>,
-        document.getElementById('example')
     );
 
     /** @jsx React.DOM */
