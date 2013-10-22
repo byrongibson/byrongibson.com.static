@@ -226,12 +226,19 @@ module.exports = function(grunt) {
           {expand: true, flatten: true, src: ["bower_components/html5-boilerplate/apple-touch-icon-precomposed.png"], dest: 'src/img/ico/h5bp/'},
           {expand: true, flatten: true, src: ["bower_components/html5-boilerplate/favicon.ico"], dest: 'src/img/ico/h5bp/'},
           {expand: true, flatten: true, src: ["bower_components/bootstrap/docs-assets/ico/*"], dest: 'src/img/ico/bootstrap/'},
-          {expand: true, flatten: true, src: ["src/fonts/*"], dest: 'dist/fonts/'},
+          {expand: true, flatten: true, src: ["bower_components/pure/pure-min.css"], dest: 'dist/css/lib/'},
+          {expand: true, flatten: true, src: ["src/css/pure-blog.css"], dest: 'dist/css'},
+          {expand: true, flatten: true, src: ["src/css/pure-email.css"], dest: 'dist/css'},
+          {expand: true, flatten: true, src: ["src/css/pure-landingpage.css"], dest: 'dist/css'},
+          {expand: true, flatten: true, src: ["src/html/pure-blog.html"], dest: 'dist/'},
+          {expand: true, flatten: true, src: ["src/html/pure-email.html"], dest: 'dist/'},
+          {expand: true, flatten: true, src: ["src/html/pure-landingpage.html"], dest: 'dist/'},
           {expand: true, flatten: true, src: ["src/html/humans.txt"], dest: 'dist/'},
           {expand: true, flatten: true, src: ["src/html/robots.txt"], dest: 'dist/'},
           {expand: true, flatten: true, src: ["src/img/ico/bootstrap/*"], dest: 'dist/img/ico/bootstrap'},
           {expand: true, flatten: true, src: ["src/img/ico/h5bp/*"], dest: 'dist/img/ico/h5bp'},
-          {expand: true, flatten: true, src: ["src/img/*"], dest: 'dist/img/'}
+          {expand: true, flatten: true, src: ["src/img/*"], dest: 'dist/img/'},
+          {expand: true, flatten: true, src: ["src/fonts/*"], dest: 'dist/fonts/'}
         ]
       },
       aws: {
@@ -250,6 +257,7 @@ module.exports = function(grunt) {
           {expand: true, flatten: true, src: ["dist/js/main.js"], dest: 'aws/scripts/'},
           {expand: true, flatten: true, src: ["dist/css/lib/bootstrap-theme.css"], dest: 'aws/styles/lib/'},
           {expand: true, flatten: true, src: ["dist/css/lib/bootstrap.css"], dest: 'aws/styles/lib/'},
+          {expand: true, flatten: true, src: ["dist/css/lib/pure-min.css"], dest: 'aws/styles/lib/'},
           {expand: true, flatten: true, src: ["dist/css/main.css"], dest: 'aws/styles/'},
           {expand: true, flatten: true, src: ["dist/fonts/*"], dest: 'aws/fonts/'},
           {expand: true, flatten: true, src: ["dist/img/*"], dest: 'aws/images/'},
