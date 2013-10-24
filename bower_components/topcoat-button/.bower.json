@@ -1,0 +1,15 @@
+{
+  "name": "topcoat-button",
+  "homepage": "https://github.com/topcoat/button",
+  "version": "0.5.4",
+  "_release": "0.5.4",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.5.4",
+    "commit": "264bae6be0af492f045832ea6e39ddbfd7a8fed7"
+  },
+  "_source": "git://github.com/topcoat/button.git",
+  "_target": "~0.5.4",
+  "_originalSource": "topcoat-button",
+  "_direct": true
+}

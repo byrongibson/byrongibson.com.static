@@ -21,6 +21,8 @@
     "html5shiv": "~3.7.0",
     "html5-boilerplate": "latest",
     "bootstrap": "~3.0.0",
-    "pure": "~0.3.0"
+    "pure": "~0.3.0",
+    "topcoat": "~0.8.0",
+    "topcoat-button": "~0.5.4"
   }
 }
