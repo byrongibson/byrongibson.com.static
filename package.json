@@ -1,30 +1,20 @@
 {
-  "name": "bootstrap",
-  "description": "Sleek, intuitive, and powerful front-end framework for faster and easier web development.",
-  "version": "3.0.0",
-  "keywords": [
-    "bootstrap",
-    "css"
-  ],
-  "homepage": "http://getbootstrap.com",
-  "author": "Twitter, Inc.",
-  "scripts": {
+    "name": "byrongibson.com"
+  , "description": "my personal website, built on some of the best FOSS technologies around"
+  , "keywords": ["byrongibson", "byrongibson.com"]
+  , "homepage": "http://byrongibson.com"
+  , "version": "3.0.0"
+  , "scripts": {
     "test": "grunt test"
-  },
-  "repository": {
+  }
+  , "repository": {
     "type": "git",
-    "url": "https://github.com/twbs/bootstrap.git"
-  },
-  "bugs": {
-    "url": "https://github.com/twbs/bootstrap/issues"
-  },
-  "licenses": [
-    {
-      "type": "Apache-2.0",
-      "url": "http://www.apache.org/licenses/LICENSE-2.0"
-    }
-  ],
-  "devDependencies": {
+    "url": "https://github.com/byrongibson/byrongibson.com.git"
+  }
+  , "bugs": {
+    "url": "https://github.com/byrongibson/byrongibson.com/issues"
+  }
+  , "devDependencies": {
     "browserstack-runner": "~0.0.12",
     "btoa": "~1.1.1",
     "grunt": "~0.4.1",
