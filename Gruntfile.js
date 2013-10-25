@@ -1,4 +1,4 @@
-/* jshint node: true */
+/styles* jshint node: true */
 
 module.exports = function(grunt) {
   "use strict";
@@ -20,12 +20,11 @@ module.exports = function(grunt) {
               ' * Namely main.less, main.js, main.min.css, main.min.js, and a few tweaks to Variables.less.\n' +
               ' */\n',
     jqueryCheck: 'if (typeof jQuery === "undefined") { throw new Error("Bootstrap requires jQuery") }\n\n',
-
+    
     // Task configuration.
     clean: {
-        aws: ['aws'],
-        test: ['test'],
-        dist: ['dist']
+        test: ['test']
+        ,dist: ['dist']
     },
 
     jshint: {
@@ -62,7 +61,7 @@ module.exports = function(grunt) {
           'src/scripts/tab.js',
           'src/scripts/affix.js'
         ],
-        dest: 'test/scripts/lib/<%= pkg.name %>.js'
+        dest: 'src/scripts/lib/<%= pkg.name %>.js'
       },
       html_index: {
         src: [
@@ -90,55 +89,118 @@ module.exports = function(grunt) {
         dest: 'src/scripts/main.js'
       }
     }, 
-    
+
     uglify: {
-      options: {
-        report: 'min'
-      },
-      jquery: {
-        src: 'bower_components/jquery/jquery.js',
-        dest: 'test/scripts/lib/jquery.js'
-      },
-      bootstrap: {
-        src: ['<%= concat.bootstrap.dest %>'],
-        dest: 'test/scripts/lib/<%= pkg.name %>.js'
-      },
-      modernizr: {
-        src: ['bower_components/modernizr/modernizr.js'],
-        dest: 'test/scripts/lib/modernizr.js'
-      },
-      html5shiv: {
-        src: ['bower_components/html5shiv/dist/html5shiv.js'],
-        dest: 'test/scripts/lib/html5shiv.js'
-      },
-      html5shivprintshiv: {
-        src: ['bower_components/html5shiv/dist/html5shiv-printshiv.js'],
-        dest: 'test/scripts/lib/html5shiv-printshiv.js'
-      },
-      JSXTransformer: {
-        src: ['bower_components/react/JSXTransformer.js'],
-        dest: 'test/scripts/lib/JSXTransformer.js'
-      },
-      react: {
-        src: ['bower_components/react/react.js'],
-        dest: 'test/scripts/lib/react.js'
-      },
-      d3: {
-        src: ['bower_components/d3/d3.js'],
-        dest: 'test/scripts/lib/d3.js'
-      },
-      requirejs: {
-        src: ['bower_components/requirejs/require.js'],
-        dest: 'test/scripts/require.js'
-      },
-      main: {
-        src: ['src/scripts/main.js'],
-        dest: 'test/scripts/main.js'
-      },
-      plugins: {
-        src: ['src/scripts/plugins.js'],
-        dest: 'test/scripts/plugins.js'
-      }
+        test: {
+            /*options: {
+                mangle: false
+                , compress: true
+                , beautify: true
+                , report: 'min'
+                , sourceMap: 'test/scripts/source-map.js'
+                , sourceMapRoot: 'src/scripts/'
+                , preserveComments: true
+            },*/
+            jquery: {
+                src: 'bower_components/jquery/jquery.js',
+                dest: 'test/scripts/lib/jquery.js'
+            },
+            bootstrap: {
+                src: ['<%= concat.bootstrap.dest %>'],
+                dest: 'test/scripts/lib/<%= pkg.name %>.js'
+            },
+            modernizr: {
+                src: ['bower_components/modernizr/modernizr.js'],
+                dest: 'test/scripts/lib/modernizr.js'
+            },
+            html5shiv: {
+                src: ['bower_components/html5shiv/dist/html5shiv.js'],
+                dest: 'test/scripts/lib/html5shiv.js'
+            },
+            html5shivprintshiv: {
+                src: ['bower_components/html5shiv/dist/html5shiv-printshiv.js'],
+                dest: 'test/scripts/lib/html5shiv-printshiv.js'
+            },
+            JSXTransformer: {
+                src: ['bower_components/react/JSXTransformer.js'],
+                dest: 'test/scripts/lib/JSXTransformer.js'
+            },
+            react: {
+                src: ['bower_components/react/react.js'],
+                dest: 'test/scripts/lib/react.js'
+            },
+            d3: {
+                src: ['bower_components/d3/d3.js'],
+                dest: 'test/scripts/lib/d3.js'
+            },
+            requirejs: {
+                src: ['bower_components/requirejs/require.js'],
+                dest: 'test/scripts/require.js'
+            },
+            main: {
+                src: ['src/scripts/main.js'],
+                dest: 'test/scripts/main.js'
+            },
+            plugins: {
+                src: ['src/scripts/plugins.js'],
+                dest: 'test/scripts/plugins.js'
+            }
+        },
+        dist: {
+            options: {
+                mangle: false //(only main.js, plugins.js)
+                , compress: true
+                , beautify: true
+                , report: 'gzip'
+                , sourceMap: 'dist/scripts/source-map.js'
+                , sourceMapRoot: 'src/scripts/'
+                , preserveComments: false
+            },
+            jquery: {
+                src: 'bower_components/jquery/jquery.js',
+                dest: 'dist/scripts/lib/jquery.js'
+            },
+            bootstrap: {
+                src: ['<%= concat.bootstrap.dest %>'],
+                dest: 'dist/scripts/lib/<%= pkg.name %>.js'
+            },
+            modernizr: {
+                src: ['bower_components/modernizr/modernizr.js'],
+                dest: 'dist/scripts/lib/modernizr.js'
+            },
+            html5shiv: {
+                src: ['bower_components/html5shiv/dist/html5shiv.js'],
+                dest: 'dist/scripts/lib/html5shiv.js'
+            },
+            html5shivprintshiv: {
+                src: ['bower_components/html5shiv/dist/html5shiv-printshiv.js'],
+                dest: 'dist/scripts/lib/html5shiv-printshiv.js'
+            },
+            JSXTransformer: {
+                src: ['bower_components/react/JSXTransformer.js'],
+                dest: 'dist/scripts/lib/JSXTransformer.js'
+            },
+            react: {
+                src: ['bower_components/react/react.js'],
+                dest: 'dist/scripts/lib/react.js'
+            },
+            d3: {
+                src: ['bower_components/d3/d3.js'],
+                dest: 'dist/scripts/lib/d3.js'
+            },
+            requirejs: {
+                src: ['bower_components/requirejs/require.js'],
+                dest: 'dist/scripts/require.js'
+            },
+            main: {
+                src: ['src/scripts/main.js'],
+                dest: 'dist/scripts/main.js'
+            },
+            plugins: {
+                src: ['src/scripts/plugins.js'],
+                dest: 'dist/scripts/plugins.js'
+            }
+        }
     },
 
     /* rename is broken, it overwrites the source file with the new name, even when
@@ -165,90 +227,85 @@ module.exports = function(grunt) {
     },*/
 
     recess: {
-      options: {
-        compile: true
-      },
-      bootstrap_test: {
-        options: {
-          compress: false
+        test: {
+            options: {
+                compile: true                 // Compiles CSS or LESS. Fixes white space and sort order.
+                , compress: false                // Compress your compiled code
+                /*, noIDs: true                    // Doesn't complain about using IDs in your stylesheets
+                , noJSPrefix: true            // Doesn't complain about styling .js- prefixed classnames
+                , noOverqualifying: true        // Doesn't complain about overqualified selectors (ie: div#foo.bar)
+                , noUnderscores: true            // Doesn't complain about using underscores in your class names
+                , noUniversalSelectors: false    // Doesn't complain about using the universal * selector
+                , prefixWhitespace: true        // Adds whitespace prefix to line up vender prefixed properties
+                , strictPropertyOrder: true    // Complains if not strict property order
+                , zeroUnits: true*/                // Doesn't complain if you add units to values of 0
+            },
+            bootstrap: {
+                src: ['src/styles/less/bootstrap.less'],
+                dest: 'test/styles/lib/bootstrap.css'
+                //dest: 'dist/styles/lib/<%= pkg.name %>.css'
+            },
+            bootstrap_theme: {
+                src: ['src/styles/less/theme.less'],
+                dest: 'test/styles/lib/bootstrap-theme.css'
+                //dest: 'test/styles/lib/<%= pkg.name %>-theme.css'
+            },
+            normalize: {
+                src: ['bower_components/html5-boilerplate/css/normalize.css'],
+                dest: 'test/styles/lib/normalize.css'
+            },
+            main: {
+                src: ['src/styles/less/main.less'],
+                dest: 'test/styles/main.css'
+            },
+            pure: {
+                src: ['src/styles/css/pure.css'],
+                dest: 'test/styles/pure.css'
+            }
         },
-        src: ['src/styles/less/bootstrap.less'],
-        dest: 'test/styles/lib/bootstrap.css'
-        //dest: 'dist/styles/lib/<%= pkg.name %>.css'
-      },
-      bootstrap_dist: {
-        options: {
-          compress: true
-        },
-        src: ['src/styles/less/bootstrap.less'],
-        dest: 'dist/styles/lib/bootstrap.css'
-        //dest: 'dist/styles/lib/<%= pkg.name %>.css'
-      },
-      bootstrap_theme_test: {
-        options: {
-          compress: false
-        },
-        src: ['src/styles/less/theme.less'],
-        dest: 'test/styles/lib/bootstrap-theme.css'
-        //dest: 'test/styles/lib/<%= pkg.name %>-theme.css'
-      },
-      bootstrap_theme_dist: {
-        options: {
-          compress: true
-        },
-        src: ['src/styles/less/theme.less'],
-        dest: 'dist/styles/lib/bootstrap-theme.css'
-        //dest: 'test/styles/lib/<%= pkg.name %>-theme.css'
-      },
-      normalize_test: {
-        options: {
-          compress: false
-        },
-        src: ['bower_components/html5-boilerplate/css/normalize.css'],
-        dest: 'test/styles/lib/normalize.css'
-      },
-      normalize_dist: {
-        options: {
-          compress: true
-        },
-        src: ['bower_components/html5-boilerplate/css/normalize.css'],
-        dest: 'dist/styles/lib/normalize.css'
-      },
-      main_test: {
-        options: {
-          compress: false
-        },
-        src: ['src/styles/less/main.less'],
-        dest: 'test/styles/main.css'
-      },
-      main_dist: {
-        options: {
-          compress: true
-        },
-        src: ['src/styles/less/main.less'],
-        dest: 'dist/styles/main.css'
-      },
-      pure_test: {
-        options: {
-          compress: false
-        },
-        src: ['src/styles/css/pure.css'],
-        dest: 'test/styles/pure.css'
-      },
-      pure_dist: {
-        options: {
-          compress: true
-        },
-        src: ['src/styles/css/pure.css'],
-        dest: 'dist/styles/pure.css'
-      }
+        dist: {  
+            options: {
+                compile: true                 // Compiles CSS or LESS. Fixes white space and sort order.
+                , compress: true                // Compress your compiled code
+                , noIDs: true                    // Doesn't complain about using IDs in your stylesheets
+                , noJSPrefix: true            // Doesn't complain about styling .js- prefixed classnames
+                , noOverqualifying: true        // Doesn't complain about overqualified selectors (ie: div#foo.bar)
+                , noUnderscores: true            // Doesn't complain about using underscores in your class names
+                , noUniversalSelectors: false    // Doesn't complain about using the universal * selector
+                , prefixWhitespace: false        // Adds whitespace prefix to line up vender prefixed properties
+                , strictPropertyOrder: true    // Complains if not strict property order
+                , zeroUnits: true                // Doesn't complain if you add units to values of 0
+            },
+            bootstrap: {
+                src: ['src/styles/less/bootstrap.less'],
+                dest: 'dist/styles/lib/bootstrap.css'
+                //dest: 'dist/styles/lib/<%= pkg.name %>.css'
+            },
+            bootstrap_theme: {
+                src: ['src/styles/less/theme.less'],
+                dest: 'dist/styles/lib/bootstrap-theme.css'
+                //dest: 'test/styles/lib/<%= pkg.name %>-theme.css'
+            },
+            normalize: {
+                src: ['bower_components/html5-boilerplate/css/normalize.css'],
+                dest: 'dist/styles/lib/normalize.css'
+            },
+            main: {
+                src: ['src/styles/less/main.less'],
+                dest: 'dist/styles/main.css'
+            },
+            pure: {
+                src: ['src/styles/css/pure.css'],
+                dest: 'dist/styles/pure.css'
+            }
+        }
     },
 
     htmlmin: {                                      // Task
         test: {                                     // Target
             options: {                              // Target options: https://github.com/gruntjs/grunt-contrib-htmlmin
                 removeComments: false,
-                collapseWhitespace: true,
+                collapseWhitespace: false,
                 removeCommentsFromCDATA: false,
                 removeCDATASectionsFromCDATA: false,
                 collapseBooleanAttributes: false,
@@ -285,6 +342,7 @@ module.exports = function(grunt) {
         }
     },
 
+
     copy: {
       test: {
         files: [
@@ -297,6 +355,8 @@ module.exports = function(grunt) {
           {expand: true, flatten: true, src: ["src/styles/css/pure-email.css"], dest: 'test/styles'},
           {expand: true, flatten: true, src: ["src/styles/css/pure-blog.css"], dest: 'test/styles'},
           {expand: true, flatten: true, src: ["src/styles/css/pure.css"], dest: 'test/styles'},
+          /*{expand: true, flatten: true, src: ["src/scripts/main.js"], dest: 'test/scripts'},
+          {expand: true, flatten: true, src: ["src/scripts/plugins.js"], dest: 'test/scripts'},*/
           {expand: true, flatten: true, src: ["src/html/pure-landingpage.html"], dest: 'test/'},
           {expand: true, flatten: true, src: ["src/html/pure-email.html"], dest: 'test/'},
           {expand: true, flatten: true, src: ["src/html/pure-blog.html"], dest: 'test/'},
@@ -321,8 +381,6 @@ module.exports = function(grunt) {
           {expand: true, flatten: true, src: ["test/scripts/lib/respond.js"], dest: 'dist/scripts/lib/'},
           {expand: true, flatten: true, src: ["test/scripts/lib/bootstrap.js"], dest: 'dist/scripts/lib/'},
           {expand: true, flatten: true, src: ["test/scripts/require.js"], dest: 'dist/scripts/'},
-          {expand: true, flatten: true, src: ["test/scripts/plugins.js"], dest: 'dist/scripts/'},
-          {expand: true, flatten: true, src: ["test/scripts/main.js"], dest: 'dist/scripts/'},
           {expand: true, flatten: true, src: ["test/styles/lib/bootstrap-theme.css"], dest: 'dist/styles/lib/'},
           {expand: true, flatten: true, src: ["test/styles/lib/bootstrap.css"], dest: 'dist/styles/lib/'},
           {expand: true, flatten: true, src: ["test/styles/lib/normalize.css"], dest: 'dist/styles/lib/'},
@@ -357,14 +415,20 @@ module.exports = function(grunt) {
     },
 
     connect: {
-      server: {
-        options: {
-          port: 3000,
-          base: './test/',
-          //base: './dist/',
-          keepalive: true
+        test: {
+            options: {
+                port: 3000,
+                base: './test/',
+                keepalive: true
+            }
+        },
+        dist: {
+            options: {
+                port: 3000,
+                base: './dist/',
+                keepalive: true
+            }
         }
-      }
     },
 
     validation: {
@@ -390,6 +454,11 @@ module.exports = function(grunt) {
         tasks: ['recess', 'copy']
       }
     }
+
+
+
+
+
   });
 
   // These plugins provide necessary tasks.
@@ -428,23 +497,41 @@ module.exports = function(grunt) {
   }
   grunt.registerTask('test', testSubtasks);
 
-  // JS distribution task.
-  //grunt.registerTask('dist-js', ['concat', 'jsx', 'uglify']);
-  grunt.registerTask('dist-js', ['concat', 'uglify']);
+  // Concat but don't minify html and JS files.
+  grunt.registerTask('concat-all', ['concat']);
 
-  // CSS distribution task.
+  //grunt.registerTask('dist-js', ['jsx', 'uglify']);
+  grunt.registerTask('test-js', ['uglify:test']);
+
+  // Compile less & css into single css file, distribute to ./test only
+  grunt.registerTask('test-css', ['recess:test']);
+  
+  // Compile but don't minify html, distribute to ./test only
+  grunt.registerTask('test-html', ['htmlmin:test']);
+
+  // Copy fonts from src to ./test
+  grunt.registerTask('test-copy', ['copy:test']);
+  
+  // Build ./test
+  grunt.registerTask('dist-test', ['clean:test', 'concat-all', 'test-css', 'test-js', 'test-html', 'test-copy']);
+
+  // compile and minify js, distribute to both ./test and ./dist
+  //grunt.registerTask('dist-js', ['jsx', 'uglify']);
+  grunt.registerTask('dist-js', ['uglify']);
+
+  // compile and minify less & css, distribute to both ./test and ./dist
   grunt.registerTask('dist-css', ['recess']);
   
-  // HTML distribution task.
+  // compile and minify html, distribute to both ./test and ./dist
   grunt.registerTask('dist-html', ['htmlmin']);
 
-  // Fonts distribution task.
+  // Copy Fonts to both ./test and ./dist
   grunt.registerTask('dist-copy', ['copy']);
 
-  // Full distribution task.
-  grunt.registerTask('dist', ['clean', 'dist-css', 'dist-js', 'dist-html', 'dist-copy']);
+  // Full distribution task, build both ./test and ./dist
+  grunt.registerTask('dist', ['clean', 'concat-all', 'dist-css', 'dist-js', 'dist-html', 'dist-copy']);
 
-  // Default task.
+  // Default task. fixme: fix tests for new workflow, eg no jekyll _gh-pages
   grunt.registerTask('default', ['test', 'dist']);
 
 };
