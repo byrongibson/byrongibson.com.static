@@ -92,7 +92,7 @@ module.exports = function(grunt) {
 
     uglify: {
         test: {
-            /*options: {
+            options: {
                 mangle: false
                 , compress: true
                 , beautify: true
@@ -100,7 +100,7 @@ module.exports = function(grunt) {
                 , sourceMap: 'test/scripts/source-map.js'
                 , sourceMapRoot: 'src/scripts/'
                 , preserveComments: true
-            },*/
+            },
             jquery: {
                 src: 'bower_components/jquery/jquery.js',
                 dest: 'test/scripts/lib/jquery.js'
@@ -231,28 +231,22 @@ module.exports = function(grunt) {
             options: {
                 compile: true                 // Compiles CSS or LESS. Fixes white space and sort order.
                 , compress: false                // Compress your compiled code
-                /*, noIDs: true                    // Doesn't complain about using IDs in your stylesheets
+                , noIDs: true                    // Doesn't complain about using IDs in your stylesheets
                 , noJSPrefix: true            // Doesn't complain about styling .js- prefixed classnames
                 , noOverqualifying: true        // Doesn't complain about overqualified selectors (ie: div#foo.bar)
                 , noUnderscores: true            // Doesn't complain about using underscores in your class names
                 , noUniversalSelectors: false    // Doesn't complain about using the universal * selector
                 , prefixWhitespace: true        // Adds whitespace prefix to line up vender prefixed properties
                 , strictPropertyOrder: true    // Complains if not strict property order
-                , zeroUnits: true*/                // Doesn't complain if you add units to values of 0
+                , zeroUnits: true                // Doesn't complain if you add units to values of 0
             },
             bootstrap: {
                 src: ['src/styles/less/bootstrap.less'],
                 dest: 'test/styles/lib/bootstrap.css'
-                //dest: 'dist/styles/lib/<%= pkg.name %>.css'
             },
             bootstrap_theme: {
                 src: ['src/styles/less/theme.less'],
                 dest: 'test/styles/lib/bootstrap-theme.css'
-                //dest: 'test/styles/lib/<%= pkg.name %>-theme.css'
-            },
-            normalize: {
-                src: ['bower_components/html5-boilerplate/css/normalize.css'],
-                dest: 'test/styles/lib/normalize.css'
             },
             main: {
                 src: ['src/styles/less/main.less'],
@@ -371,7 +365,7 @@ module.exports = function(grunt) {
       },
       dist: {
         files: [
-          {expand: true, flatten: true, src: ["test/scripts/lib/modernizr.js"], dest: 'dist/scripts/lib/'},
+          /*{expand: true, flatten: true, src: ["test/scripts/lib/modernizr.js"], dest: 'dist/scripts/lib/'},
           {expand: true, flatten: true, src: ["test/scripts/lib/jquery.js"], dest: 'dist/scripts/lib/'},
           {expand: true, flatten: true, src: ["test/scripts/lib/html5shiv.js"], dest: 'dist/scripts/lib/'},
           {expand: true, flatten: true, src: ["test/scripts/lib/html5shiv-printshiv.js"], dest: 'dist/scripts/lib/'},
@@ -390,19 +384,19 @@ module.exports = function(grunt) {
           {expand: true, flatten: true, src: ["test/styles/pure-blog.css"], dest: 'dist/styles/'},
           {expand: true, flatten: true, src: ["test/styles/pure.css"], dest: 'dist/styles/'},
           {expand: true, flatten: true, src: ["test/styles/main.css"], dest: 'dist/styles/'},
+          {expand: true, flatten: true, src: ["test/pure-landingpage.html"], dest: 'dist/'},
+          {expand: true, flatten: true, src: ["test/pure-email.html"], dest: 'dist/'},
+          {expand: true, flatten: true, src: ["test/pure-blog.html"], dest: 'dist/'},
+          {expand: true, flatten: true, src: ["test/pure.html"], dest: 'dist/'},*/
+          {expand: true, flatten: true, src: ["test/crossdomain.xml"], dest: 'dist/'},
+          {expand: true, flatten: true, src: ["test/humans.txt"], dest: 'dist/'},
+          {expand: true, flatten: true, src: ["test/robots.txt"], dest: 'dist/'},
           {expand: true, flatten: true, src: ["test/images/ico/bootstrap/*"], dest: 'dist/images/ico/bootstrap/'},
           {expand: true, flatten: true, src: ["test/images/ico/h5bp/*"], dest: 'dist/images/ico/h5bp/'},
           {expand: true, flatten: true, src: ["test/images/ico/h5bp/apple-touch-icon-precomposed.png"], dest: 'dist/images/ico/h5bp'},
           {expand: true, flatten: true, src: ["test/images/ico/h5bp/favicon.ico"], dest: 'dist/images/ico/h5bp'},
           {expand: true, flatten: true, src: ["test/images/*"], dest: 'dist/images/'},
-          {expand: true, flatten: true, src: ["test/fonts/*"], dest: 'dist/fonts/'},
-          {expand: true, flatten: true, src: ["test/pure-landingpage.html"], dest: 'dist/'},
-          {expand: true, flatten: true, src: ["test/pure-email.html"], dest: 'dist/'},
-          {expand: true, flatten: true, src: ["test/pure-blog.html"], dest: 'dist/'},
-          {expand: true, flatten: true, src: ["test/pure.html"], dest: 'dist/'},
-          {expand: true, flatten: true, src: ["test/crossdomain.xml"], dest: 'dist/'},
-          {expand: true, flatten: true, src: ["test/humans.txt"], dest: 'dist/'},
-          {expand: true, flatten: true, src: ["test/robots.txt"], dest: 'dist/'}
+          {expand: true, flatten: true, src: ["test/fonts/*"], dest: 'dist/fonts/'}
         ]
       }
     },
@@ -454,10 +448,6 @@ module.exports = function(grunt) {
         tasks: ['recess', 'copy']
       }
     }
-
-
-
-
 
   });
 
@@ -513,7 +503,8 @@ module.exports = function(grunt) {
   grunt.registerTask('test-copy', ['copy:test']);
   
   // Build ./test
-  grunt.registerTask('dist-test', ['clean:test', 'concat-all', 'test-css', 'test-js', 'test-html', 'test-copy']);
+  //grunt.registerTask('dist-test', ['clean:test', 'concat-all', 'test-css', 'test-js', 'test-html', 'test-copy']);
+  grunt.registerTask('dist-test', ['concat-all', 'test-css', 'test-js', 'test-html', 'test-copy']);
 
   // compile and minify js, distribute to both ./test and ./dist
   //grunt.registerTask('dist-js', ['jsx', 'uglify']);
