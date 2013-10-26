@@ -101,49 +101,18 @@ module.exports = function(grunt) {
                 , sourceMapRoot: 'src/scripts/'
                 , preserveComments: true
             },
-            jquery: {
-                src: 'bower_components/jquery/jquery.js',
-                dest: 'test/scripts/lib/jquery.js'
-            },
-            bootstrap: {
-                src: ['<%= concat.bootstrap.dest %>'],
-                dest: 'test/scripts/lib/<%= pkg.name %>.js'
-            },
-            modernizr: {
-                src: ['bower_components/modernizr/modernizr.js'],
-                dest: 'test/scripts/lib/modernizr.js'
-            },
-            html5shiv: {
-                src: ['bower_components/html5shiv/dist/html5shiv.js'],
-                dest: 'test/scripts/lib/html5shiv.js'
-            },
-            html5shivprintshiv: {
-                src: ['bower_components/html5shiv/dist/html5shiv-printshiv.js'],
-                dest: 'test/scripts/lib/html5shiv-printshiv.js'
-            },
-            JSXTransformer: {
-                src: ['bower_components/react/JSXTransformer.js'],
-                dest: 'test/scripts/lib/JSXTransformer.js'
-            },
-            react: {
-                src: ['bower_components/react/react.js'],
-                dest: 'test/scripts/lib/react.js'
-            },
-            d3: {
-                src: ['bower_components/d3/d3.js'],
-                dest: 'test/scripts/lib/d3.js'
-            },
-            requirejs: {
-                src: ['bower_components/requirejs/require.js'],
-                dest: 'test/scripts/require.js'
-            },
-            main: {
-                src: ['src/scripts/main.js'],
-                dest: 'test/scripts/main.js'
-            },
-            plugins: {
-                src: ['src/scripts/plugins.js'],
-                dest: 'test/scripts/plugins.js'
+            files: {
+                'test/scripts/lib/jquery.js':'bower_components/jquery/jquery.js'
+                ,'test/scripts/lib/<%= pkg.name %>.js':'<%= concat.bootstrap.dest %>'
+                ,'test/scripts/lib/modernizr.js':'bower_components/modernizr/modernizr.js'
+                ,'test/scripts/lib/html5shiv.js':'bower_components/html5shiv/dist/html5shiv.js'
+                ,'test/scripts/lib/html5shiv-printshiv.js':'bower_components/html5shiv/dist/html5shiv-printshiv.js'
+                ,'test/scripts/lib/JSXTransformer.js':'bower_components/react/JSXTransformer.js'
+                ,'test/scripts/lib/react.js':'bower_components/react/react.js'
+                ,'test/scripts/lib/d3.js':'bower_components/d3/d3.js'
+                ,'test/scripts/require.js':'bower_components/requirejs/require.js'
+                ,'test/scripts/main.js':'src/scripts/main.js'
+                ,'test/scripts/plugins.js':'src/scripts/plugins.js'
             }
         },
         dist: {
@@ -156,49 +125,18 @@ module.exports = function(grunt) {
                 , sourceMapRoot: 'src/scripts/'
                 , preserveComments: false
             },
-            jquery: {
-                src: 'bower_components/jquery/jquery.js',
-                dest: 'dist/scripts/lib/jquery.js'
-            },
-            bootstrap: {
-                src: ['<%= concat.bootstrap.dest %>'],
-                dest: 'dist/scripts/lib/<%= pkg.name %>.js'
-            },
-            modernizr: {
-                src: ['bower_components/modernizr/modernizr.js'],
-                dest: 'dist/scripts/lib/modernizr.js'
-            },
-            html5shiv: {
-                src: ['bower_components/html5shiv/dist/html5shiv.js'],
-                dest: 'dist/scripts/lib/html5shiv.js'
-            },
-            html5shivprintshiv: {
-                src: ['bower_components/html5shiv/dist/html5shiv-printshiv.js'],
-                dest: 'dist/scripts/lib/html5shiv-printshiv.js'
-            },
-            JSXTransformer: {
-                src: ['bower_components/react/JSXTransformer.js'],
-                dest: 'dist/scripts/lib/JSXTransformer.js'
-            },
-            react: {
-                src: ['bower_components/react/react.js'],
-                dest: 'dist/scripts/lib/react.js'
-            },
-            d3: {
-                src: ['bower_components/d3/d3.js'],
-                dest: 'dist/scripts/lib/d3.js'
-            },
-            requirejs: {
-                src: ['bower_components/requirejs/require.js'],
-                dest: 'dist/scripts/require.js'
-            },
-            main: {
-                src: ['src/scripts/main.js'],
-                dest: 'dist/scripts/main.js'
-            },
-            plugins: {
-                src: ['src/scripts/plugins.js'],
-                dest: 'dist/scripts/plugins.js'
+            files: {
+                'dist/scripts/lib/jquery.js':'bower_components/jquery/jquery.js'
+                ,'dist/scripts/lib/<%= pkg.name %>.js':'<%= concat.bootstrap.dest %>'
+                ,'dist/scripts/lib/modernizr.js':'bower_components/modernizr/modernizr.js'
+                ,'dist/scripts/lib/html5shiv.js':'bower_components/html5shiv/dist/html5shiv.js'
+                ,'dist/scripts/lib/html5shiv-printshiv.js':'bower_components/html5shiv/dist/html5shiv-printshiv.js'
+                ,'dist/scripts/lib/JSXTransformer.js':'bower_components/react/JSXTransformer.js'
+                ,'dist/scripts/lib/react.js':'bower_components/react/react.js'
+                ,'dist/scripts/lib/d3.js':'bower_components/d3/d3.js'
+                ,'dist/scripts/require.js':'bower_components/requirejs/require.js'
+                ,'dist/scripts/main.js':'src/scripts/main.js'
+                ,'dist/scripts/plugins.js':'src/scripts/plugins.js'
             }
         }
     },
@@ -240,22 +178,12 @@ module.exports = function(grunt) {
                 , strictPropertyOrder: true    // Complains if not strict property order
                 , zeroUnits: true                // Doesn't complain if you add units to values of 0
             },
-            bootstrap: {
-                src: ['src/styles/less/bootstrap.less'],
-                dest: 'test/styles/lib/bootstrap.css'
-            },
-            bootstrap_theme: {
-                src: ['src/styles/less/theme.less'],
-                dest: 'test/styles/lib/bootstrap-theme.css'
-            },
-            main: {
-                src: ['src/styles/less/main.less'],
-                dest: 'test/styles/main.css'
-            },
-            pure: {
-                src: ['src/styles/css/pure.css'],
-                dest: 'test/styles/pure.css'
-            }
+            files: {
+                'test/styles/lib/bootstrap.css':'src/styles/less/bootstrap.less'
+                ,'test/styles/lib/bootstrap-theme.css':'src/styles/less/theme.less'
+                ,'test/styles/main.css':'src/styles/less/main.less'
+                ,'test/styles/pure.css':'src/styles/css/pure.css'
+            }              
         },
         dist: {  
             options: {
@@ -270,27 +198,12 @@ module.exports = function(grunt) {
                 , strictPropertyOrder: true    // Complains if not strict property order
                 , zeroUnits: true                // Doesn't complain if you add units to values of 0
             },
-            bootstrap: {
-                src: ['src/styles/less/bootstrap.less'],
-                dest: 'dist/styles/lib/bootstrap.css'
-                //dest: 'dist/styles/lib/<%= pkg.name %>.css'
-            },
-            bootstrap_theme: {
-                src: ['src/styles/less/theme.less'],
-                dest: 'dist/styles/lib/bootstrap-theme.css'
-                //dest: 'test/styles/lib/<%= pkg.name %>-theme.css'
-            },
-            normalize: {
-                src: ['bower_components/html5-boilerplate/css/normalize.css'],
-                dest: 'dist/styles/lib/normalize.css'
-            },
-            main: {
-                src: ['src/styles/less/main.less'],
-                dest: 'dist/styles/main.css'
-            },
-            pure: {
-                src: ['src/styles/css/pure.css'],
-                dest: 'dist/styles/pure.css'
+            files: {
+                'dist/styles/lib/bootstrap.css':'src/styles/less/bootstrap.less'
+                ,'dist/styles/lib/bootstrap-theme.css':'src/styles/less/theme.less'
+                ,'dist/styles/lib/normalize.css':'bower_components/html5-boilerplate/css/normalize.css'
+                ,'dist/styles/main.css':'src/styles/less/main.less'
+                ,'dist/styles/pure.css':'src/styles/css/pure.css'
             }
         }
     },
