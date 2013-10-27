@@ -1,20 +1,23 @@
 {
-    "name": "bootstrap"
-  , "description": "my personal website, built on some of the best FOSS technologies around"
-  , "keywords": ["byrongibson", "byrongibson.com"]
-  , "homepage": "http://byrongibson.com"
-  , "version": "3.0.0"
-  , "scripts": {
+  "name": "bootstrap",
+  "description": "my personal website, built on some of the best FOSS technologies around",
+  "keywords": [
+    "byrongibson",
+    "byrongibson.com"
+  ],
+  "homepage": "http://byrongibson.com",
+  "version": "3.0.0",
+  "scripts": {
     "test": "grunt test"
-  }
-  , "repository": {
+  },
+  "repository": {
     "type": "git",
     "url": "https://github.com/byrongibson/byrongibson.com.git"
-  }
-  , "bugs": {
+  },
+  "bugs": {
     "url": "https://github.com/byrongibson/byrongibson.com/issues"
-  }
-  , "devDependencies": {
+  },
+  "devDependencies": {
     "browserstack-runner": "~0.0.12",
     "btoa": "~1.1.1",
     "grunt": "~0.4.1",
@@ -35,6 +38,7 @@
     "uglifyjs": "~2.3.6",
     "uglify-js": "~2.4.0",
     "absurd": "0.0.36",
-    "react-tools": "~0.5.0"
+    "react-tools": "~0.5.0",
+    "grunt-jsx": "~0.1.5"
   }
 }
