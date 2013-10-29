@@ -20,12 +20,14 @@ module.exports = function(grunt) {
               ' * Namely main.less, main.js, main.min.css, main.min.js, and a few tweaks to Variables.less.\n' +
               ' */\n',
     jqueryCheck: 'if (typeof jQuery === "undefined") { throw new Error("Bootstrap requires jQuery") }\n\n',
-    
+   
+
     // Task configuration.
     clean: {
         test: ['test']
         ,dist: ['dist']
     },
+
 
     jshint: {
       options: {
@@ -41,6 +43,7 @@ module.exports = function(grunt) {
         src: ['src/scripts/tests/unit/*.js']
       }
     },
+
 
     concat: {
       options: {
@@ -83,86 +86,48 @@ module.exports = function(grunt) {
       }
     },
 
-    jsx: {
-      client: {
-        src: 'src/scripts/main.jsx',
-        dest: 'src/scripts/main.js'
-      }
-    }, 
-
-    uglify: {
-        test: {
-            options: {
-                mangle: false
-                , compress: true
-                , beautify: true
-                , report: 'min'
-                , sourceMap: 'test/scripts/source-map.js'
-                , sourceMapRoot: 'src/scripts/'
-                , preserveComments: true
+    
+    htmlmin: {                                      // Task
+        test: {                                     // Target
+            options: {                              // Target options: https://github.com/gruntjs/grunt-contrib-htmlmin
+                removeComments: false,
+                collapseWhitespace: false,
+                removeCommentsFromCDATA: false,
+                removeCDATASectionsFromCDATA: false,
+                collapseBooleanAttributes: false,
+                removeAttributeQuotes: false,
+                removeRedundantAttributes: false,
+                useShortDoctype: false,
+                removeEmptyAttributes: false,
+                removeOptionalTags: false,
+                removeEmptyElements: false
             },
-            files: {
-                'test/scripts/lib/jquery.js':'bower_components/jquery/jquery.js'
-                ,'test/scripts/lib/<%= pkg.name %>.js':'<%= concat.bootstrap.dest %>'
-                ,'test/scripts/lib/modernizr.js':'bower_components/modernizr/modernizr.js'
-                ,'test/scripts/lib/html5shiv.js':'bower_components/html5shiv/dist/html5shiv.js'
-                ,'test/scripts/lib/html5shiv-printshiv.js':'bower_components/html5shiv/dist/html5shiv-printshiv.js'
-                ,'test/scripts/lib/JSXTransformer.js':'bower_components/react/JSXTransformer.js'
-                ,'test/scripts/lib/react.js':'bower_components/react/react.js'
-                ,'test/scripts/lib/d3.js':'bower_components/d3/d3.js'
-                ,'test/scripts/require.js':'bower_components/requirejs/require.js'
-                ,'test/scripts/main.js':'src/scripts/main.js'
-                ,'test/scripts/plugins.js':'src/scripts/plugins.js'
+            files: {                                        // Dictionary of files
+                'test/index.html': 'src/index.html',        // 'destination': 'source'
+                'test/error.html': 'src/error.html'
             }
         },
-        dist: {
-            options: {
-                mangle: false //(only main.js, plugins.js)
-                , compress: true
-                , beautify: true
-                , report: 'gzip'
-                , sourceMap: 'dist/scripts/source-map.js'
-                , sourceMapRoot: 'src/scripts/'
-                , preserveComments: false
+        dist: {                                     // Target
+            options: {                              // Target options: https://github.com/gruntjs/grunt-contrib-htmlmin
+                removeComments: true,
+                collapseWhitespace: true,
+                removeCommentsFromCDATA: true,
+                removeCDATASectionsFromCDATA: false,
+                collapseBooleanAttributes: false,
+                removeAttributeQuotes: false,
+                removeRedundantAttributes: false,
+                useShortDoctype: false,
+                removeEmptyAttributes: true,
+                removeOptionalTags: false,
+                removeEmptyElements: false
             },
-            files: {
-                'dist/scripts/lib/jquery.js':'bower_components/jquery/jquery.js'
-                ,'dist/scripts/lib/<%= pkg.name %>.js':'<%= concat.bootstrap.dest %>'
-                ,'dist/scripts/lib/modernizr.js':'bower_components/modernizr/modernizr.js'
-                ,'dist/scripts/lib/html5shiv.js':'bower_components/html5shiv/dist/html5shiv.js'
-                ,'dist/scripts/lib/html5shiv-printshiv.js':'bower_components/html5shiv/dist/html5shiv-printshiv.js'
-                ,'dist/scripts/lib/JSXTransformer.js':'bower_components/react/JSXTransformer.js'
-                ,'dist/scripts/lib/react.js':'bower_components/react/react.js'
-                ,'dist/scripts/lib/d3.js':'bower_components/d3/d3.js'
-                ,'dist/scripts/require.js':'bower_components/requirejs/require.js'
-                ,'dist/scripts/main.js':'src/scripts/main.js'
-                ,'dist/scripts/plugins.js':'src/scripts/plugins.js'
+            files: {                                        // Dictionary of files
+                'dist/index.html': 'src/index.html',        // 'destination': 'source'
+                'dist/error.html': 'src/error.html'
             }
         }
     },
 
-    /* rename is broken, it overwrites the source file with the new name, even when
-     * dest specifies a completely different path.  Should not do this.  Just use 
-     * uglify instead to compress the uncompressed source and rename at new loc.
-     */
-    /*rename: {
-        jquery: {
-            src: 'bower_components/jquery/jquery.min.js',
-            dest: 'test/scripts/lib/jquery.js'
-        },
-        respond: {
-            src: 'bower_components/respond/respond.min.js',
-            dest: 'test/scripts/lib/respond.js'
-        },
-        react: {
-          src: 'bower_components/react/react.min.js',
-          dest: 'test/scripts/lib/react.js'
-        },
-        d3: {
-          src: 'bower_components/d3/d3.min.js',
-          dest: 'test/scripts/lib/d3.js'
-        }
-    },*/
 
     recess: {
         test: {
@@ -208,46 +173,89 @@ module.exports = function(grunt) {
         }
     },
 
-    htmlmin: {                                      // Task
-        test: {                                     // Target
-            options: {                              // Target options: https://github.com/gruntjs/grunt-contrib-htmlmin
-                removeComments: false,
-                collapseWhitespace: false,
-                removeCommentsFromCDATA: false,
-                removeCDATASectionsFromCDATA: false,
-                collapseBooleanAttributes: false,
-                removeAttributeQuotes: false,
-                removeRedundantAttributes: false,
-                useShortDoctype: false,
-                removeEmptyAttributes: false,
-                removeOptionalTags: false,
-                removeEmptyElements: false
+    
+    uglify: {
+        test: {
+            options: {
+                mangle: false
+                , compress: true
+                , beautify: true
+                , report: false
+                , sourceMap: 'test/scripts/source-map.js'
+                , sourceMapRoot: 'src/scripts/'
+                , preserveComments: true
             },
-            files: {                                        // Dictionary of files
-                'test/index.html': 'src/index.html',        // 'destination': 'source'
-                'test/error.html': 'src/error.html'
+            files: {
+                'test/scripts/lib/jquery.js':'bower_components/jquery/jquery.js'
+                ,'test/scripts/lib/<%= pkg.name %>.js':'<%= concat.bootstrap.dest %>'
+                ,'test/scripts/lib/modernizr.js':'bower_components/modernizr/modernizr.js'
+                ,'test/scripts/lib/html5shiv.js':'bower_components/html5shiv/dist/html5shiv.js'
+                ,'test/scripts/lib/html5shiv-printshiv.js':'bower_components/html5shiv/dist/html5shiv-printshiv.js'
+                ,'test/scripts/lib/JSXTransformer.js':'bower_components/react/JSXTransformer.js'
+                ,'test/scripts/lib/react.js':'bower_components/react/react.js'
+                ,'test/scripts/lib/d3.js':'bower_components/d3/d3.js'
+                ,'test/scripts/require.js':'bower_components/requirejs/require.js'
+                ,'test/scripts/main.js':'src/scripts/main.js'
+                ,'test/scripts/plugins.js':'src/scripts/plugins.js'
             }
         },
-        dist: {                                     // Target
-            options: {                              // Target options: https://github.com/gruntjs/grunt-contrib-htmlmin
-                removeComments: true,
-                collapseWhitespace: true,
-                removeCommentsFromCDATA: true,
-                removeCDATASectionsFromCDATA: false,
-                collapseBooleanAttributes: false,
-                removeAttributeQuotes: false,
-                removeRedundantAttributes: false,
-                useShortDoctype: false,
-                removeEmptyAttributes: true,
-                removeOptionalTags: false,
-                removeEmptyElements: false
+        dist: {
+            options: {
+                mangle: false //(only main.js, plugins.js)
+                , compress: true
+                , beautify: true
+                , report: 'min'
+                , sourceMap: 'dist/scripts/source-map.js'
+                , sourceMapRoot: 'src/scripts/'
+                , preserveComments: false
             },
-            files: {                                        // Dictionary of files
-                'dist/index.html': 'test/index.html',        // 'destination': 'source'
-                'dist/error.html': 'test/error.html'
+            files: {
+                'dist/scripts/lib/jquery.js':'bower_components/jquery/jquery.js'
+                ,'dist/scripts/lib/<%= pkg.name %>.js':'<%= concat.bootstrap.dest %>'
+                ,'dist/scripts/lib/modernizr.js':'bower_components/modernizr/modernizr.js'
+                ,'dist/scripts/lib/html5shiv.js':'bower_components/html5shiv/dist/html5shiv.js'
+                ,'dist/scripts/lib/html5shiv-printshiv.js':'bower_components/html5shiv/dist/html5shiv-printshiv.js'
+                ,'dist/scripts/lib/JSXTransformer.js':'bower_components/react/JSXTransformer.js'
+                ,'dist/scripts/lib/react.js':'bower_components/react/react.js'
+                ,'dist/scripts/lib/d3.js':'bower_components/d3/d3.js'
+                ,'dist/scripts/require.js':'bower_components/requirejs/require.js'
+                ,'dist/scripts/main.js':'src/scripts/main.js'
+                ,'dist/scripts/plugins.js':'src/scripts/plugins.js'
+            }
+        },
+        gzip: {
+            options: {
+                mangle: false //(only main.js, plugins.js)
+                , compress: true
+                , beautify: true
+                , report: 'gzip'
+                , sourceMap: 'dist/scripts/source-map.js'
+                , sourceMapRoot: 'src/scripts/'
+                , preserveComments: false
+            },
+            files: {
+                'dist/scripts/lib/jquery.js':'bower_components/jquery/jquery.js'
+                ,'dist/scripts/lib/<%= pkg.name %>.js':'<%= concat.bootstrap.dest %>'
+                ,'dist/scripts/lib/modernizr.js':'bower_components/modernizr/modernizr.js'
+                ,'dist/scripts/lib/html5shiv.js':'bower_components/html5shiv/dist/html5shiv.js'
+                ,'dist/scripts/lib/html5shiv-printshiv.js':'bower_components/html5shiv/dist/html5shiv-printshiv.js'
+                ,'dist/scripts/lib/JSXTransformer.js':'bower_components/react/JSXTransformer.js'
+                ,'dist/scripts/lib/react.js':'bower_components/react/react.js'
+                ,'dist/scripts/lib/d3.js':'bower_components/d3/d3.js'
+                ,'dist/scripts/require.js':'bower_components/requirejs/require.js'
+                ,'dist/scripts/main.js':'src/scripts/main.js'
+                ,'dist/scripts/plugins.js':'src/scripts/plugins.js'
             }
         }
     },
+
+    
+    jsx: {
+        client: {
+            src: 'src/scripts/main.jsx',
+            dest: 'src/scripts/main.js'
+        }
+    }, 
 
 
     copy: {
@@ -314,6 +322,17 @@ module.exports = function(grunt) {
       }
     },
 
+
+    validation: {
+        options: {
+            reset: true
+        },
+        files: {
+            src: ["_gh_pages/**/*.html"]
+        }
+    },
+
+
     qunit: {
       options: {
         inject: 'src/scripts/tests/unit/phantom.js'
@@ -321,6 +340,7 @@ module.exports = function(grunt) {
       files: ['src/scripts/tests/*.html']
     },
 
+    
     connect: {
         test: {
             options: {
@@ -338,28 +358,20 @@ module.exports = function(grunt) {
         }
     },
 
-    validation: {
-      options: {
-        reset: true
-      },
-      files: {
-        src: ["_gh_pages/**/*.html"]
-      }
-    },
 
     watch: {
-      src: {
-        files: '<%= jshint.src.src %>',
-        tasks: ['jshint:src', 'qunit']
-      },
-      test: {
-        files: '<%= jshint.test.src %>',
-        tasks: ['jshint:test', 'qunit']
-      },
-      recess: {
-        files: 'src/styles/less/*.less',
-        tasks: ['recess', 'copy']
-      }
+        src: {
+            files: '<%= jshint.src.src %>',
+            tasks: ['jshint:src', 'qunit']
+        },
+        test: {
+            files: '<%= jshint.test.src %>',
+            tasks: ['jshint:test', 'qunit']
+        },
+        recess: {
+            files: 'src/styles/less/*.less',
+            tasks: ['recess', 'copy']
+        }
     }
 
   });

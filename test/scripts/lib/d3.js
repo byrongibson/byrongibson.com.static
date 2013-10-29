@@ -240,12 +240,17 @@ d3 = function() {
         };
     }
     function d3_event_dragSuppress() {
-        var name = ".dragsuppress-" + ++d3_event_dragId, touchmove = "touchmove" + name, selectstart = "selectstart" + name, dragstart = "dragstart" + name, click = "click" + name, w = d3.select(d3_window).on(touchmove, d3_eventPreventDefault).on(selectstart, d3_eventPreventDefault).on(dragstart, d3_eventPreventDefault), style = d3_documentElement.style, select = style[d3_event_dragSelect];
-        return style[d3_event_dragSelect] = "none", function(suppressClick) {
+        var name = ".dragsuppress-" + ++d3_event_dragId, click = "click" + name, w = d3.select(d3_window).on("touchmove" + name, d3_eventPreventDefault).on("dragstart" + name, d3_eventPreventDefault).on("selectstart" + name, d3_eventPreventDefault);
+        if (d3_event_dragSelect) {
+            var style = d3_documentElement.style, select = style[d3_event_dragSelect];
+            style[d3_event_dragSelect] = "none";
+        }
+        return function(suppressClick) {
             function off() {
                 w.on(click, null);
             }
-            w.on(name, null), style[d3_event_dragSelect] = select, suppressClick && (w.on(click, function() {
+            w.on(name, null), d3_event_dragSelect && (style[d3_event_dragSelect] = select), 
+            suppressClick && (w.on(click, function() {
                 d3_eventPreventDefault(), off();
             }, !0), setTimeout(off, 0));
         };
@@ -1129,6 +1134,14 @@ d3 = function() {
     }
     function d3_geo_resample(project) {
         function resample(stream) {
+            return (maxDepth ? resampleRecursive : resampleNone)(stream);
+        }
+        function resampleNone(stream) {
+            return d3_geo_transformPoint(stream, function(x, y) {
+                x = project(x, y), stream.point(x[0], x[1]);
+            });
+        }
+        function resampleRecursive(stream) {
             function point(x, y) {
                 x = project(x, y), stream.point(x[0], x[1]);
             }
@@ -1179,18 +1192,35 @@ d3 = function() {
             return arguments.length ? (maxDepth = (δ2 = _ * _) > 0 && 16, resample) : Math.sqrt(δ2);
         }, resample;
     }
-    function d3_geo_transform(stream) {
-        this.stream = stream;
-    }
     function d3_geo_pathProjectStream(project) {
         var resample = d3_geo_resample(function(x, y) {
             return project([ x * d3_degrees, y * d3_degrees ]);
         });
         return function(stream) {
-            var transform = new d3_geo_transform(stream = resample(stream));
-            return transform.point = function(x, y) {
-                stream.point(x * d3_radians, y * d3_radians);
-            }, transform;
+            return d3_geo_projectionRadians(resample(stream));
+        };
+    }
+    function d3_geo_transform(stream) {
+        this.stream = stream;
+    }
+    function d3_geo_transformPoint(stream, point) {
+        return {
+            point: point,
+            sphere: function() {
+                stream.sphere();
+            },
+            lineStart: function() {
+                stream.lineStart();
+            },
+            lineEnd: function() {
+                stream.lineEnd();
+            },
+            polygonStart: function() {
+                stream.polygonStart();
+            },
+            polygonEnd: function() {
+                stream.polygonEnd();
+            }
         };
     }
     function d3_geo_projection(project) {
@@ -1241,10 +1271,9 @@ d3 = function() {
         };
     }
     function d3_geo_projectionRadians(stream) {
-        var transform = new d3_geo_transform(stream);
-        return transform.point = function(λ, φ) {
-            stream.point(λ * d3_radians, φ * d3_radians);
-        }, transform;
+        return d3_geo_transformPoint(stream, function(x, y) {
+            stream.point(x * d3_radians, y * d3_radians);
+        });
     }
     function d3_geo_equirectangular(λ, φ) {
         return [ λ, φ ];
@@ -2250,10 +2279,17 @@ d3 = function() {
         return d3.range.apply(d3, d3_scale_linearTickRange(domain, m));
     }
     function d3_scale_linearTickFormat(domain, m, format) {
-        var precision = -Math.floor(Math.log(d3_scale_linearTickRange(domain, m)[2]) / Math.LN10 + .01);
+        var range = d3_scale_linearTickRange(domain, m);
         return d3.format(format ? format.replace(d3_format_re, function(a, b, c, d, e, f, g, h, i, j) {
-            return [ b, c, d, e, f, g, h, i || "." + (precision - 2 * ("%" === j)), j ].join("");
-        }) : ",." + precision + "f");
+            return [ b, c, d, e, f, g, h, i || "." + d3_scale_linearFormatPrecision(j, range), j ].join("");
+        }) : ",." + d3_scale_linearPrecision(range[2]) + "f");
+    }
+    function d3_scale_linearPrecision(value) {
+        return -Math.floor(Math.log(value) / Math.LN10 + .01);
+    }
+    function d3_scale_linearFormatPrecision(type, range) {
+        var p = d3_scale_linearPrecision(range[2]);
+        return type in d3_scale_linearFormatSignificant ? Math.abs(p - d3_scale_linearPrecision(Math.max(Math.abs(range[0]), Math.abs(range[1])))) + +("e" !== type) : p - 2 * ("%" === type);
     }
     function d3_scale_log(linear, base, positive, domain) {
         function log(x) {
@@ -2998,7 +3034,7 @@ d3 = function() {
         return range.selectNode(d3_document.body), range.createContextualFragment(request.responseText);
     }
     var d3 = {
-        version: "3.3.8"
+        version: "3.3.9"
     };
     Date.now || (Date.now = function() {
         return +new Date();
@@ -3516,7 +3552,7 @@ d3 = function() {
     d3_selection_onFilters.forEach(function(k) {
         "on" + k in d3_document && d3_selection_onFilters.remove(k);
     });
-    var d3_event_dragSelect = d3_vendorSymbol(d3_documentElement.style, "userSelect"), d3_event_dragId = 0;
+    var d3_event_dragSelect = "onselectstart" in d3_document ? null : d3_vendorSymbol(d3_documentElement.style, "userSelect"), d3_event_dragId = 0;
     d3.mouse = function(container) {
         return d3_mousePoint(container, d3_eventSource());
     };
@@ -4412,34 +4448,7 @@ d3 = function() {
             d3_geo_pathCentroid.lineEnd = d3_geo_pathCentroidLineEnd;
         }
     };
-    d3.geo.transform = function(methods) {
-        return {
-            stream: function(stream) {
-                var transform = new d3_geo_transform(stream);
-                for (var k in methods) transform[k] = methods[k];
-                return transform;
-            }
-        };
-    }, d3_geo_transform.prototype = {
-        point: function(x, y) {
-            this.stream.point(x, y);
-        },
-        sphere: function() {
-            this.stream.sphere();
-        },
-        lineStart: function() {
-            this.stream.lineStart();
-        },
-        lineEnd: function() {
-            this.stream.lineEnd();
-        },
-        polygonStart: function() {
-            this.stream.polygonStart();
-        },
-        polygonEnd: function() {
-            this.stream.polygonEnd();
-        }
-    }, d3.geo.path = function() {
+    d3.geo.path = function() {
         function path(object) {
             return object && ("function" == typeof pointRadius && contextStream.pointRadius(+pointRadius.apply(this, arguments)), 
             cacheStream && cacheStream.valid || (cacheStream = projectStream(contextStream)), 
@@ -4468,6 +4477,33 @@ d3 = function() {
             return arguments.length ? (pointRadius = "function" == typeof _ ? _ : (contextStream.pointRadius(+_), 
             +_), path) : pointRadius;
         }, path.projection(d3.geo.albersUsa()).context(null);
+    }, d3.geo.transform = function(methods) {
+        return {
+            stream: function(stream) {
+                var transform = new d3_geo_transform(stream);
+                for (var k in methods) transform[k] = methods[k];
+                return transform;
+            }
+        };
+    }, d3_geo_transform.prototype = {
+        point: function(x, y) {
+            this.stream.point(x, y);
+        },
+        sphere: function() {
+            this.stream.sphere();
+        },
+        lineStart: function() {
+            this.stream.lineStart();
+        },
+        lineEnd: function() {
+            this.stream.lineEnd();
+        },
+        polygonStart: function() {
+            this.stream.polygonStart();
+        },
+        polygonEnd: function() {
+            this.stream.polygonEnd();
+        }
     }, d3.geo.projection = d3_geo_projection, d3.geo.projectionMutator = d3_geo_projectionMutator, 
     (d3.geo.equirectangular = function() {
         return d3_geo_projection(d3_geo_equirectangular);
@@ -5489,7 +5525,15 @@ d3 = function() {
     };
     d3.scale.linear = function() {
         return d3_scale_linear([ 0, 1 ], [ 0, 1 ], d3_interpolate, !1);
-    }, d3.scale.log = function() {
+    };
+    var d3_scale_linearFormatSignificant = {
+        s: 1,
+        g: 1,
+        p: 1,
+        r: 1,
+        e: 1
+    };
+    d3.scale.log = function() {
         return d3_scale_log(d3.scale.linear().domain([ 0, 1 ]), 10, !0, [ 1, 10 ]);
     };
     var d3_scale_logFormat = d3.format(".0e"), d3_scale_logNiceNegative = {
