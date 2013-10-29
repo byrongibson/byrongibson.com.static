@@ -397,7 +397,6 @@ module.exports = function(grunt) {
   /*grunt.loadNpmTasks('grunt-contrib-imagemin'); */ /* https://npmjs.org/package/grunt-contrib-imagemin */
   /*grunt.loadNpmTasks('grunt-rename');*/  
 
-
   // Docs HTML validation task
   grunt.registerTask('validate-html', ['validation']);
 
@@ -415,39 +414,53 @@ module.exports = function(grunt) {
   // Concat but don't minify html and JS files.
   grunt.registerTask('concat-all', ['concat']);
 
+  /***** Compile Javascript *****/
+
   //grunt.registerTask('dist-js', ['jsx', 'uglify']);
   grunt.registerTask('test-js', ['uglify:test']);
+
+  // compile and minify js, distribute to both ./test and ./dist
+  grunt.registerTask('dist-js', ['uglify:test','uglify:dist']);
+
+  // compile and minify js, distribute to both ./test and ./dist
+  grunt.registerTask('gzip-js', ['uglify:test','uglify:dist','uglify:gzip']);
+
+  /***** Compile CSS *****/
 
   // Compile less & css into single css file, distribute to ./test only
   grunt.registerTask('test-css', ['recess:test']);
   
+  // compile and minify less & css, distribute to both ./test and ./dist
+  grunt.registerTask('dist-css', ['recess']);
+ 
+  /***** Compile HTML *****/
+
   // Compile but don't minify html, distribute to ./test only
   grunt.registerTask('test-html', ['htmlmin:test']);
+
+  // compile and minify html, distribute to both ./test and ./dist
+  grunt.registerTask('dist-html', ['htmlmin']);
+
+  /***** Copy Assets *****/
 
   // Copy fonts from src to ./test
   grunt.registerTask('test-copy', ['copy:test']);
   
-  // Build ./test
-  //grunt.registerTask('dist-test', ['clean:test', 'concat-all', 'test-css', 'test-js', 'test-html', 'test-copy']);
-  grunt.registerTask('dist-test', ['concat-all', 'test-css', 'test-js', 'test-html', 'test-copy']);
-
-  // compile and minify js, distribute to both ./test and ./dist
-  //grunt.registerTask('dist-js', ['jsx', 'uglify']);
-  grunt.registerTask('dist-js', ['uglify']);
-
-  // compile and minify less & css, distribute to both ./test and ./dist
-  grunt.registerTask('dist-css', ['recess']);
-  
-  // compile and minify html, distribute to both ./test and ./dist
-  grunt.registerTask('dist-html', ['htmlmin']);
-
   // Copy Fonts to both ./test and ./dist
   grunt.registerTask('dist-copy', ['copy']);
 
-  // Full distribution task, build both ./test and ./dist
+  /***** Build *****/
+
+  // Test build; builds ./test 
+  grunt.registerTask('dist-test', ['concat-all', 'test-css', 'test-js', 'test-html', 'test-copy']);
+
+  // Full build: builds both ./test and ./dist
   grunt.registerTask('dist', ['clean', 'concat-all', 'dist-css', 'dist-js', 'dist-html', 'dist-copy']);
 
+  // Optimized build: build ./test and ./dist, gzip ./dist js.
+  grunt.registerTask('dist-gzip', ['clean', 'concat-all', 'dist-css', 'gzip-js', 'dist-html', 'dist-copy']);
+
   // Default task. fixme: fix tests for new workflow, eg no jekyll _gh-pages
-  grunt.registerTask('default', ['test', 'dist']);
+  grunt.registerTask('default', ['test', 'dist-gzip']);
 
 };
