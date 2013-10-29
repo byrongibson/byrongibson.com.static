@@ -414,16 +414,13 @@ module.exports = function(grunt) {
   // Concat but don't minify html and JS files.
   grunt.registerTask('concat-all', ['concat']);
 
-  /***** Compile Javascript *****/
+  /***** Compile HTML *****/
 
-  //grunt.registerTask('dist-js', ['jsx', 'uglify']);
-  grunt.registerTask('test-js', ['uglify:test']);
+  // Compile but don't minify html, distribute to ./test only
+  grunt.registerTask('test-html', ['htmlmin:test']);
 
-  // compile and minify js, distribute to both ./test and ./dist
-  grunt.registerTask('dist-js', ['uglify:test','uglify:dist']);
-
-  // compile and minify js, distribute to both ./test and ./dist
-  grunt.registerTask('gzip-js', ['uglify:test','uglify:dist','uglify:gzip']);
+  // compile and minify html, distribute to both ./test and ./dist
+  grunt.registerTask('dist-html', ['htmlmin']);
 
   /***** Compile CSS *****/
 
@@ -433,13 +430,16 @@ module.exports = function(grunt) {
   // compile and minify less & css, distribute to both ./test and ./dist
   grunt.registerTask('dist-css', ['recess']);
  
-  /***** Compile HTML *****/
+  /***** Compile Javascript *****/
 
-  // Compile but don't minify html, distribute to ./test only
-  grunt.registerTask('test-html', ['htmlmin:test']);
+  //grunt.registerTask('dist-js', ['jsx', 'uglify']);
+  grunt.registerTask('test-js', ['uglify:test']);
 
-  // compile and minify html, distribute to both ./test and ./dist
-  grunt.registerTask('dist-html', ['htmlmin']);
+  // compile and minify js, distribute to both ./test and ./dist
+  grunt.registerTask('dist-js', ['uglify:test','uglify:dist']);
+
+  // compile and minify js, distribute to both ./test and ./dist
+  grunt.registerTask('gzip-js', ['uglify:test','uglify:gzip']);
 
   /***** Copy Assets *****/
 
