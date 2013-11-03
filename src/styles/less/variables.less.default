@@ -39,36 +39,21 @@
 // Typography
 // -------------------------
 
-// Copy-paste the following google api output directly into css source for more redunancy
-//@import url(http://fonts.googleapis.com/css?family=Open+Sans|Archivo+Black);
-@import url(http://fonts.googleapis.com/css?family=Archivo+Black|Open+Sans:400,400italic,700,700italic);
-
 @font-family-sans-serif:  "Helvetica Neue", Helvetica, Arial, sans-serif;
 @font-family-serif:       Georgia, "Times New Roman", Times, serif;
 @font-family-monospace:   Monaco, Menlo, Consolas, "Courier New", monospace;
-@font-family-open-sans:   "Open Sans", @font-family-sans-serif;
-@font-family-archivo-black: "Archivo Black", @font-family-sans-serif;
-@font-family-base:        @font-family-open-sans;
+@font-family-base:        @font-family-sans-serif;
 
-@font-size-base:          14px; //14px;
+@font-size-base:          14px;
 @font-size-large:         ceil(@font-size-base * 1.25); // ~18px
 @font-size-small:         ceil(@font-size-base * 0.85); // ~12px
-
-/************/
-@font-size-h1:            floor(@font-size-base * 2.6); // ~36px
-@font-size-h2:            floor(@font-size-base * 2.15); // ~30px
-@font-size-h3:            ceil(@font-size-base * 1.7); // ~24px
-@font-size-h4:            ceil(@font-size-base * 1.25); // ~18px
-@font-size-h5:            @font-size-base;
-@font-size-h6:            ceil(@font-size-base * 0.85); // ~12px
 
 @line-height-base:        1.428571429; // 20/14
 @line-height-computed:    floor(@font-size-base * @line-height-base); // ~20px
 
-@headings-font-family:    @font-family-archivo-black; //@headings-font-family:    @font-family-base;
+@headings-font-family:    @font-family-base;
 @headings-font-weight:    500;
 @headings-line-height:    1.1;
-@headings-color:          inherit;
 
 // Iconography
 // -------------------------
@@ -251,10 +236,10 @@
 // -------------------------
 
 // Basics of a navbar
-@navbar-height:                    100px; //50px;
+@navbar-height:                    50px;
 @navbar-margin-bottom:             @line-height-computed;
 @navbar-default-color:             #777;
-@navbar-default-bg:                #fff; //#f8f8f8;
+@navbar-default-bg:                #f8f8f8;
 @navbar-default-border:            darken(@navbar-default-bg, 6.5%);
 @navbar-border-radius:             @border-radius-base;
 @navbar-padding-horizontal:        floor(@grid-gutter-width / 2);

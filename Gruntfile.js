@@ -344,14 +344,14 @@ module.exports = function(grunt) {
     connect: {
         test: {
             options: {
-                port: 3000,
+                port: 3001,
                 base: './test/',
                 keepalive: true
             }
         },
         dist: {
             options: {
-                port: 3000,
+                port: 3001,
                 base: './dist/',
                 keepalive: true
             }
