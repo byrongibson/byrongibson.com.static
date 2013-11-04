@@ -6832,8 +6832,8 @@ body {
 }
 
 .navbar-brand {
-  padding: 4px 18px 4px 18.75px;
-  margin: 4px 18px 4px 18.75px;
+  padding: 4px 18px 4px 15px;
+  margin: 4px 18px 4px 15px;
 }
 
 #helloworld {
