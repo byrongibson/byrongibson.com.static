@@ -49,7 +49,7 @@ module.exports = function(grunt) {
       options: {
         stripBanners: true
       },
-      bootstrap: {
+      scripts: {
         src: [
           'src/scripts/transition.js',
           'src/scripts/alert.js',
@@ -401,7 +401,7 @@ module.exports = function(grunt) {
   grunt.registerTask('validate-html', ['validation']);
 
   // Test task.
-  var testSubtasks = ['dist-css', 'jshint', 'qunit', 'validate-html'];
+  var testSubtasks = ['dist-styles', 'jshint', 'qunit', 'validate-html'];
   // Only run BrowserStack tests under Travis
   if (process.env.TRAVIS) {
     // Only run BrowserStack tests if this is a mainline commit in twbs/bootstrap, or you have your own BrowserStack key
@@ -412,34 +412,40 @@ module.exports = function(grunt) {
   grunt.registerTask('test', testSubtasks);
 
   // Concat but don't minify html and JS files.
+  grunt.registerTask('concat-scripts', ['concat:scripts']);
+
+  // Concat but don't minify html and JS files.
+  grunt.registerTask('concat-html', ['concat:html_index','concat:html_error']);
+
+  // Concat but don't minify html and JS files.
   grunt.registerTask('concat-all', ['concat']);
 
   /***** Compile HTML *****/
 
   // Compile but don't minify html, distribute to ./test only
-  grunt.registerTask('test-html', ['htmlmin:test']);
+  grunt.registerTask('test-html', ['concat-html','htmlmin:test']);
 
   // compile and minify html, distribute to both ./test and ./dist
-  grunt.registerTask('dist-html', ['htmlmin']);
+  grunt.registerTask('dist-html', ['concat-html','htmlmin']);
 
   /***** Compile CSS *****/
 
   // Compile less & css into single css file, distribute to ./test only
-  grunt.registerTask('test-css', ['recess:test']);
+  grunt.registerTask('test-styles', ['recess:test']);
   
   // compile and minify less & css, distribute to both ./test and ./dist
-  grunt.registerTask('dist-css', ['recess']);
+  grunt.registerTask('dist-styles', ['recess']);
  
   /***** Compile Javascript *****/
 
-  //grunt.registerTask('dist-js', ['jsx', 'uglify']);
-  grunt.registerTask('test-js', ['uglify:test']);
+  //grunt.registerTask('dist-scripts', ['jsx', 'uglify']);
+  grunt.registerTask('test-scripts', ['concat-scripts','uglify:test']);
 
   // compile and minify js, distribute to both ./test and ./dist
-  grunt.registerTask('dist-js', ['uglify:test','uglify:dist']);
+  grunt.registerTask('dist-scripts', ['concat-scripts','uglify:test','uglify:dist']);
 
   // compile and minify js, distribute to both ./test and ./dist
-  grunt.registerTask('gzip-js', ['uglify:test','uglify:gzip']);
+  grunt.registerTask('gzip-scripts', ['concat-scripts','uglify:test','uglify:gzip']);
 
   /***** Copy Assets *****/
 
@@ -452,13 +458,13 @@ module.exports = function(grunt) {
   /***** Build *****/
 
   // Test build; builds ./test 
-  grunt.registerTask('dist-test', ['concat-all', 'test-css', 'test-js', 'test-html', 'test-copy']);
+  grunt.registerTask('dist-test', ['concat-all', 'test-styles', 'test-scripts', 'test-html', 'test-copy']);
 
   // Full build: builds both ./test and ./dist
-  grunt.registerTask('dist', ['clean', 'concat-all', 'dist-css', 'dist-js', 'dist-html', 'dist-copy']);
+  grunt.registerTask('dist', ['clean', 'concat-all', 'dist-styles', 'dist-scripts', 'dist-html', 'dist-copy']);
 
   // Optimized build: build ./test and ./dist, gzip ./dist js.
-  grunt.registerTask('dist-gzip', ['clean', 'concat-all', 'dist-css', 'gzip-js', 'dist-html', 'dist-copy']);
+  grunt.registerTask('dist-gzip', ['clean', 'concat-all', 'dist-styles', 'gzip-scripts', 'dist-html', 'dist-copy']);
 
   // Default task. fixme: fix tests for new workflow, eg no jekyll _gh-pages
   grunt.registerTask('default', ['test', 'dist-gzip']);
