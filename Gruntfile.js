@@ -98,7 +98,7 @@ module.exports = function(grunt) {
                 removeAttributeQuotes: false,
                 removeRedundantAttributes: false,
                 useShortDoctype: false,
-                removeEmptyAttributes: false,
+                removeEmptyAttributes: true,
                 removeOptionalTags: false,
                 removeEmptyElements: false
             },
