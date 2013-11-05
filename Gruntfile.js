@@ -178,7 +178,7 @@ module.exports = function(grunt) {
         test: {
             options: {
                 mangle: false
-                , compress: true
+                , compress: false
                 , beautify: true
                 , report: false
                 , sourceMap: 'test/scripts/source-map.js'
@@ -187,7 +187,7 @@ module.exports = function(grunt) {
             },
             files: {
                 'test/scripts/lib/jquery.js':'bower_components/jquery/jquery.js'
-                ,'test/scripts/lib/<%= pkg.name %>.js':'<%= concat.bootstrap.dest %>'
+                ,'test/scripts/lib/<%= pkg.name %>.js':'<%= concat.scripts.dest %>'
                 ,'test/scripts/lib/modernizr.js':'bower_components/modernizr/modernizr.js'
                 ,'test/scripts/lib/html5shiv.js':'bower_components/html5shiv/dist/html5shiv.js'
                 ,'test/scripts/lib/html5shiv-printshiv.js':'bower_components/html5shiv/dist/html5shiv-printshiv.js'
@@ -203,7 +203,7 @@ module.exports = function(grunt) {
             options: {
                 mangle: false //(only main.js, plugins.js)
                 , compress: true
-                , beautify: true
+                , beautify: false
                 , report: 'min'
                 , sourceMap: 'dist/scripts/source-map.js'
                 , sourceMapRoot: 'src/scripts/'
@@ -211,7 +211,7 @@ module.exports = function(grunt) {
             },
             files: {
                 'dist/scripts/lib/jquery.js':'bower_components/jquery/jquery.js'
-                ,'dist/scripts/lib/<%= pkg.name %>.js':'<%= concat.bootstrap.dest %>'
+                ,'dist/scripts/lib/<%= pkg.name %>.js':'<%= concat.scripts.dest %>'
                 ,'dist/scripts/lib/modernizr.js':'bower_components/modernizr/modernizr.js'
                 ,'dist/scripts/lib/html5shiv.js':'bower_components/html5shiv/dist/html5shiv.js'
                 ,'dist/scripts/lib/html5shiv-printshiv.js':'bower_components/html5shiv/dist/html5shiv-printshiv.js'
@@ -235,7 +235,7 @@ module.exports = function(grunt) {
             },
             files: {
                 'dist/scripts/lib/jquery.js':'bower_components/jquery/jquery.js'
-                ,'dist/scripts/lib/<%= pkg.name %>.js':'<%= concat.bootstrap.dest %>'
+                ,'dist/scripts/lib/<%= pkg.name %>.js':'<%= concat.scripts.dest %>'
                 ,'dist/scripts/lib/modernizr.js':'bower_components/modernizr/modernizr.js'
                 ,'dist/scripts/lib/html5shiv.js':'bower_components/html5shiv/dist/html5shiv.js'
                 ,'dist/scripts/lib/html5shiv-printshiv.js':'bower_components/html5shiv/dist/html5shiv-printshiv.js'
@@ -351,7 +351,7 @@ module.exports = function(grunt) {
         },
         dist: {
             options: {
-                port: 3001,
+                port: 3000,
                 base: './dist/',
                 keepalive: true
             }
@@ -438,7 +438,7 @@ module.exports = function(grunt) {
  
   /***** Compile Javascript *****/
 
-  //grunt.registerTask('dist-scripts', ['jsx', 'uglify']);
+  // don't compile or minify, just beautify and copy to ./test
   grunt.registerTask('test-scripts', ['concat-scripts','uglify:test']);
 
   // compile and minify js, distribute to both ./test and ./dist
