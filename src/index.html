@@ -7,11 +7,13 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>Byron Gibson</title>
+<meta name="author" content="">
 <meta name="description" content="My testing ground for all things web development.">
 <meta name="keywords" content="html5 css3 javascript spa single-page-app d3.js react.js data visualization dataviz yeoman.io gruntjs bower">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!--- Place favicon.ico and apple-touch-icon.png in the root directory --->
+<!--<link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">-->
 
 <!--- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries --->
 <!--[if lt IE 9]>
@@ -30,42 +32,34 @@
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
 
-
-<div class="row">
-
-    <!-- Navbar -->
-    <nav class="navbar navbar-default nav-stacked" role="navigation">
-        <!-- Brand and toggle get grouped for better mobile display -->
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top">
+        <!--<div class="container">-->
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-            <span class="sr-only">Toggle navigation</span>
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/"><img src="/images/lightningNA_75x83.jpg" alt="Me at the Lightening North American Championships" class="img-circle img-responsive"></a>
+          </button>
+        <a class="navbar-brand" href="/"><img src="/images/lightningNA_75x83.jpg" alt="Me at the Lightening North American Championships" class="img-circle img-responsive"></a>
         </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#lab">Lab</a></li>
+            <li><a href="#about">Work</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+    <!--</div>-->
+    </div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-            
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="blog">Blog</a></li>
-                <li><a href="/lab">Lab</a></li>
-                <li><a href="/work">Work</a></li>
-                <li><a href="/contact">Contact</a></li>
-            </ul>
-        </div><!-- /.navbar-collapse -->
-    </nav>
 
-</div>
-
-<div class="row">
+<!--<div class="container">-->
 
     <!-- left sidebar -->
     <div class="col-md-3">
-        <div id="sidebar" class="bs-sidebar hidden-print" role="complementary">
-            <ul id="sidenav" class="nav bs-sidenav" data-spy="affix" data-offset="200">
+        <div id="sidebar-left" class="bs-sidebar hidden-print" role="complementary">
+            <ul id="sidenav-left" class="nav bs-sidenav" data-spy="affix" data-offset="200">
                 <li>
                     <a href="#"></a>
                     <ul class="nav">
@@ -100,10 +94,38 @@
     </div>
 
     <!-- right sidebar -->
-    <aside class="col-md-3">
-        <div>&nbsp;</div>
-    </aside>
-</div>
+    <div class="col-md-3">
+        <div id="sidebar-right" class="bs-sidebar hidden-print" role="complementary">
+            <ul id="sidenav-right" class="nav bs-sidenav" data-spy="affix" data-offset="200">
+                <li>
+                    <a href="#"></a>
+                    <ul class="nav">
+                        <li><a href="#"></a></li>
+                        <li><a href="#"></a></li>
+                        <li><a href="#"></a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"></a>
+                    <ul class="nav">
+                        <li><a href="#"></a></li>
+                        <li><a href="#"></a></li>
+                        <li><a href="#"></a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"></a>
+                    <ul class="nav">
+                        <li><a href="#"></a></li>
+                        <li><a href="#"></a></li>
+                        <li><a href="#"></a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!--</div>-->
 
 <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
 <script>

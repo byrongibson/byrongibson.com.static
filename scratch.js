@@ -38,7 +38,7 @@
           'src/scripts/tab.js',
           'src/scripts/affix.js'
         ],
-        dest: 'test/scripts/lib/<%= pkg.name %>.js'
+        dest: 'src/scripts/lib/<%= pkg.name %>.js'
       },
       html_index: {
         src: [
@@ -66,57 +66,56 @@
         dest: 'src/scripts/main.js'
       }
     }, 
-    
+
     uglify: {
-      lib: {
         test: {
             options: {
                 mangle: false
-                , compress: false
+                , compress: true
                 , beautify: true
-                , report: 'min'
+                , report: false
                 , sourceMap: 'test/scripts/source-map.js'
                 , sourceMapRoot: 'src/scripts/'
                 , preserveComments: true
             },
-            jquery: {
-                src: 'bower_components/jquery/jquery.js',
-                dest: 'test/scripts/lib/jquery.js'
-            },
-            bootstrap: {
-                src: ['<%= concat.bootstrap.dest %>'],
-                dest: 'test/scripts/lib/<%= pkg.name %>.js'
-            },
-            modernizr: {
-                src: ['bower_components/modernizr/modernizr.js'],
-                dest: 'test/scripts/lib/modernizr.js'
-            },
-            html5shiv: {
-                src: ['bower_components/html5shiv/dist/html5shiv.js'],
-                dest: 'test/scripts/lib/html5shiv.js'
-            },
-            html5shivprintshiv: {
-                src: ['bower_components/html5shiv/dist/html5shiv-printshiv.js'],
-                dest: 'test/scripts/lib/html5shiv-printshiv.js'
-            },
-            JSXTransformer: {
-                src: ['bower_components/react/JSXTransformer.js'],
-                dest: 'test/scripts/lib/JSXTransformer.js'
-            },
-            react: {
-                src: ['bower_components/react/react.js'],
-                dest: 'test/scripts/lib/react.js'
-            },
-            d3: {
-                src: ['bower_components/d3/d3.js'],
-                dest: 'test/scripts/lib/d3.js'
-            },
-            requirejs: {
-                src: ['bower_components/requirejs/require.js'],
-                dest: 'test/scripts/require.js'
+            files: {
+                'test/scripts/lib/jquery.js':'bower_components/jquery/jquery.js'
+                ,'test/scripts/lib/<%= pkg.name %>.js':'<%= concat.bootstrap.dest %>'
+                ,'test/scripts/lib/modernizr.js':'bower_components/modernizr/modernizr.js'
+                ,'test/scripts/lib/html5shiv.js':'bower_components/html5shiv/dist/html5shiv.js'
+                ,'test/scripts/lib/html5shiv-printshiv.js':'bower_components/html5shiv/dist/html5shiv-printshiv.js'
+                ,'test/scripts/lib/JSXTransformer.js':'bower_components/react/JSXTransformer.js'
+                ,'test/scripts/lib/react.js':'bower_components/react/react.js'
+                ,'test/scripts/lib/d3.js':'bower_components/d3/d3.js'
+                ,'test/scripts/require.js':'bower_components/requirejs/require.js'
+                ,'test/scripts/main.js':'src/scripts/main.js'
+                ,'test/scripts/plugins.js':'src/scripts/plugins.js'
             }
         },
         dist: {
+            options: {
+                mangle: false //(only main.js, plugins.js)
+                , compress: true
+                , beautify: true
+                , report: 'min'
+                , sourceMap: 'dist/scripts/source-map.js'
+                , sourceMapRoot: 'src/scripts/'
+                , preserveComments: false
+            },
+            files: {
+                'dist/scripts/lib/jquery.js':'bower_components/jquery/jquery.js'
+                ,'dist/scripts/lib/<%= pkg.name %>.js':'<%= concat.bootstrap.dest %>'
+                ,'dist/scripts/lib/modernizr.js':'bower_components/modernizr/modernizr.js'
+                ,'dist/scripts/lib/html5shiv.js':'bower_components/html5shiv/dist/html5shiv.js'
+                ,'dist/scripts/lib/html5shiv-printshiv.js':'bower_components/html5shiv/dist/html5shiv-printshiv.js'
+                ,'dist/scripts/lib/JSXTransformer.js':'bower_components/react/JSXTransformer.js'
+                ,'dist/scripts/lib/react.js':'bower_components/react/react.js'
+                ,'dist/scripts/lib/d3.js':'bower_components/d3/d3.js'
+                ,'dist/scripts/require.js':'bower_components/requirejs/require.js'
+                ,'dist/scripts/main.js':'src/scripts/main.js'
+                ,'dist/scripts/plugins.js':'src/scripts/plugins.js'
+        },
+        gzip: {
             options: {
                 mangle: false //(only main.js, plugins.js)
                 , compress: true
@@ -126,182 +125,64 @@
                 , sourceMapRoot: 'src/scripts/'
                 , preserveComments: false
             },
-            jquery: {
-                src: 'bower_components/jquery/jquery.js',
-                dest: 'dist/scripts/lib/jquery.js'
-            },
-            bootstrap: {
-                src: ['<%= concat.bootstrap.dest %>'],
-                dest: 'dist/scripts/lib/<%= pkg.name %>.js'
-            },
-            modernizr: {
-                src: ['bower_components/modernizr/modernizr.js'],
-                dest: 'dist/scripts/lib/modernizr.js'
-            },
-            html5shiv: {
-                src: ['bower_components/html5shiv/dist/html5shiv.js'],
-                dest: 'dist/scripts/lib/html5shiv.js'
-            },
-            html5shivprintshiv: {
-                src: ['bower_components/html5shiv/dist/html5shiv-printshiv.js'],
-                dest: 'dist/scripts/lib/html5shiv-printshiv.js'
-            },
-            JSXTransformer: {
-                src: ['bower_components/react/JSXTransformer.js'],
-                dest: 'dist/scripts/lib/JSXTransformer.js'
-            },
-            react: {
-                src: ['bower_components/react/react.js'],
-                dest: 'dist/scripts/lib/react.js'
-            },
-            d3: {
-                src: ['bower_components/d3/d3.js'],
-                dest: 'dist/scripts/lib/d3.js'
-            },
-            requirejs: {
-                src: ['bower_components/requirejs/require.js'],
-                dest: 'dist/scripts/require.js'
-            }
-        }
-    },
-    project: {
-        test: {
-            options: {
-                mangle: false
-                , compress: false
-                , beautify: true
-                , report: 'min'
-                , sourceMap: 'test/scripts/source-map.js'
-                , sourceMapRoot: 'src/scripts/'
-                , preserveComments: true
-            },
-            main: {
-                src: ['src/scripts/main.js'],
-                dest: 'test/scripts/main.js'
-            },
-            plugins: {
-                src: ['src/scripts/plugins.js'],
-                dest: 'test/scripts/plugins.js'
-            }
-        },
-        dist: {
-            options: {
-                mangle: true //(only main.js, plugins.js)
-                , compress: true
-                , beautify: true
-                , report: 'gzip'
-                , sourceMap: 'dist/scripts/source-map.js'
-                , sourceMapRoot: 'src/scripts/'
-                , preserveComments: false
-            },
-            main: {
-                src: ['src/scripts/main.js'],
-                dest: 'dist/scripts/main.js'
-            },
-            plugins: {
-                src: ['src/scripts/plugins.js'],
-                dest: 'dist/scripts/plugins.js'
+            files: {
+                'dist/scripts/lib/jquery.js':'bower_components/jquery/jquery.js'
+                ,'dist/scripts/lib/<%= pkg.name %>.js':'<%= concat.bootstrap.dest %>'
+                ,'dist/scripts/lib/modernizr.js':'bower_components/modernizr/modernizr.js'
+                ,'dist/scripts/lib/html5shiv.js':'bower_components/html5shiv/dist/html5shiv.js'
+                ,'dist/scripts/lib/html5shiv-printshiv.js':'bower_components/html5shiv/dist/html5shiv-printshiv.js'
+                ,'dist/scripts/lib/JSXTransformer.js':'bower_components/react/JSXTransformer.js'
+                ,'dist/scripts/lib/react.js':'bower_components/react/react.js'
+                ,'dist/scripts/lib/d3.js':'bower_components/d3/d3.js'
+                ,'dist/scripts/require.js':'bower_components/requirejs/require.js'
+                ,'dist/scripts/main.js':'src/scripts/main.js'
+                ,'dist/scripts/plugins.js':'src/scripts/plugins.js'
             }
         }
     },
 
-    /* rename is broken, it overwrites the source file with the new name, even when
-     * dest specifies a completely different path.  Should not do this.  Just use 
-     * uglify instead to compress the uncompressed source and rename at new loc.
-     */
-    /*rename: {
-        jquery: {
-            src: 'bower_components/jquery/jquery.min.js',
-            dest: 'test/scripts/lib/jquery.js'
-        },
-        respond: {
-            src: 'bower_components/respond/respond.min.js',
-            dest: 'test/scripts/lib/respond.js'
-        },
-        react: {
-          src: 'bower_components/react/react.min.js',
-          dest: 'test/scripts/lib/react.js'
-        },
-        d3: {
-          src: 'bower_components/d3/d3.min.js',
-          dest: 'test/scripts/lib/d3.js'
-        }
-    },*/
 
     recess: {
-      options: {
-        compile: true
-      },
-      test: {
-        options: {
-            compile: true                 // Compiles CSS or LESS. Fixes white space and sort order.
-            , compress: false                // Compress your compiled code
-            , noIDs: true                    // Doesn't complain about using IDs in your stylesheets
-            , noJSPrefix: true            // Doesn't complain about styling .js- prefixed classnames
-            , noOverqualifying: true        // Doesn't complain about overqualified selectors (ie: div#foo.bar)
-            , noUnderscores: true            // Doesn't complain about using underscores in your class names
-            , noUniversalSelectors: false    // Doesn't complain about using the universal * selector
-            , prefixWhitespace: true        // Adds whitespace prefix to line up vender prefixed properties
-            , strictPropertyOrder: true    // Complains if not strict property order
-            , zeroUnits: true                // Doesn't complain if you add units to values of 0
+        test: {
+            options: {
+                compile: true                 // Compiles CSS or LESS. Fixes white space and sort order.
+                , compress: false                // Compress your compiled code
+                , noIDs: true                    // Doesn't complain about using IDs in your stylesheets
+                , noJSPrefix: true            // Doesn't complain about styling .js- prefixed classnames
+                , noOverqualifying: true        // Doesn't complain about overqualified selectors (ie: div#foo.bar)
+                , noUnderscores: true            // Doesn't complain about using underscores in your class names
+                , noUniversalSelectors: false    // Doesn't complain about using the universal * selector
+                , prefixWhitespace: true        // Adds whitespace prefix to line up vender prefixed properties
+                , strictPropertyOrder: true    // Complains if not strict property order
+                , zeroUnits: true                // Doesn't complain if you add units to values of 0
+            },
+            files: {
+                'test/styles/lib/bootstrap.css':'src/styles/less/bootstrap.less'
+                ,'test/styles/lib/bootstrap-theme.css':'src/styles/less/theme.less'
+                ,'test/styles/main.css':'src/styles/less/main.less'
+                ,'test/styles/pure.css':'src/styles/css/pure.css'
+            }              
         },
-        bootstrap: {
-            src: ['src/styles/less/bootstrap.less'],
-            dest: 'test/styles/lib/bootstrap.css'
-            //dest: 'dist/styles/lib/<%= pkg.name %>.css'
-        },
-        bootstrap_theme: {
-            src: ['src/styles/less/theme.less'],
-            dest: 'test/styles/lib/bootstrap-theme.css'
-            //dest: 'test/styles/lib/<%= pkg.name %>-theme.css'
-        },
-        normalize: {
-            src: ['bower_components/html5-boilerplate/css/normalize.css'],
-            dest: 'test/styles/lib/normalize.css'
-        },
-        main: {
-            src: ['src/styles/less/main.less'],
-            dest: 'test/styles/main.css'
-        },
-        pure: {
-            src: ['src/styles/css/pure.css'],
-            dest: 'test/styles/pure.css'
-        }
-      },
-      dist: {  
-        options: {
-            compile: true                 // Compiles CSS or LESS. Fixes white space and sort order.
-            , compress: true                // Compress your compiled code
-            , noIDs: true                    // Doesn't complain about using IDs in your stylesheets
-            , noJSPrefix: true            // Doesn't complain about styling .js- prefixed classnames
-            , noOverqualifying: true        // Doesn't complain about overqualified selectors (ie: div#foo.bar)
-            , noUnderscores: true            // Doesn't complain about using underscores in your class names
-            , noUniversalSelectors: false    // Doesn't complain about using the universal * selector
-            , prefixWhitespace: false        // Adds whitespace prefix to line up vender prefixed properties
-            , strictPropertyOrder: true    // Complains if not strict property order
-            , zeroUnits: true                // Doesn't complain if you add units to values of 0
-        },
-        bootstrap: {
-            src: ['src/styles/less/bootstrap.less'],
-            dest: 'dist/styles/lib/bootstrap.css'
-            //dest: 'dist/styles/lib/<%= pkg.name %>.css'
-        },
-        bootstrap_theme: {
-            src: ['src/styles/less/theme.less'],
-            dest: 'dist/styles/lib/bootstrap-theme.css'
-            //dest: 'test/styles/lib/<%= pkg.name %>-theme.css'
-        },
-        normalize: {
-            src: ['bower_components/html5-boilerplate/css/normalize.css'],
-            dest: 'dist/styles/lib/normalize.css'
-        },
-        main: {
-            src: ['src/styles/less/main.less'],
-            dest: 'dist/styles/main.css'
-        },
-        pure: {
-            src: ['src/styles/css/pure.css'],
-            dest: 'dist/styles/pure.css'
+        dist: {  
+            options: {
+                compile: true                 // Compiles CSS or LESS. Fixes white space and sort order.
+                , compress: true                // Compress your compiled code
+                , noIDs: true                    // Doesn't complain about using IDs in your stylesheets
+                , noJSPrefix: true            // Doesn't complain about styling .js- prefixed classnames
+                , noOverqualifying: true        // Doesn't complain about overqualified selectors (ie: div#foo.bar)
+                , noUnderscores: true            // Doesn't complain about using underscores in your class names
+                , noUniversalSelectors: false    // Doesn't complain about using the universal * selector
+                , prefixWhitespace: false        // Adds whitespace prefix to line up vender prefixed properties
+                , strictPropertyOrder: true    // Complains if not strict property order
+                , zeroUnits: true                // Doesn't complain if you add units to values of 0
+            },
+            files: {
+                'dist/styles/lib/bootstrap.css':'src/styles/less/bootstrap.less'
+                ,'dist/styles/lib/bootstrap-theme.css':'src/styles/less/theme.less'
+                ,'dist/styles/lib/normalize.css':'bower_components/html5-boilerplate/css/normalize.css'
+                ,'dist/styles/main.css':'src/styles/less/main.less'
+                ,'dist/styles/pure.css':'src/styles/css/pure.css'
+            }
         }
     },
 
@@ -309,7 +190,7 @@
         test: {                                     // Target
             options: {                              // Target options: https://github.com/gruntjs/grunt-contrib-htmlmin
                 removeComments: false,
-                collapseWhitespace: true,
+                collapseWhitespace: false,
                 removeCommentsFromCDATA: false,
                 removeCDATASectionsFromCDATA: false,
                 collapseBooleanAttributes: false,
@@ -340,11 +221,12 @@
                 removeEmptyElements: false
             },
             files: {                                        // Dictionary of files
-                'dist/index.html': 'test/index.html',        // 'destination': 'source'
-                'dist/error.html': 'test/error.html'
+                'dist/index.html': 'src/index.html',        // 'destination': 'source'
+                'dist/error.html': 'src/error.html'
             }
         }
     },
+
 
     copy: {
       test: {
@@ -358,8 +240,8 @@
           {expand: true, flatten: true, src: ["src/styles/css/pure-email.css"], dest: 'test/styles'},
           {expand: true, flatten: true, src: ["src/styles/css/pure-blog.css"], dest: 'test/styles'},
           {expand: true, flatten: true, src: ["src/styles/css/pure.css"], dest: 'test/styles'},
-          {expand: true, flatten: true, src: ["src/scripts/main.js"], dest: 'test/scripts'},
-          {expand: true, flatten: true, src: ["src/scripts/plugins.js"], dest: 'test/scripts'},
+          /*{expand: true, flatten: true, src: ["src/scripts/main.js"], dest: 'test/scripts'},
+          {expand: true, flatten: true, src: ["src/scripts/plugins.js"], dest: 'test/scripts'},*/
           {expand: true, flatten: true, src: ["src/html/pure-landingpage.html"], dest: 'test/'},
           {expand: true, flatten: true, src: ["src/html/pure-email.html"], dest: 'test/'},
           {expand: true, flatten: true, src: ["src/html/pure-blog.html"], dest: 'test/'},
@@ -374,7 +256,7 @@
       },
       dist: {
         files: [
-          {expand: true, flatten: true, src: ["test/scripts/lib/modernizr.js"], dest: 'dist/scripts/lib/'},
+          /*{expand: true, flatten: true, src: ["test/scripts/lib/modernizr.js"], dest: 'dist/scripts/lib/'},
           {expand: true, flatten: true, src: ["test/scripts/lib/jquery.js"], dest: 'dist/scripts/lib/'},
           {expand: true, flatten: true, src: ["test/scripts/lib/html5shiv.js"], dest: 'dist/scripts/lib/'},
           {expand: true, flatten: true, src: ["test/scripts/lib/html5shiv-printshiv.js"], dest: 'dist/scripts/lib/'},
@@ -393,19 +275,19 @@
           {expand: true, flatten: true, src: ["test/styles/pure-blog.css"], dest: 'dist/styles/'},
           {expand: true, flatten: true, src: ["test/styles/pure.css"], dest: 'dist/styles/'},
           {expand: true, flatten: true, src: ["test/styles/main.css"], dest: 'dist/styles/'},
+          {expand: true, flatten: true, src: ["test/pure-landingpage.html"], dest: 'dist/'},
+          {expand: true, flatten: true, src: ["test/pure-email.html"], dest: 'dist/'},
+          {expand: true, flatten: true, src: ["test/pure-blog.html"], dest: 'dist/'},
+          {expand: true, flatten: true, src: ["test/pure.html"], dest: 'dist/'},*/
+          {expand: true, flatten: true, src: ["test/crossdomain.xml"], dest: 'dist/'},
+          {expand: true, flatten: true, src: ["test/humans.txt"], dest: 'dist/'},
+          {expand: true, flatten: true, src: ["test/robots.txt"], dest: 'dist/'},
           {expand: true, flatten: true, src: ["test/images/ico/bootstrap/*"], dest: 'dist/images/ico/bootstrap/'},
           {expand: true, flatten: true, src: ["test/images/ico/h5bp/*"], dest: 'dist/images/ico/h5bp/'},
           {expand: true, flatten: true, src: ["test/images/ico/h5bp/apple-touch-icon-precomposed.png"], dest: 'dist/images/ico/h5bp'},
           {expand: true, flatten: true, src: ["test/images/ico/h5bp/favicon.ico"], dest: 'dist/images/ico/h5bp'},
           {expand: true, flatten: true, src: ["test/images/*"], dest: 'dist/images/'},
-          {expand: true, flatten: true, src: ["test/fonts/*"], dest: 'dist/fonts/'},
-          {expand: true, flatten: true, src: ["test/pure-landingpage.html"], dest: 'dist/'},
-          {expand: true, flatten: true, src: ["test/pure-email.html"], dest: 'dist/'},
-          {expand: true, flatten: true, src: ["test/pure-blog.html"], dest: 'dist/'},
-          {expand: true, flatten: true, src: ["test/pure.html"], dest: 'dist/'},
-          {expand: true, flatten: true, src: ["test/crossdomain.xml"], dest: 'dist/'},
-          {expand: true, flatten: true, src: ["test/humans.txt"], dest: 'dist/'},
-          {expand: true, flatten: true, src: ["test/robots.txt"], dest: 'dist/'}
+          {expand: true, flatten: true, src: ["test/fonts/*"], dest: 'dist/fonts/'}
         ]
       }
     },
@@ -416,49 +298,3 @@
       },
       files: ['src/scripts/tests/*.html']
     },
-
-    connect: {
-        test: {
-            server: {
-                options: {
-                    port: 3000,
-                    base: './test/',
-                    keepalive: true
-                }
-            }
-        },
-        dist: {
-            server: {
-                options: {
-                    port: 3000,
-                    base: './dist/',
-                    keepalive: true
-                }
-            }
-        }
-    },
-
-    validation: {
-      options: {
-        reset: true
-      },
-      files: {
-        src: ["_gh_pages/**/*.html"]
-      }
-    },
-
-    watch: {
-      src: {
-        files: '<%= jshint.src.src %>',
-        tasks: ['jshint:src', 'qunit']
-      },
-      test: {
-        files: '<%= jshint.test.src %>',
-        tasks: ['jshint:test', 'qunit']
-      },
-      recess: {
-        files: 'src/styles/less/*.less',
-        tasks: ['recess', 'copy']
-      }
-    }
-
