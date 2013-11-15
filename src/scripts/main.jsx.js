@@ -1,4 +1,4 @@
-
+/** @jsx React.DOM */
 
 // http://www.requirejs.org/docs/start.html
 require([
@@ -21,16 +21,15 @@ require([
     // test load success 
     //alert("require.js loaded");
 
-    React.renderComponent(
+    /*React.renderComponent(
         React.DOM.h1(null, 'Hello World.'),
         document.getElementById('helloworld')
-    );
+    );*/
 
-    /** @jsx React.DOM */
-    /*React.renderComponent(
+    React.renderComponent(
         <h1>Hello, world!</h1>,
         document.getElementById('example')
-    );*/
+    );
 
 
     /****************************************************
