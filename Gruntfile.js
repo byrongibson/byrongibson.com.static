@@ -20,14 +20,12 @@ module.exports = function(grunt) {
               ' * Namely main.less, main.js, main.min.css, main.min.js, and a few tweaks to Variables.less.\n' +
               ' */\n',
     jqueryCheck: 'if (typeof jQuery === "undefined") { throw new Error("Bootstrap requires jQuery") }\n\n',
-   
 
     // Task configuration.
     clean: {
         test: ['test']
         ,dist: ['dist']
     },
-
 
     jshint: {
       options: {
@@ -258,6 +256,8 @@ module.exports = function(grunt) {
     }, 
 
 
+
+
     copy: {
       test: {
         files: [
@@ -390,12 +390,12 @@ module.exports = function(grunt) {
   /*grunt.loadNpmTasks('grunt-contrib-compress'); */ /* https://npmjs.org/package/grunt-contrib-compress */
   /*grunt.loadNpmTasks('grunt-contrib-imagemin'); */ /* https://npmjs.org/package/grunt-contrib-imagemin */
   /*grunt.loadNpmTasks('grunt-contrib-requirejs'); */ /* https://npmjs.org/package/grunt-contrib-requirejs */ /* https://github.com/jrburke/r.js/blob/master/build/example.build.js */
-  grunt.loadNpmTasks('grunt-html-validation');
-  grunt.loadNpmTasks('grunt-recess');
-  grunt.loadNpmTasks('grunt-jsx'); /* https://npmjs.org/package/grunt-jsx */
-  grunt.loadNpmTasks('grunt-react'); /* https://npmjs.org/package/grunt-react */
   /*grunt.loadNpmTasks('grunt-usemin');*/ /* https://npmjs.org/package/grunt-usemin */
-  /*grunt.loadNpmTasks('grunt-rename');*/  
+  grunt.loadNpmTasks('grunt-html-validation');
+  grunt.loadNpmTasks('grunt-browserify');
+  grunt.loadNpmTasks('grunt-recess');
+  grunt.loadNpmTasks('grunt-react'); /* https://npmjs.org/package/grunt-react */
+  grunt.loadNpmTasks('grunt-jsx'); /* https://npmjs.org/package/grunt-jsx */
 
   // Docs HTML validation task
   grunt.registerTask('validate-html', ['validation']);
