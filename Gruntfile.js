@@ -47,7 +47,7 @@ module.exports = function(grunt) {
       options: {
         stripBanners: true
       },
-      scripts: {
+      bootstrap: {
         src: [
           'src/scripts/transition.js',
           'src/scripts/alert.js',
@@ -62,13 +62,14 @@ module.exports = function(grunt) {
           'src/scripts/tab.js',
           'src/scripts/affix.js'
         ],
-        dest: 'src/scripts/lib/<%= pkg.name %>.js'
+        dest: 'src/scripts/lib/bootstrap.js'
       },
       html_index: {
         src: [
             'src/html/_head.html',
             'src/html/_header.html',
             'src/html/_index.html',
+            'src/html/_footer.html',
             'src/html/_foot.html'
         ],
         dest: 'src/index.html'
@@ -78,6 +79,7 @@ module.exports = function(grunt) {
             'src/html/_head.html',
             'src/html/_header.html',
             'src/html/_error.html',
+            'src/html/_footer.html',
             'src/html/_foot.html'
         ],
         dest: 'src/error.html'
@@ -85,9 +87,9 @@ module.exports = function(grunt) {
     },
 
     
-    htmlmin: {                                      // Task
-        test: {                                     // Target
-            options: {                              // Target options: https://github.com/gruntjs/grunt-contrib-htmlmin
+    htmlmin: { 
+        testDefault: { 
+            options: { // Target options: https://github.com/gruntjs/grunt-contrib-htmlmin
                 removeComments: false,
                 collapseWhitespace: false,
                 removeCommentsFromCDATA: false,
@@ -100,13 +102,13 @@ module.exports = function(grunt) {
                 removeOptionalTags: false,
                 removeEmptyElements: false
             },
-            files: {                                        // Dictionary of files
-                'test/index.html': 'src/index.html',        // 'destination': 'source'
-                'test/error.html': 'src/error.html'
+            files: { 
+                'test/default/index.html': 'src/index.html'
+                ,'test/default/error.html': 'src/error.html'
             }
         },
-        dist: {                                     // Target
-            options: {                              // Target options: https://github.com/gruntjs/grunt-contrib-htmlmin
+        distDefault: { 
+            options: { // Target options: https://github.com/gruntjs/grunt-contrib-htmlmin
                 removeComments: true,
                 collapseWhitespace: true,
                 removeCommentsFromCDATA: true,
@@ -119,16 +121,54 @@ module.exports = function(grunt) {
                 removeOptionalTags: false,
                 removeEmptyElements: false
             },
-            files: {                                        // Dictionary of files
-                'dist/index.html': 'src/index.html',        // 'destination': 'source'
-                'dist/error.html': 'src/error.html'
+            files: { 
+                'dist/default/index.html': 'src/index.html' 
+                ,'dist/default/error.html': 'src/error.html'
+            }
+        },
+        testBrowserify: {
+            options: { // Target options: https://github.com/gruntjs/grunt-contrib-htmlmin
+                removeComments: false,
+                collapseWhitespace: false,
+                removeCommentsFromCDATA: false,
+                removeCDATASectionsFromCDATA: false,
+                collapseBooleanAttributes: false,
+                removeAttributeQuotes: false,
+                removeRedundantAttributes: false,
+                useShortDoctype: false,
+                removeEmptyAttributes: true,
+                removeOptionalTags: false,
+                removeEmptyElements: false
+            },
+            files: { 
+                'test/browserify/index.html': 'src/index.html'        
+                ,'test/browserify/error.html': 'src/error.html'
+            }
+        },
+        distBrowserify: { 
+            options: { // Target options: https://github.com/gruntjs/grunt-contrib-htmlmin
+                removeComments: true,
+                collapseWhitespace: true,
+                removeCommentsFromCDATA: true,
+                removeCDATASectionsFromCDATA: false,
+                collapseBooleanAttributes: false,
+                removeAttributeQuotes: false,
+                removeRedundantAttributes: false,
+                useShortDoctype: false,
+                removeEmptyAttributes: true,
+                removeOptionalTags: false,
+                removeEmptyElements: false
+            },
+            files: {  
+                'dist/browserify/index.html': 'src/index.html'        
+                ,'dist/browserify/error.html': 'src/error.html'
             }
         }
     },
 
 
     recess: {
-        test: {
+        testDefault: {
             options: {
                 compile: true                 // Compiles CSS or LESS. Fixes white space and sort order.
                 , compress: false                // Compress your compiled code
@@ -142,13 +182,17 @@ module.exports = function(grunt) {
                 , zeroUnits: true                // Doesn't complain if you add units to values of 0
             },
             files: {
-                'test/styles/lib/bootstrap.css':'src/styles/less/bootstrap.less'
-                ,'test/styles/lib/bootstrap-theme.css':'src/styles/less/theme.less'
-                ,'test/styles/main.css':'src/styles/less/main.less'
-                ,'test/styles/pure.css':'src/styles/css/pure.css'
+                'test/default/styles/lib/bootstrap.css':'src/styles/less/bootstrap.less'
+                ,'test/default/styles/lib/bootstrap-theme.css':'src/styles/less/theme.less'
+                ,'test/default/styles/main.css':'src/styles/less/main.less'
+                ,'test/default/styles/pure.css':'src/styles/css/pure.css'
+                ,'test/browserify/styles/lib/bootstrap.css':'src/styles/less/bootstrap.less'
+                ,'test/browserify/styles/lib/bootstrap-theme.css':'src/styles/less/theme.less'
+                ,'test/browserify/styles/main.css':'src/styles/less/main.less'
+                ,'test/browserify/styles/pure.css':'src/styles/css/pure.css'
             }              
         },
-        dist: {  
+        distDefault: {  
             options: {
                 compile: true                 // Compiles CSS or LESS. Fixes white space and sort order.
                 , compress: true                // Compress your compiled code
@@ -162,87 +206,129 @@ module.exports = function(grunt) {
                 , zeroUnits: true                // Doesn't complain if you add units to values of 0
             },
             files: {
-                'dist/styles/lib/bootstrap.css':'src/styles/less/bootstrap.less'
-                ,'dist/styles/lib/bootstrap-theme.css':'src/styles/less/theme.less'
-                ,'dist/styles/lib/normalize.css':'bower_components/html5-boilerplate/css/normalize.css'
-                ,'dist/styles/main.css':'src/styles/less/main.less'
-                ,'dist/styles/pure.css':'src/styles/css/pure.css'
+                'dist/default/styles/lib/bootstrap.css':'src/styles/less/bootstrap.less'
+                ,'dist/default/styles/lib/bootstrap-theme.css':'src/styles/less/theme.less'
+                ,'dist/default/styles/lib/normalize.css':'bower_components/html5-boilerplate/css/normalize.css'
+                ,'dist/default/styles/main.css':'src/styles/less/main.less'
+                ,'dist/default/styles/pure.css':'src/styles/css/pure.css'
+            }
+        },
+        testBrowserify: {
+            options: {
+                compile: true                 // Compiles CSS or LESS. Fixes white space and sort order.
+                , compress: false                // Compress your compiled code
+                , noIDs: true                    // Doesn't complain about using IDs in your stylesheets
+                , noJSPrefix: true            // Doesn't complain about styling .js- prefixed classnames
+                , noOverqualifying: true        // Doesn't complain about overqualified selectors (ie: div#foo.bar)
+                , noUnderscores: true            // Doesn't complain about using underscores in your class names
+                , noUniversalSelectors: false    // Doesn't complain about using the universal * selector
+                , prefixWhitespace: true        // Adds whitespace prefix to line up vender prefixed properties
+                , strictPropertyOrder: true    // Complains if not strict property order
+                , zeroUnits: true                // Doesn't complain if you add units to values of 0
+            },
+            files: {
+                'test/browserify/styles/lib/bootstrap.css':'src/styles/less/bootstrap.less'
+                ,'test/browserify/styles/lib/bootstrap-theme.css':'src/styles/less/theme.less'
+                ,'test/browserify/styles/main.css':'src/styles/less/main.less'
+                ,'test/browserify/styles/pure.css':'src/styles/css/pure.css'
+            }              
+        },
+        distBrowserify: {  
+            options: {
+                compile: true                 // Compiles CSS or LESS. Fixes white space and sort order.
+                , compress: true                // Compress your compiled code
+                , noIDs: true                    // Doesn't complain about using IDs in your stylesheets
+                , noJSPrefix: true            // Doesn't complain about styling .js- prefixed classnames
+                , noOverqualifying: true        // Doesn't complain about overqualified selectors (ie: div#foo.bar)
+                , noUnderscores: true            // Doesn't complain about using underscores in your class names
+                , noUniversalSelectors: false    // Doesn't complain about using the universal * selector
+                , prefixWhitespace: false        // Adds whitespace prefix to line up vender prefixed properties
+                , strictPropertyOrder: true    // Complains if not strict property order
+                , zeroUnits: true                // Doesn't complain if you add units to values of 0
+            },
+            files: {
+                'dist/browserify/styles/lib/bootstrap.css':'src/styles/less/bootstrap.less'
+                ,'dist/browserify/styles/lib/bootstrap-theme.css':'src/styles/less/theme.less'
+                ,'dist/browserify/styles/lib/normalize.css':'bower_components/html5-boilerplate/css/normalize.css'
+                ,'dist/browserify/styles/main.css':'src/styles/less/main.less'
+                ,'dist/browserify/styles/pure.css':'src/styles/css/pure.css'
             }
         }
+
     },
 
     
     uglify: {
-        test: {
+        testDefault: {
             options: {
                 mangle: false
                 , compress: false
                 , beautify: true
                 , report: false
-                , sourceMap: 'test/scripts/source-map.js'
+                , sourceMap: 'test/default/scripts/source-map.js'
                 , sourceMapRoot: 'src/scripts/'
                 , preserveComments: true
             },
             files: {
-                'test/scripts/lib/jquery.js':'bower_components/jquery/jquery.js'
-                ,'test/scripts/lib/<%= pkg.name %>.js':'<%= concat.scripts.dest %>'
-                ,'test/scripts/lib/modernizr.js':'bower_components/modernizr/modernizr.js'
-                ,'test/scripts/lib/html5shiv.js':'bower_components/html5shiv/dist/html5shiv.js'
-                ,'test/scripts/lib/html5shiv-printshiv.js':'bower_components/html5shiv/dist/html5shiv-printshiv.js'
-                ,'test/scripts/lib/JSXTransformer.js':'bower_components/react/JSXTransformer.js'
-                ,'test/scripts/lib/react.js':'bower_components/react/react.js'
-                ,'test/scripts/lib/d3.js':'bower_components/d3/d3.js'
-                ,'test/scripts/require.js':'bower_components/requirejs/require.js'
-                ,'test/scripts/main.js':'src/scripts/main.js'
-                ,'test/scripts/plugins.js':'src/scripts/plugins.js'
+                'test/default/scripts/lib/jquery.js':'bower_components/jquery/jquery.js'
+                ,'test/default/scripts/lib/bootstrap.js':'<%= concat.bootstrap.dest %>'
+                ,'test/default/scripts/lib/modernizr.js':'bower_components/modernizr/modernizr.js'
+                ,'test/default/scripts/lib/html5shiv.js':'bower_components/html5shiv/dist/html5shiv.js'
+                ,'test/default/scripts/lib/html5shiv-printshiv.js':'bower_components/html5shiv/dist/html5shiv-printshiv.js'
+                ,'test/default/scripts/lib/JSXTransformer.js':'bower_components/react/JSXTransformer.js'
+                ,'test/default/scripts/lib/react.js':'bower_components/react/react.js'
+                ,'test/default/scripts/lib/d3.js':'bower_components/d3/d3.js'
+                ,'test/default/scripts/require.js':'bower_components/requirejs/require.js'
+                ,'test/default/scripts/main.js':'src/scripts/main.js'
+                ,'test/default/scripts/plugins.js':'src/scripts/plugins.js'
             }
         },
-        dist: {
+        distDefault: {
             options: {
                 mangle: false //(only main.js, plugins.js)
                 , compress: true
                 , beautify: false
                 , report: 'min'
-                , sourceMap: 'dist/scripts/source-map.js'
+                , sourceMap: 'dist/default/scripts/source-map.js'
                 , sourceMapRoot: 'src/scripts/'
                 , preserveComments: false
             },
             files: {
-                'dist/scripts/lib/jquery.js':'bower_components/jquery/jquery.js'
-                ,'dist/scripts/lib/<%= pkg.name %>.js':'<%= concat.scripts.dest %>'
-                ,'dist/scripts/lib/modernizr.js':'bower_components/modernizr/modernizr.js'
-                ,'dist/scripts/lib/html5shiv.js':'bower_components/html5shiv/dist/html5shiv.js'
-                ,'dist/scripts/lib/html5shiv-printshiv.js':'bower_components/html5shiv/dist/html5shiv-printshiv.js'
-                ,'dist/scripts/lib/JSXTransformer.js':'bower_components/react/JSXTransformer.js'
-                ,'dist/scripts/lib/react.js':'bower_components/react/react.js'
-                ,'dist/scripts/lib/d3.js':'bower_components/d3/d3.js'
-                ,'dist/scripts/require.js':'bower_components/requirejs/require.js'
-                ,'dist/scripts/main.js':'src/scripts/main.js'
-                ,'dist/scripts/plugins.js':'src/scripts/plugins.js'
+                'dist/default/scripts/lib/jquery.js':'bower_components/jquery/jquery.js'
+                ,'dist/default/scripts/lib/bootstrap.js':'<%= concat.bootstrap.dest %>'
+                ,'dist/default/scripts/lib/modernizr.js':'bower_components/modernizr/modernizr.js'
+                ,'dist/default/scripts/lib/html5shiv.js':'bower_components/html5shiv/dist/html5shiv.js'
+                ,'dist/default/scripts/lib/html5shiv-printshiv.js':'bower_components/html5shiv/dist/html5shiv-printshiv.js'
+                ,'dist/default/scripts/lib/JSXTransformer.js':'bower_components/react/JSXTransformer.js'
+                ,'dist/default/scripts/lib/react.js':'bower_components/react/react.js'
+                ,'dist/default/scripts/lib/d3.js':'bower_components/d3/d3.js'
+                ,'dist/default/scripts/require.js':'bower_components/requirejs/require.js'
+                ,'dist/default/scripts/main.js':'src/scripts/main.js'
+                ,'dist/default/scripts/plugins.js':'src/scripts/plugins.js'
             }
         },
-        gzip: {
+        gzipDefault: {
             options: {
                 mangle: false //(only main.js, plugins.js)
                 , compress: true
                 , beautify: true
                 , report: 'gzip'
-                , sourceMap: 'dist/scripts/source-map.js'
+                , sourceMap: 'dist/default/scripts/source-map.js'
                 , sourceMapRoot: 'src/scripts/'
                 , preserveComments: false
             },
             files: {
-                'dist/scripts/lib/jquery.js':'bower_components/jquery/jquery.js'
-                ,'dist/scripts/lib/<%= pkg.name %>.js':'<%= concat.scripts.dest %>'
-                ,'dist/scripts/lib/modernizr.js':'bower_components/modernizr/modernizr.js'
-                ,'dist/scripts/lib/html5shiv.js':'bower_components/html5shiv/dist/html5shiv.js'
-                ,'dist/scripts/lib/html5shiv-printshiv.js':'bower_components/html5shiv/dist/html5shiv-printshiv.js'
-                ,'dist/scripts/lib/JSXTransformer.js':'bower_components/react/JSXTransformer.js'
-                ,'dist/scripts/lib/react.js':'bower_components/react/react.js'
-                ,'dist/scripts/lib/d3.js':'bower_components/d3/d3.js'
-                ,'dist/scripts/require.js':'bower_components/requirejs/require.js'
-                ,'dist/scripts/main.js':'src/scripts/main.js'
-                ,'dist/scripts/plugins.js':'src/scripts/plugins.js'
+                'dist/default/scripts/lib/jquery.js':'bower_components/jquery/jquery.js'
+                ,'dist/default/scripts/lib/bootstrap.js':'<%= concat.bootstrap.dest %>'
+                ,'dist/default/scripts/lib/modernizr.js':'bower_components/modernizr/modernizr.js'
+                ,'dist/default/scripts/lib/html5shiv.js':'bower_components/html5shiv/dist/html5shiv.js'
+                ,'dist/default/scripts/lib/html5shiv-printshiv.js':'bower_components/html5shiv/dist/html5shiv-printshiv.js'
+                ,'dist/default/scripts/lib/JSXTransformer.js':'bower_components/react/JSXTransformer.js'
+                ,'dist/default/scripts/lib/react.js':'bower_components/react/react.js'
+                ,'dist/default/scripts/lib/d3.js':'bower_components/d3/d3.js'
+                ,'dist/default/scripts/require.js':'bower_components/requirejs/require.js'
+                ,'dist/default/scripts/main.js':'src/scripts/main.js'
+                ,'dist/default/scripts/plugins.js':'src/scripts/plugins.js'
             }
         }
     },
@@ -255,69 +341,74 @@ module.exports = function(grunt) {
         }
     }, 
 
-
-
+    browserify: {
+      dist: {
+        files: {
+          'build/module.js': ['src/scripts/**/*.js']
+        }
+      }
+    },
 
     copy: {
       test: {
         files: [
-          {expand: true, flatten: true, src: ["bower_components/html5-boilerplate/crossdomain.xml"], dest: 'test/'},
+          {expand: true, flatten: true, src: ["bower_components/html5-boilerplate/crossdomain.xml"], dest: 'test/default/'},
           {expand: true, flatten: true, src: ["bower_components/html5-boilerplate/apple-touch-icon-precomposed.png"], dest: 'src/images/ico/h5bp/'},
           {expand: true, flatten: true, src: ["bower_components/html5-boilerplate/favicon.ico"], dest: 'src/images/ico/h5bp/'},
           {expand: true, flatten: true, src: ["bower_components/bootstrap/docs-assets/ico/*"], dest: 'src/images/ico/bootstrap/'},
-          {expand: true, flatten: true, src: ["bower_components/pure/pure-min.css"], dest: 'test/styles/lib/'},
-          {expand: true, flatten: true, src: ["src/styles/css/pure-landingpage.css"], dest: 'test/styles'},
-          {expand: true, flatten: true, src: ["src/styles/css/pure-email.css"], dest: 'test/styles'},
-          {expand: true, flatten: true, src: ["src/styles/css/pure-blog.css"], dest: 'test/styles'},
-          {expand: true, flatten: true, src: ["src/styles/css/pure.css"], dest: 'test/styles'},
-          /*{expand: true, flatten: true, src: ["src/scripts/main.js"], dest: 'test/scripts'},
-          {expand: true, flatten: true, src: ["src/scripts/plugins.js"], dest: 'test/scripts'},*/
-          {expand: true, flatten: true, src: ["src/html/pure-landingpage.html"], dest: 'test/'},
-          {expand: true, flatten: true, src: ["src/html/pure-email.html"], dest: 'test/'},
-          {expand: true, flatten: true, src: ["src/html/pure-blog.html"], dest: 'test/'},
-          {expand: true, flatten: true, src: ["src/html/pure.html"], dest: 'test/'},
-          {expand: true, flatten: true, src: ["src/html/humans.txt"], dest: 'test/'},
-          {expand: true, flatten: true, src: ["src/html/robots.txt"], dest: 'test/'},
-          {expand: true, flatten: true, src: ["src/images/ico/bootstrap/*"], dest: 'test/images/ico/bootstrap'},
-          {expand: true, flatten: true, src: ["src/images/ico/h5bp/*"], dest: 'test/images/ico/h5bp'},
-          {expand: true, flatten: true, src: ["src/images/*"], dest: 'test/images/'},
-          {expand: true, flatten: true, src: ["src/fonts/*"], dest: 'test/fonts/'}
+          {expand: true, flatten: true, src: ["bower_components/pure/pure-min.css"], dest: 'test/default/styles/lib/'},
+          {expand: true, flatten: true, src: ["src/styles/css/pure-landingpage.css"], dest: 'test/default/styles'},
+          {expand: true, flatten: true, src: ["src/styles/css/pure-email.css"], dest: 'test/default/styles'},
+          {expand: true, flatten: true, src: ["src/styles/css/pure-blog.css"], dest: 'test/default/styles'},
+          {expand: true, flatten: true, src: ["src/styles/css/pure.css"], dest: 'test/default/styles'},
+          /*{expand: true, flatten: true, src: ["src/scripts/main.js"], dest: 'test/default/scripts'},
+          {expand: true, flatten: true, src: ["src/scripts/plugins.js"], dest: 'test/default/scripts'},*/
+          {expand: true, flatten: true, src: ["src/html/pure-landingpage.html"], dest: 'test/default/'},
+          {expand: true, flatten: true, src: ["src/html/pure-email.html"], dest: 'test/default/'},
+          {expand: true, flatten: true, src: ["src/html/pure-blog.html"], dest: 'test/default/'},
+          {expand: true, flatten: true, src: ["src/html/pure.html"], dest: 'test/default/'},
+          {expand: true, flatten: true, src: ["src/html/humans.txt"], dest: 'test/default/'},
+          {expand: true, flatten: true, src: ["src/html/robots.txt"], dest: 'test/default/'},
+          {expand: true, flatten: true, src: ["src/images/ico/bootstrap/*"], dest: 'test/default/images/ico/bootstrap'},
+          {expand: true, flatten: true, src: ["src/images/ico/h5bp/*"], dest: 'test/default/images/ico/h5bp'},
+          {expand: true, flatten: true, src: ["src/images/*"], dest: 'test/default/images/'},
+          {expand: true, flatten: true, src: ["src/fonts/*"], dest: 'test/default/fonts/'}
         ]
       },
       dist: {
         files: [
-          /*{expand: true, flatten: true, src: ["test/scripts/lib/modernizr.js"], dest: 'dist/scripts/lib/'},
-          {expand: true, flatten: true, src: ["test/scripts/lib/jquery.js"], dest: 'dist/scripts/lib/'},
-          {expand: true, flatten: true, src: ["test/scripts/lib/html5shiv.js"], dest: 'dist/scripts/lib/'},
-          {expand: true, flatten: true, src: ["test/scripts/lib/html5shiv-printshiv.js"], dest: 'dist/scripts/lib/'},
-          {expand: true, flatten: true, src: ["test/scripts/lib/react.js"], dest: 'dist/scripts/lib/'},
-          {expand: true, flatten: true, src: ["test/scripts/lib/JSXTransformer.js"], dest: 'dist/scripts/lib/'},
-          {expand: true, flatten: true, src: ["test/scripts/lib/d3.js"], dest: 'dist/scripts/lib/'},
-          {expand: true, flatten: true, src: ["test/scripts/lib/respond.js"], dest: 'dist/scripts/lib/'},
-          {expand: true, flatten: true, src: ["test/scripts/lib/bootstrap.js"], dest: 'dist/scripts/lib/'},
-          {expand: true, flatten: true, src: ["test/scripts/require.js"], dest: 'dist/scripts/'},
-          {expand: true, flatten: true, src: ["test/styles/lib/bootstrap-theme.css"], dest: 'dist/styles/lib/'},
-          {expand: true, flatten: true, src: ["test/styles/lib/bootstrap.css"], dest: 'dist/styles/lib/'},
-          {expand: true, flatten: true, src: ["test/styles/lib/normalize.css"], dest: 'dist/styles/lib/'},
-          {expand: true, flatten: true, src: ["test/styles/lib/pure-min.css"], dest: 'dist/styles/lib/'},
-          {expand: true, flatten: true, src: ["test/styles/pure-landingpage.css"], dest: 'dist/styles/'},
-          {expand: true, flatten: true, src: ["test/styles/pure-email.css"], dest: 'dist/styles/'},
-          {expand: true, flatten: true, src: ["test/styles/pure-blog.css"], dest: 'dist/styles/'},
-          {expand: true, flatten: true, src: ["test/styles/pure.css"], dest: 'dist/styles/'},
-          {expand: true, flatten: true, src: ["test/styles/main.css"], dest: 'dist/styles/'},
-          {expand: true, flatten: true, src: ["test/pure-landingpage.html"], dest: 'dist/'},
-          {expand: true, flatten: true, src: ["test/pure-email.html"], dest: 'dist/'},
-          {expand: true, flatten: true, src: ["test/pure-blog.html"], dest: 'dist/'},
-          {expand: true, flatten: true, src: ["test/pure.html"], dest: 'dist/'},*/
-          {expand: true, flatten: true, src: ["test/crossdomain.xml"], dest: 'dist/'},
-          {expand: true, flatten: true, src: ["test/humans.txt"], dest: 'dist/'},
-          {expand: true, flatten: true, src: ["test/robots.txt"], dest: 'dist/'},
-          {expand: true, flatten: true, src: ["test/images/ico/bootstrap/*"], dest: 'dist/images/ico/bootstrap/'},
-          {expand: true, flatten: true, src: ["test/images/ico/h5bp/*"], dest: 'dist/images/ico/h5bp/'},
-          {expand: true, flatten: true, src: ["test/images/ico/h5bp/apple-touch-icon-precomposed.png"], dest: 'dist/images/ico/h5bp'},
-          {expand: true, flatten: true, src: ["test/images/ico/h5bp/favicon.ico"], dest: 'dist/images/ico/h5bp'},
-          {expand: true, flatten: true, src: ["test/images/*"], dest: 'dist/images/'},
-          {expand: true, flatten: true, src: ["test/fonts/*"], dest: 'dist/fonts/'}
+          /*{expand: true, flatten: true, src: ["test/default/scripts/lib/modernizr.js"], dest: 'dist/default/scripts/lib/'},
+          {expand: true, flatten: true, src: ["test/default/scripts/lib/jquery.js"], dest: 'dist/default/scripts/lib/'},
+          {expand: true, flatten: true, src: ["test/default/scripts/lib/html5shiv.js"], dest: 'dist/default/scripts/lib/'},
+          {expand: true, flatten: true, src: ["test/default/scripts/lib/html5shiv-printshiv.js"], dest: 'dist/default/scripts/lib/'},
+          {expand: true, flatten: true, src: ["test/default/scripts/lib/react.js"], dest: 'dist/default/scripts/lib/'},
+          {expand: true, flatten: true, src: ["test/default/scripts/lib/JSXTransformer.js"], dest: 'dist/default/scripts/lib/'},
+          {expand: true, flatten: true, src: ["test/default/scripts/lib/d3.js"], dest: 'dist/default/scripts/lib/'},
+          {expand: true, flatten: true, src: ["test/default/scripts/lib/respond.js"], dest: 'dist/default/scripts/lib/'},
+          {expand: true, flatten: true, src: ["test/default/scripts/lib/bootstrap.js"], dest: 'dist/default/scripts/lib/'},
+          {expand: true, flatten: true, src: ["test/default/scripts/require.js"], dest: 'dist/default/scripts/'},
+          {expand: true, flatten: true, src: ["test/default/styles/lib/bootstrap-theme.css"], dest: 'dist/default/styles/lib/'},
+          {expand: true, flatten: true, src: ["test/default/styles/lib/bootstrap.css"], dest: 'dist/default/styles/lib/'},
+          {expand: true, flatten: true, src: ["test/default/styles/lib/normalize.css"], dest: 'dist/default/styles/lib/'},
+          {expand: true, flatten: true, src: ["test/default/styles/lib/pure-min.css"], dest: 'dist/default/styles/lib/'},
+          {expand: true, flatten: true, src: ["test/default/styles/pure-landingpage.css"], dest: 'dist/default/styles/'},
+          {expand: true, flatten: true, src: ["test/default/styles/pure-email.css"], dest: 'dist/default/styles/'},
+          {expand: true, flatten: true, src: ["test/default/styles/pure-blog.css"], dest: 'dist/default/styles/'},
+          {expand: true, flatten: true, src: ["test/default/styles/pure.css"], dest: 'dist/default/styles/'},
+          {expand: true, flatten: true, src: ["test/default/styles/main.css"], dest: 'dist/default/styles/'},
+          {expand: true, flatten: true, src: ["test/default/pure-landingpage.html"], dest: 'dist/default/'},
+          {expand: true, flatten: true, src: ["test/default/pure-email.html"], dest: 'dist/default/'},
+          {expand: true, flatten: true, src: ["test/default/pure-blog.html"], dest: 'dist/default/'},
+          {expand: true, flatten: true, src: ["test/default/pure.html"], dest: 'dist/default/'},*/
+          {expand: true, flatten: true, src: ["test/default/crossdomain.xml"], dest: 'dist/default/'},
+          {expand: true, flatten: true, src: ["test/default/humans.txt"], dest: 'dist/default/'},
+          {expand: true, flatten: true, src: ["test/default/robots.txt"], dest: 'dist/default/'},
+          {expand: true, flatten: true, src: ["test/default/images/ico/bootstrap/*"], dest: 'dist/default/images/ico/bootstrap/'},
+          {expand: true, flatten: true, src: ["test/default/images/ico/h5bp/*"], dest: 'dist/default/images/ico/h5bp/'},
+          {expand: true, flatten: true, src: ["test/default/images/ico/h5bp/apple-touch-icon-precomposed.png"], dest: 'dist/default/images/ico/h5bp'},
+          {expand: true, flatten: true, src: ["test/default/images/ico/h5bp/favicon.ico"], dest: 'dist/default/images/ico/h5bp'},
+          {expand: true, flatten: true, src: ["test/default/images/*"], dest: 'dist/default/images/'},
+          {expand: true, flatten: true, src: ["test/default/fonts/*"], dest: 'dist/default/fonts/'}
         ]
       }
     },
@@ -345,14 +436,14 @@ module.exports = function(grunt) {
         test: {
             options: {
                 port: 3001,
-                base: './test/',
+                base: './test/default/',
                 keepalive: true
             }
         },
         dist: {
             options: {
                 port: 3000,
-                base: './dist/',
+                base: './dist/default/',
                 keepalive: true
             }
         }
@@ -387,6 +478,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
+  /*grunt.loadNpmTasks('grunt-contrib-mincss');*/ /* https://npmjs.org/package/grunt-contrib-mincss */
   /*grunt.loadNpmTasks('grunt-contrib-compress'); */ /* https://npmjs.org/package/grunt-contrib-compress */
   /*grunt.loadNpmTasks('grunt-contrib-imagemin'); */ /* https://npmjs.org/package/grunt-contrib-imagemin */
   /*grunt.loadNpmTasks('grunt-contrib-requirejs'); */ /* https://npmjs.org/package/grunt-contrib-requirejs */ /* https://github.com/jrburke/r.js/blob/master/build/example.build.js */
@@ -412,7 +504,7 @@ module.exports = function(grunt) {
   grunt.registerTask('test', testSubtasks);
 
   // Concat but don't minify html and JS files.
-  grunt.registerTask('concat-scripts', ['concat:scripts']);
+  grunt.registerTask('concat-scripts', ['concat:bootstrap']);
 
   // Concat but don't minify html and JS files.
   grunt.registerTask('concat-html', ['concat:html_index','concat:html_error']);
@@ -423,31 +515,39 @@ module.exports = function(grunt) {
   /***** Compile HTML *****/
 
   // Compile but don't minify html, distribute to ./test only
-  grunt.registerTask('test-html', ['concat-html','htmlmin:test']);
+  grunt.registerTask('test-html', ['concat-html','htmlmin:testDefault']);
 
   // compile and minify html, distribute to both ./test and ./dist
-  grunt.registerTask('dist-html', ['concat-html','htmlmin']);
+  grunt.registerTask('dist-html', ['concat-html','htmlmin:testDefault', 'htmlmin:distDefault']);
 
   /***** Compile CSS *****/
 
   // Compile less & css into single css file, distribute to ./test only
-  grunt.registerTask('test-styles', ['recess:test']);
+  grunt.registerTask('test-styles', ['recess:testDefault']);
   
   // compile and minify less & css, distribute to both ./test and ./dist
-  grunt.registerTask('dist-styles', ['recess']);
+  grunt.registerTask('dist-styles', ['recess:testDefault', 'recess:distDefault']);
  
-  /***** Compile Javascript *****/
+  /***** Compile Scripts *****/
 
   // don't compile or minify, just beautify and copy to ./test
-  grunt.registerTask('test-scripts', ['concat-scripts','uglify:test']);
+  grunt.registerTask('test-scripts', ['concat-scripts','uglify:testDefault']);
 
   // compile and minify js, distribute to both ./test and ./dist
-  grunt.registerTask('dist-scripts', ['concat-scripts','uglify:test','uglify:dist']);
+  grunt.registerTask('dist-scripts', ['concat-scripts','uglify:testDefault','uglify:distDefault']);
 
   // compile and minify js, distribute to both ./test and ./dist
-  grunt.registerTask('gzip-scripts', ['concat-scripts','uglify:test','uglify:gzip']);
+  grunt.registerTask('gzip-scripts', ['concat-scripts','uglify:testDefault','uglify:gzipDefault']);
 
-  /***** Copy Assets *****/
+  /***** Browserify Scripts *****/
+
+  // alternative to Compiling Scripts with uglify
+  
+  grunt.registerTask('test-browserify', []);
+  grunt.registerTask('dist-browserify', []);
+  grunt.registerTask('gzip-browserify', []);
+
+  /***** Copy Assets Default *****/
 
   // Copy fonts from src to ./test
   grunt.registerTask('test-copy', ['copy:test']);
@@ -455,18 +555,40 @@ module.exports = function(grunt) {
   // Copy Fonts to both ./test and ./dist
   grunt.registerTask('dist-copy', ['copy']);
 
-  /***** Build *****/
+  /***** Copy Assets Default *****/
+
+  // Copy fonts from src to ./test
+  grunt.registerTask('test-copy', ['copy:test']);
+  
+  // Copy Fonts to both ./test and ./dist
+  grunt.registerTask('dist-copy', ['copy']);
+
+  /***** Build Default *****/
 
   // Test build; builds ./test 
-  grunt.registerTask('dist-test', ['concat-all', 'test-styles', 'test-scripts', 'test-html', 'test-copy']);
+  grunt.registerTask('test-default', ['concat-all', 'test-styles', 'test-scripts', 'test-html', 'test-copy']);
 
   // Full build: builds both ./test and ./dist
-  grunt.registerTask('dist', ['clean', 'concat-all', 'dist-styles', 'dist-scripts', 'dist-html', 'dist-copy']);
+  grunt.registerTask('dist-default', ['clean', 'concat-all', 'dist-styles', 'dist-scripts', 'dist-html', 'dist-copy']);
 
   // Optimized build: build ./test and ./dist, gzip ./dist js.
-  grunt.registerTask('dist-gzip', ['clean', 'concat-all', 'dist-styles', 'gzip-scripts', 'dist-html', 'dist-copy']);
+  grunt.registerTask('gzip-default', ['clean', 'concat-all', 'dist-styles', 'gzip-scripts', 'dist-html', 'dist-copy']);
 
   // Default task. fixme: fix tests for new workflow, eg no jekyll _gh-pages
-  grunt.registerTask('default', ['test', 'dist-gzip']);
+  grunt.registerTask('default', ['test', 'dist']);
+
+  /***** Build Browserify *****/
+
+  // Test build; builds ./test 
+  grunt.registerTask('test-browserify', ['concat-all', 'test-styles', 'test-scripts', 'test-html', 'test-copy']);
+
+  // Full build: builds both ./test and ./dist
+  grunt.registerTask('dist-browserify', ['clean', 'concat-all', 'dist-styles', 'dist-scripts', 'dist-html', 'dist-copy']);
+
+  // Optimized build: build ./test and ./dist, gzip ./dist js.
+  grunt.registerTask('gzip-browserify', ['clean', 'concat-all', 'dist-styles', 'gzip-scripts', 'dist-html', 'dist-copy']);
+
+  // Default task. fixme: fix tests for new workflow, eg no jekyll _gh-pages
+  grunt.registerTask('default', ['test', 'dist']);
 
 };

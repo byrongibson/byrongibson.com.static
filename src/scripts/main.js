@@ -1,16 +1,18 @@
-/** @jsx React.DOM */
+
 
 // http://www.requirejs.org/docs/start.html
 require([
     "lib/jquery", 
     "lib/bootstrap", 
     "lib/react",
+    //"lib/JSXTransformer",
     "lib/d3"
 //    "plugins"
 ], function(
     $, 
     bootstrap, 
     React,
+    //JSXTransformer,
     d3
     ) {
     //This function is called when scripts/helper/util.js is loaded.
@@ -21,15 +23,17 @@ require([
     // test load success 
     //alert("require.js loaded");
 
-    /*React.renderComponent(
+    React.renderComponent(
         React.DOM.h1(null, 'Hello World.'),
         document.getElementById('helloworld')
-    );*/
+    );
 
-    React.renderComponent(
+
+    /** @jsx React.DOM */
+    /*React.renderComponent(
         <h1>Hello, world!</h1>,
         document.getElementById('example')
-    );
+    );*/
 
 
     /****************************************************
