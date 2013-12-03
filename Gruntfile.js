@@ -141,8 +141,8 @@ module.exports = function(grunt) {
                 removeEmptyElements: false
             },
             files: { 
-                'test/browserify/index.html': 'src/index.html'        
-                ,'test/browserify/error.html': 'src/error.html'
+                'build/test/index.html': 'src/index.html'        
+                ,'build/test/error.html': 'src/error.html'
             }
         },
         distBrowserify: { 
@@ -160,8 +160,8 @@ module.exports = function(grunt) {
                 removeEmptyElements: false
             },
             files: {  
-                'dist/browserify/index.html': 'src/index.html'        
-                ,'dist/browserify/error.html': 'src/error.html'
+                'build/dist/index.html': 'src/index.html'        
+                ,'build/dist/error.html': 'src/error.html'
             }
         }
     },
@@ -186,10 +186,6 @@ module.exports = function(grunt) {
                 ,'test/default/styles/lib/bootstrap-theme.css':'src/styles/less/theme.less'
                 ,'test/default/styles/main.css':'src/styles/less/main.less'
                 ,'test/default/styles/pure.css':'src/styles/css/pure.css'
-                ,'test/browserify/styles/lib/bootstrap.css':'src/styles/less/bootstrap.less'
-                ,'test/browserify/styles/lib/bootstrap-theme.css':'src/styles/less/theme.less'
-                ,'test/browserify/styles/main.css':'src/styles/less/main.less'
-                ,'test/browserify/styles/pure.css':'src/styles/css/pure.css'
             }              
         },
         distDefault: {  
@@ -227,10 +223,10 @@ module.exports = function(grunt) {
                 , zeroUnits: true                // Doesn't complain if you add units to values of 0
             },
             files: {
-                'test/browserify/styles/lib/bootstrap.css':'src/styles/less/bootstrap.less'
-                ,'test/browserify/styles/lib/bootstrap-theme.css':'src/styles/less/theme.less'
-                ,'test/browserify/styles/main.css':'src/styles/less/main.less'
-                ,'test/browserify/styles/pure.css':'src/styles/css/pure.css'
+                'build/test/styles/lib/bootstrap.css':'src/styles/less/bootstrap.less'
+                ,'build/test/styles/lib/bootstrap-theme.css':'src/styles/less/theme.less'
+                ,'build/test/styles/main.css':'src/styles/less/main.less'
+                ,'build/test/styles/pure.css':'src/styles/css/pure.css'
             }              
         },
         distBrowserify: {  
@@ -247,14 +243,13 @@ module.exports = function(grunt) {
                 , zeroUnits: true                // Doesn't complain if you add units to values of 0
             },
             files: {
-                'dist/browserify/styles/lib/bootstrap.css':'src/styles/less/bootstrap.less'
-                ,'dist/browserify/styles/lib/bootstrap-theme.css':'src/styles/less/theme.less'
-                ,'dist/browserify/styles/lib/normalize.css':'bower_components/html5-boilerplate/css/normalize.css'
-                ,'dist/browserify/styles/main.css':'src/styles/less/main.less'
-                ,'dist/browserify/styles/pure.css':'src/styles/css/pure.css'
+                'build/dist/styles/lib/bootstrap.css':'src/styles/less/bootstrap.less'
+                ,'build/dist/styles/lib/bootstrap-theme.css':'src/styles/less/theme.less'
+                ,'build/dist/styles/lib/normalize.css':'bower_components/html5-boilerplate/css/normalize.css'
+                ,'build/dist/styles/main.css':'src/styles/less/main.less'
+                ,'build/dist/styles/pure.css':'src/styles/css/pure.css'
             }
         }
-
     },
 
     
@@ -330,6 +325,78 @@ module.exports = function(grunt) {
                 ,'dist/default/scripts/main.js':'src/scripts/main.js'
                 ,'dist/default/scripts/plugins.js':'src/scripts/plugins.js'
             }
+        },
+        testBrowserify: {
+            options: {
+                mangle: false
+                , compress: false
+                , beautify: true
+                , report: false
+                , sourceMap: 'test/default/scripts/source-map.js'
+                , sourceMapRoot: 'src/scripts/'
+                , preserveComments: true
+            },
+            files: {
+                'build/test/scripts/lib/jquery.js':'bower_components/jquery/jquery.js'
+                ,'build/test/scripts/lib/bootstrap.js':'<%= concat.bootstrap.dest %>'
+                ,'build/test/scripts/lib/modernizr.js':'bower_components/modernizr/modernizr.js'
+                ,'build/test/scripts/lib/html5shiv.js':'bower_components/html5shiv/dist/html5shiv.js'
+                ,'build/test/scripts/lib/html5shiv-printshiv.js':'bower_components/html5shiv/dist/html5shiv-printshiv.js'
+                ,'build/test/scripts/lib/JSXTransformer.js':'bower_components/react/JSXTransformer.js'
+                ,'build/test/scripts/lib/react.js':'bower_components/react/react.js'
+                ,'build/test/scripts/lib/d3.js':'bower_components/d3/d3.js'
+                ,'build/test/scripts/require.js':'bower_components/requirejs/require.js'
+                ,'build/test/scripts/main.js':'src/scripts/main.js'
+                ,'build/test/scripts/plugins.js':'src/scripts/plugins.js'
+            }
+        },
+        distBrowserify: {
+            options: {
+                mangle: false //(only main.js, plugins.js)
+                , compress: true
+                , beautify: false
+                , report: 'min'
+                , sourceMap: 'dist/default/scripts/source-map.js'
+                , sourceMapRoot: 'src/scripts/'
+                , preserveComments: false
+            },
+            files: {
+                'build/dist/scripts/lib/jquery.js':'bower_components/jquery/jquery.js'
+                ,'build/dist/scripts/lib/bootstrap.js':'<%= concat.bootstrap.dest %>'
+                ,'build/dist/scripts/lib/modernizr.js':'bower_components/modernizr/modernizr.js'
+                ,'build/dist/scripts/lib/html5shiv.js':'bower_components/html5shiv/dist/html5shiv.js'
+                ,'build/dist/scripts/lib/html5shiv-printshiv.js':'bower_components/html5shiv/dist/html5shiv-printshiv.js'
+                ,'build/dist/scripts/lib/JSXTransformer.js':'bower_components/react/JSXTransformer.js'
+                ,'build/dist/scripts/lib/react.js':'bower_components/react/react.js'
+                ,'build/dist/scripts/lib/d3.js':'bower_components/d3/d3.js'
+                ,'build/dist/scripts/require.js':'bower_components/requirejs/require.js'
+                ,'build/dist/scripts/main.js':'src/scripts/main.js'
+                ,'build/dist/scripts/plugins.js':'src/scripts/plugins.js'
+            }
+        },
+        gzipBrowserify: {
+            options: {
+                mangle: false //(only main.js, plugins.js)
+                , compress: true
+                , beautify: true
+                , report: 'gzip'
+                , sourceMap: 'dist/default/scripts/source-map.js'
+                , sourceMapRoot: 'src/scripts/'
+                , preserveComments: false
+            },
+            files: {
+                'build/dist/scripts/lib/jquery.js':'bower_components/jquery/jquery.js'
+                ,'build/dist/scripts/lib/bootstrap.js':'<%= concat.bootstrap.dest %>'
+                ,'build/dist/scripts/lib/modernizr.js':'bower_components/modernizr/modernizr.js'
+                ,'build/dist/scripts/lib/html5shiv.js':'bower_components/html5shiv/dist/html5shiv.js'
+                ,'build/dist/scripts/lib/html5shiv-printshiv.js':'bower_components/html5shiv/dist/html5shiv-printshiv.js'
+                ,'build/dist/scripts/lib/JSXTransformer.js':'bower_components/react/JSXTransformer.js'
+                ,'build/dist/scripts/lib/react.js':'bower_components/react/react.js'
+                ,'build/dist/scripts/lib/d3.js':'bower_components/d3/d3.js'
+                ,'build/dist/scripts/require.js':'bower_components/requirejs/require.js'
+                ,'build/dist/scripts/main.js':'src/scripts/main.js'
+                ,'build/dist/scripts/plugins.js':'src/scripts/plugins.js'
+            }
         }
     },
 
@@ -342,7 +409,34 @@ module.exports = function(grunt) {
     }, 
 
     browserify: {
+      test: {
+        options: {
+          ignore:
+          ,noParse: []  // better to shim libraries that don't need to be parsed for require() statement than to use noParse
+          ,alias: [] 
+          ,aliasMappings: []
+          ,external: []
+          ,transform: []
+          ,debug: true // enable source map support
+          ,shim: 
+          ,postBundleCB: 
+        },
+        files: {
+          'build/module.js': ['src/scripts/**/*.js']
+        }
+      },
       dist: {
+        options: {
+          ignore:
+          ,noParse: []  // better to shim libraries that don't need to be parsed for require() statement than to use noParse
+          ,alias: [] 
+          ,aliasMappings: []
+          ,external: []
+          ,transform: []
+          ,debug: false // enable source map support
+          ,shim: 
+          ,postBundleCB: 
+        },
         files: {
           'build/module.js': ['src/scripts/**/*.js']
         }
@@ -350,19 +444,25 @@ module.exports = function(grunt) {
     },
 
     copy: {
-      test: {
-        files: [
-          {expand: true, flatten: true, src: ["bower_components/html5-boilerplate/crossdomain.xml"], dest: 'test/default/'},
+      src: 
+        files: {
+          {expand: true, flatten: true, src: ["bower_components/html5-boilerplate/crossdomain.xml"], dest: 'src/'},
           {expand: true, flatten: true, src: ["bower_components/html5-boilerplate/apple-touch-icon-precomposed.png"], dest: 'src/images/ico/h5bp/'},
           {expand: true, flatten: true, src: ["bower_components/html5-boilerplate/favicon.ico"], dest: 'src/images/ico/h5bp/'},
           {expand: true, flatten: true, src: ["bower_components/bootstrap/docs-assets/ico/*"], dest: 'src/images/ico/bootstrap/'},
-          {expand: true, flatten: true, src: ["bower_components/pure/pure-min.css"], dest: 'test/default/styles/lib/'},
+          {expand: true, flatten: true, src: ["bower_components/pure/pure-min.css"], dest: 'src/styles/lib/'},
+        }
+      },
+      test: {
+        files: [
+          {expand: true, flatten: true, src: ["src/crossdomain.xml"], dest: 'test/default/'},
+          {expand: true, flatten: true, src: ["src/images/ico/h5bp/*"], dest: 'test/default/images/ico/h5bp/'},
+          {expand: true, flatten: true, src: ["src/images/ico/bootstrap/*"], dest: 'test/default/images/ico/bootstrap/'},
+          {expand: true, flatten: true, src: ["src/styles/lib/pure-min.css"], dest: 'test/default/styles/lib/'},
           {expand: true, flatten: true, src: ["src/styles/css/pure-landingpage.css"], dest: 'test/default/styles'},
           {expand: true, flatten: true, src: ["src/styles/css/pure-email.css"], dest: 'test/default/styles'},
           {expand: true, flatten: true, src: ["src/styles/css/pure-blog.css"], dest: 'test/default/styles'},
           {expand: true, flatten: true, src: ["src/styles/css/pure.css"], dest: 'test/default/styles'},
-          /*{expand: true, flatten: true, src: ["src/scripts/main.js"], dest: 'test/default/scripts'},
-          {expand: true, flatten: true, src: ["src/scripts/plugins.js"], dest: 'test/default/scripts'},*/
           {expand: true, flatten: true, src: ["src/html/pure-landingpage.html"], dest: 'test/default/'},
           {expand: true, flatten: true, src: ["src/html/pure-email.html"], dest: 'test/default/'},
           {expand: true, flatten: true, src: ["src/html/pure-blog.html"], dest: 'test/default/'},
@@ -377,38 +477,15 @@ module.exports = function(grunt) {
       },
       dist: {
         files: [
-          /*{expand: true, flatten: true, src: ["test/default/scripts/lib/modernizr.js"], dest: 'dist/default/scripts/lib/'},
-          {expand: true, flatten: true, src: ["test/default/scripts/lib/jquery.js"], dest: 'dist/default/scripts/lib/'},
-          {expand: true, flatten: true, src: ["test/default/scripts/lib/html5shiv.js"], dest: 'dist/default/scripts/lib/'},
-          {expand: true, flatten: true, src: ["test/default/scripts/lib/html5shiv-printshiv.js"], dest: 'dist/default/scripts/lib/'},
-          {expand: true, flatten: true, src: ["test/default/scripts/lib/react.js"], dest: 'dist/default/scripts/lib/'},
-          {expand: true, flatten: true, src: ["test/default/scripts/lib/JSXTransformer.js"], dest: 'dist/default/scripts/lib/'},
-          {expand: true, flatten: true, src: ["test/default/scripts/lib/d3.js"], dest: 'dist/default/scripts/lib/'},
-          {expand: true, flatten: true, src: ["test/default/scripts/lib/respond.js"], dest: 'dist/default/scripts/lib/'},
-          {expand: true, flatten: true, src: ["test/default/scripts/lib/bootstrap.js"], dest: 'dist/default/scripts/lib/'},
-          {expand: true, flatten: true, src: ["test/default/scripts/require.js"], dest: 'dist/default/scripts/'},
-          {expand: true, flatten: true, src: ["test/default/styles/lib/bootstrap-theme.css"], dest: 'dist/default/styles/lib/'},
-          {expand: true, flatten: true, src: ["test/default/styles/lib/bootstrap.css"], dest: 'dist/default/styles/lib/'},
-          {expand: true, flatten: true, src: ["test/default/styles/lib/normalize.css"], dest: 'dist/default/styles/lib/'},
-          {expand: true, flatten: true, src: ["test/default/styles/lib/pure-min.css"], dest: 'dist/default/styles/lib/'},
-          {expand: true, flatten: true, src: ["test/default/styles/pure-landingpage.css"], dest: 'dist/default/styles/'},
-          {expand: true, flatten: true, src: ["test/default/styles/pure-email.css"], dest: 'dist/default/styles/'},
-          {expand: true, flatten: true, src: ["test/default/styles/pure-blog.css"], dest: 'dist/default/styles/'},
-          {expand: true, flatten: true, src: ["test/default/styles/pure.css"], dest: 'dist/default/styles/'},
-          {expand: true, flatten: true, src: ["test/default/styles/main.css"], dest: 'dist/default/styles/'},
-          {expand: true, flatten: true, src: ["test/default/pure-landingpage.html"], dest: 'dist/default/'},
-          {expand: true, flatten: true, src: ["test/default/pure-email.html"], dest: 'dist/default/'},
-          {expand: true, flatten: true, src: ["test/default/pure-blog.html"], dest: 'dist/default/'},
-          {expand: true, flatten: true, src: ["test/default/pure.html"], dest: 'dist/default/'},*/
-          {expand: true, flatten: true, src: ["test/default/crossdomain.xml"], dest: 'dist/default/'},
-          {expand: true, flatten: true, src: ["test/default/humans.txt"], dest: 'dist/default/'},
-          {expand: true, flatten: true, src: ["test/default/robots.txt"], dest: 'dist/default/'},
-          {expand: true, flatten: true, src: ["test/default/images/ico/bootstrap/*"], dest: 'dist/default/images/ico/bootstrap/'},
-          {expand: true, flatten: true, src: ["test/default/images/ico/h5bp/*"], dest: 'dist/default/images/ico/h5bp/'},
-          {expand: true, flatten: true, src: ["test/default/images/ico/h5bp/apple-touch-icon-precomposed.png"], dest: 'dist/default/images/ico/h5bp'},
-          {expand: true, flatten: true, src: ["test/default/images/ico/h5bp/favicon.ico"], dest: 'dist/default/images/ico/h5bp'},
-          {expand: true, flatten: true, src: ["test/default/images/*"], dest: 'dist/default/images/'},
-          {expand: true, flatten: true, src: ["test/default/fonts/*"], dest: 'dist/default/fonts/'}
+          {expand: true, flatten: true, src: ["src/crossdomain.xml"], dest: 'dist/default/'},
+          {expand: true, flatten: true, src: ["src/humans.txt"], dest: 'dist/default/'},
+          {expand: true, flatten: true, src: ["src/robots.txt"], dest: 'dist/default/'},
+          {expand: true, flatten: true, src: ["src/images/ico/bootstrap/*"], dest: 'dist/default/images/ico/bootstrap/'},
+          {expand: true, flatten: true, src: ["src/images/ico/h5bp/*"], dest: 'dist/default/images/ico/h5bp/'},
+          {expand: true, flatten: true, src: ["src/images/ico/h5bp/apple-touch-icon-precomposed.png"], dest: 'dist/default/images/ico/h5bp'},
+          {expand: true, flatten: true, src: ["src/images/ico/h5bp/favicon.ico"], dest: 'dist/default/images/ico/h5bp'},
+          {expand: true, flatten: true, src: ["src/images/*"], dest: 'dist/default/images/'},
+          {expand: true, flatten: true, src: ["src/fonts/*"], dest: 'dist/default/fonts/'}
         ]
       }
     },
