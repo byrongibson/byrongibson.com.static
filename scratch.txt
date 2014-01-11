@@ -1,0 +1,14 @@
+Browserify Workflow:
+
+concat:bootstrap
+concat:html_index
+concat:html_error
+htmlmin:testBrowserifyDefault
+htmlmin:distBrowserifyDefault
+recess:testBrowserifyDefault
+recess:distBrowserifyDefault
+uglify:testBrowserifyDefault
+uglify:distBrowserifyDefault
+uglify:gzipBrowserifyDefault //can't do this till after all packages browserified into one
+browserify:test
+browserify:dist

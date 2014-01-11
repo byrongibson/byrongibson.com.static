@@ -2,6 +2,7 @@
 _gh_pages
 _site
 .ruby-version
+scratch.js
 
 # Numerous always-ignore extensions
 *.diff
