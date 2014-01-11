@@ -467,6 +467,7 @@ module.exports = function(grunt) {
           ,{expand: true, flatten: true, src: ["src/images/*"], dest: 'test/images/'}
           ,{expand: true, flatten: true, src: ["src/fonts/*"], dest: 'test/fonts/'}
           ,{expand: true, flatten: true, src: ["src/crossdomain.xml"], dest: 'test/'}
+          ,{expand: true, flatten: true, src: ["src/sitemap.xml"], dest: 'test/'}
           ,{expand: true, flatten: true, src: ["src/humans.txt"], dest: 'test/'}
           ,{expand: true, flatten: true, src: ["src/robots.txt"], dest: 'test/'}
         ]
@@ -477,6 +478,7 @@ module.exports = function(grunt) {
           ,{expand: true, flatten: true, src: ["src/images/ico/h5bp/*"], dest: 'dist/images/ico/h5bp/'}
           ,{expand: true, flatten: true, src: ["src/images/*"], dest: 'dist/images/'}
           ,{expand: true, flatten: true, src: ["src/crossdomain.xml"], dest: 'dist/'}
+          ,{expand: true, flatten: true, src: ["src/sitemap.xml"], dest: 'dist/'}
           ,{expand: true, flatten: true, src: ["src/humans.txt"], dest: 'dist/'}
           ,{expand: true, flatten: true, src: ["src/robots.txt"], dest: 'dist/'}
           ,{expand: true, flatten: true, src: ["src/fonts/*"], dest: 'dist/fonts/'}
@@ -489,6 +491,7 @@ module.exports = function(grunt) {
           ,{expand: true, flatten: true, src: ["src/images/*"], dest: 'build/test/images/'}
           ,{expand: true, flatten: true, src: ["src/fonts/*"], dest: 'build/test/fonts/'}
           ,{expand: true, flatten: true, src: ["src/crossdomain.xml"], dest: 'build/test/'}
+          ,{expand: true, flatten: true, src: ["src/sitemap.xml"], dest: 'build/test/'}
           ,{expand: true, flatten: true, src: ["src/humans.txt"], dest: 'build/test/'}
           ,{expand: true, flatten: true, src: ["src/robots.txt"], dest: 'build/test/'}
         ]
@@ -500,6 +503,7 @@ module.exports = function(grunt) {
           ,{expand: true, flatten: true, src: ["src/images/*"], dest: 'build/dist/images/'}
           ,{expand: true, flatten: true, src: ["src/fonts/*"], dest: 'build/dist/fonts/'}
           ,{expand: true, flatten: true, src: ["src/crossdomain.xml"], dest: 'build/dist/'}
+          ,{expand: true, flatten: true, src: ["src/sitemap.xml"], dest: 'build/dist/'}
           ,{expand: true, flatten: true, src: ["src/humans.txt"], dest: 'build/dist/'}
           ,{expand: true, flatten: true, src: ["src/robots.txt"], dest: 'build/dist/'}
         ]
