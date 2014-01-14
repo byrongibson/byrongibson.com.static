@@ -600,6 +600,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-html-validation');
   grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-recess');
+  grunt.loadNpmTasks('grunt-aws-s3');
   grunt.loadNpmTasks('grunt-react'); /* https://npmjs.org/package/grunt-react */
   grunt.loadNpmTasks('grunt-jsx'); /* https://npmjs.org/package/grunt-jsx */
 
