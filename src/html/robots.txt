@@ -1,0 +1,59 @@
+# robotstxt.org/
+
+# http://danbirken.com/seo/2013/10/17/who-exactly-is-crawling-my-site.html 
+# https://news.ycombinator.com/item?id=6572677 
+
+User-Agent: Googlebot
+Disallow: /demo
+
+User-Agent: Googlebot-Mobile
+Disallow: /demo
+
+User-Agent: Googlebot-Image
+Disallow: /demo
+
+User-Agent: Googlebot-News
+Disallow: /demo
+
+User-Agent: Googlebot-Video
+Disallow: /demo
+
+User-agent: AdsBot-Google
+Disallow: /demo
+
+User-Agent: msnbot
+Disallow: /demo
+
+User-Agent: msnbot-media
+Disallow: /demo
+
+User-Agent: bingbot
+Disallow: /demo
+
+# Adsense
+User-Agent: Mediapartners-Google
+Disallow: /demo 
+
+# Blekko
+User-Agent: ScoutJet
+Disallow: /demo 
+
+User-Agent: Yandex
+Disallow: /demo 
+
+User-agent: baiduspider
+Disallow: /demo 
+
+User-agent: DuckDuckBot
+Disallow: /demo 
+
+# India search engine guruji.com
+User-agent: GurujiBot
+Disallow: /demo
+
+# CommonCrawl
+User-agent: ccbot
+Disallow: /demo 
+
+User-Agent: *
+Disallow: /
