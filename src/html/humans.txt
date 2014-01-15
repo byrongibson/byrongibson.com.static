@@ -1,0 +1,16 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+   Byron Gibson -- Maker -- @byrongibson
+
+# THANKS
+
+    All FOSS and all FOSS contributors
+
+# TECHNOLOGY COLOPHON
+
+    HTML5 Boilerplate
+    Bootstrap 3
+    Modernizr, jQuery, Requirejs, React, D3.js, Gruntjs, Browserify
