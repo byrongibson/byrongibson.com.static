@@ -22,11 +22,18 @@
 <script src="/scripts/lib/respond.js"></script>
 <![endif]-->
 
-<!--<link rel="stylesheet" href="/styles/lib/bootstrap.css">-->
 <link rel="stylesheet" href="/styles/main.css">
-<!--<script src="/scripts/lib/modernizr.js"></script>-->
-<!--<script data-main="/scripts/main" src="/scripts/require.js"></script>-->
-<script src="/scripts/module.js"></script>
+<script src="/scripts/lib/modernizr.js"></script>
+<script>
+  yepnope([{
+    load: 'http:/­/ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js',
+    complete: function () {
+      if (!window.jQuery) {
+        yepnope('local/jquery.min.js');
+      }
+    }
+  }
+</script>
 
 </head>
 <body>

@@ -23,10 +23,9 @@ module.exports = function(grunt) {
 
     // Task configuration.
     clean: {
-      test: ['test']
+      build: ['build']
+      ,test: ['test']
       ,dist: ['dist']
-      ,testBrowserify: ['build/test']
-      ,distBrowserify: ['build/dist']
     },
 
     jshint: {
@@ -68,61 +67,61 @@ module.exports = function(grunt) {
       }
       ,html_index: {
         src: [
-          'src/html/_head.html'
-          ,'src/html/_header.html'
-          ,'src/html/_index.html'
-          ,'src/html/_footer.html'
-          ,'src/html/_foot.html'
+          'src/html/partials/_head.html'
+          ,'src/html/partials/_header.html'
+          ,'src/html/partials/_index.html'
+          ,'src/html/partials/_footer.html'
+          ,'src/html/partials/_foot.html'
         ],
         dest: 'build/index.html'
       }
       ,html_error: {
         src: [
-          'src/html/_head.html'
-          ,'src/html/_header.html'
-          ,'src/html/_error.html'
-          ,'src/html/_footer.html'
-          ,'src/html/_foot.html'
+          'src/html/partials/_head.html'
+          ,'src/html/partials/_header.html'
+          ,'src/html/partials/_error.html'
+          ,'src/html/partials/_footer.html'
+          ,'src/html/partials/_foot.html'
         ],
         dest: 'build/error.html'
       }
       ,lab_index: {
         src: [
-          'src/html/_head.html'
-          ,'src/html/_header.html'
-          ,'src/html/lab/_index.html'
-          ,'src/html/_footer.html'
-          ,'src/html/_foot.html'
+          'src/html/partials/_head.html'
+          ,'src/html/partials/_header.html'
+          ,'src/html/partials/lab/_index.html'
+          ,'src/html/partials/_footer.html'
+          ,'src/html/partials/_foot.html'
         ],
         dest: 'build/lab/index.html'
       }
       ,blog_index: {
         src: [
-          'src/html/_head.html'
-          ,'src/html/_header.html'
-          ,'src/html/blog/_index.html'
-          ,'src/html/_footer.html'
-          ,'src/html/_foot.html'
+          'src/html/partials/_head.html'
+          ,'src/html/partials/_header.html'
+          ,'src/html/partials/blog/_index.html'
+          ,'src/html/partials/_footer.html'
+          ,'src/html/partials/_foot.html'
         ],
         dest: 'build/blog/index.html'
       }
       ,work_index: {
         src: [
-          'src/html/_head.html'
-          ,'src/html/_header.html'
-          ,'src/html/work/_index.html'
-          ,'src/html/_footer.html'
-          ,'src/html/_foot.html'
+          'src/html/partials/_head.html'
+          ,'src/html/partials/_header.html'
+          ,'src/html/partials/work/_index.html'
+          ,'src/html/partials/_footer.html'
+          ,'src/html/partials/_foot.html'
         ],
         dest: 'build/work/index.html'
       }
       ,contact_index: {
         src: [
-          'src/html/_head.html'
-          ,'src/html/_header.html'
-          ,'src/html/contact/_index.html'
-          ,'src/html/_footer.html'
-          ,'src/html/_foot.html'
+          'src/html/partials/_head.html'
+          ,'src/html/partials/_header.html'
+          ,'src/html/partials/contact/_index.html'
+          ,'src/html/partials/_footer.html'
+          ,'src/html/partials/_foot.html'
         ],
         dest: 'build/contact/index.html'
       }
@@ -228,7 +227,7 @@ module.exports = function(grunt) {
           , compress: false
           , beautify: true
           , report: false
-          , sourceMap: 'test/default/scripts/source-map.js'
+          , sourceMap: 'test/scripts/source-map.js'
           , sourceMapRoot: 'src/scripts/'
           , preserveComments: true
         },
@@ -241,7 +240,6 @@ module.exports = function(grunt) {
           ,'build/scripts/lib/JSXTransformer.js':'bower_components/react/JSXTransformer.js'
           ,'build/scripts/lib/react.js':'bower_components/react/react.js'
           ,'build/scripts/lib/d3.js':'bower_components/d3/d3.js'
-          ,'build/scripts/require.js':'bower_components/requirejs/require.js'
           ,'build/scripts/main.js':'src/scripts/main.js'
           ,'build/scripts/plugins.js':'src/scripts/plugins.js'
         }
@@ -252,7 +250,7 @@ module.exports = function(grunt) {
           , compress: true
           , beautify: false
           , report: 'min'
-          , sourceMap: 'dist/default/scripts/source-map.js'
+          , sourceMap: 'dist/scripts/source-map.js'
           , sourceMapRoot: 'src/scripts/'
           , preserveComments: false
         },
@@ -265,7 +263,6 @@ module.exports = function(grunt) {
           ,'build/scripts/lib/JSXTransformer.js':'bower_components/react/JSXTransformer.js'
           ,'build/scripts/lib/react.js':'bower_components/react/react.js'
           ,'build/scripts/lib/d3.js':'bower_components/d3/d3.js'
-          ,'build/scripts/require.js':'bower_components/requirejs/require.js'
           ,'build/scripts/main.js':'src/scripts/main.js'
           ,'build/scripts/plugins.js':'src/scripts/plugins.js'
         }
@@ -276,7 +273,7 @@ module.exports = function(grunt) {
           , compress: true
           , beautify: true
           , report: 'gzip'
-          , sourceMap: 'dist/default/scripts/source-map.js'
+          , sourceMap: 'dist/scripts/source-map.js'
           , sourceMapRoot: 'src/scripts/'
           , preserveComments: false
         },
@@ -289,7 +286,6 @@ module.exports = function(grunt) {
           ,'build/scripts/lib/JSXTransformer.js':'bower_components/react/JSXTransformer.js'
           ,'build/scripts/lib/react.js':'bower_components/react/react.js'
           ,'build/scripts/lib/d3.js':'bower_components/d3/d3.js'
-          ,'build/scripts/require.js':'bower_components/requirejs/require.js'
           ,'build/scripts/main.js':'src/scripts/main.js'
           ,'build/scripts/plugins.js':'src/scripts/plugins.js'
         }
@@ -300,7 +296,7 @@ module.exports = function(grunt) {
           , compress: false
           , beautify: true
           , report: false
-          , sourceMap: 'test/default/scripts/source-map.js'
+          , sourceMap: 'test/scripts/source-map.js'
           , sourceMapRoot: 'src/scripts/'
           , preserveComments: true
         },
@@ -323,7 +319,7 @@ module.exports = function(grunt) {
           , compress: true
           , beautify: false
           , report: 'min'
-          , sourceMap: 'dist/default/scripts/source-map.js'
+          , sourceMap: 'dist/scripts/source-map.js'
           , sourceMapRoot: 'src/scripts/'
           , preserveComments: false
         },
@@ -346,7 +342,7 @@ module.exports = function(grunt) {
           , compress: true
           , beautify: true
           , report: 'gzip'
-          , sourceMap: 'dist/default/scripts/source-map.js'
+          , sourceMap: 'dist/scripts/source-map.js'
           , sourceMapRoot: 'src/scripts/'
           , preserveComments: false
         },
@@ -432,6 +428,7 @@ module.exports = function(grunt) {
           ,{expand: true, flatten: true, src: ["src/images/ico/h5bp/*"], dest: 'build/images/ico/h5bp/'}
           ,{expand: true, flatten: true, src: ["src/images/*"], dest: 'build/images/'}
           ,{expand: true, flatten: true, src: ["src/fonts/*"], dest: 'build/fonts/'}
+          ,{expand: true, flatten: true, src: ["src/data/blog/*.markdown"], dest: 'build/blog/data'}
           ,{expand: true, flatten: true, src: ["src/html/*.xml"], dest: 'build/'}
           ,{expand: true, flatten: true, src: ["src/html/*.txt"], dest: 'build/'}
           ,{expand: true, flatten: true, src: ["src/html/*.ico"], dest: 'build/'}
@@ -443,13 +440,14 @@ module.exports = function(grunt) {
           ,{expand: true, flatten: true, src: ["build/images/ico/h5bp/*"], dest: 'test/images/ico/h5bp/'}
           ,{expand: true, flatten: true, src: ["build/images/*"], dest: 'test/images/'}
           ,{expand: true, flatten: true, src: ["build/fonts/*"], dest: 'test/fonts/'}
-          ,{expand: true, flatten: true, src: ["build/html/*.xml"], dest: 'test/'}
-          ,{expand: true, flatten: true, src: ["build/html/*.txt"], dest: 'test/'}
-          ,{expand: true, flatten: true, src: ["build/html/*.ico"], dest: 'test/'}
           ,{expand: true, flatten: true, src: ['build/styles/lib/*.css'], dest: 'test/styles/lib/'}
           ,{expand: true, flatten: true, src: ['build/styles/*.css'], dest: 'test/styles/'}
           ,{expand: true, flatten: true, src: ['build/scripts/lib/*.js'], dest: 'test/scripts/lib/'}
           ,{expand: true, flatten: true, src: ['build/scripts/*.js'], dest: 'test/scripts/'}
+          ,{expand: true, flatten: true, src: ["build/blog/data/*.markdown"], dest: 'test/blog/data'}
+          ,{expand: true, flatten: true, src: ["build/*.xml"], dest: 'test/'}
+          ,{expand: true, flatten: true, src: ["build/*.txt"], dest: 'test/'}
+          ,{expand: true, flatten: true, src: ["build/*.ico"], dest: 'test/'}
         ]
       }
       ,dist: {
@@ -458,13 +456,14 @@ module.exports = function(grunt) {
           ,{expand: true, flatten: true, src: ["build/images/ico/h5bp/*"], dest: 'dist/images/ico/h5bp/'}
           ,{expand: true, flatten: true, src: ["build/images/*"], dest: 'dist/images/'}
           ,{expand: true, flatten: true, src: ["build/fonts/*"], dest: 'dist/fonts/'}
-          ,{expand: true, flatten: true, src: ["build/html/*.xml"], dest: 'dist/'}
-          ,{expand: true, flatten: true, src: ["build/html/*.txt"], dest: 'dist/'}
-          ,{expand: true, flatten: true, src: ["build/html/*.ico"], dest: 'dist/'}
           ,{expand: true, flatten: true, src: ['build/styles/lib/*.css'], dest: 'dist/styles/lib/'}
           ,{expand: true, flatten: true, src: ['build/styles/*.css'], dest: 'dist/styles/'}
           ,{expand: true, flatten: true, src: ['build/scripts/lib/*.js'], dest: 'dist/scripts/lib/'}
           ,{expand: true, flatten: true, src: ['build/scripts/*.js'], dest: 'dist/scripts/'}
+          ,{expand: true, flatten: true, src: ["build/blog/data/*.markdown"], dest: 'dist/blog/data'}
+          ,{expand: true, flatten: true, src: ["build/*.xml"], dest: 'test/'}
+          ,{expand: true, flatten: true, src: ["build/*.txt"], dest: 'test/'}
+          ,{expand: true, flatten: true, src: ["build/*.ico"], dest: 'test/'}
         ]
       }
     },
@@ -494,14 +493,14 @@ module.exports = function(grunt) {
       test: {
         options: {
           port: 3001
-          ,base: './test/default/'
+          ,base: './test/'
           ,keepalive: true
         }
       }
       ,dist: {
         options: {
           port: 3000
-          ,base: './dist/default/'
+          ,base: './dist/'
           ,keepalive: true
         }
       }
@@ -601,33 +600,24 @@ module.exports = function(grunt) {
   // compile and minify js, distribute to both ./test and ./dist
   grunt.registerTask('dist-scripts-browserify', ['concat:bootstrap','browserify:dist']);
   // compile and minify js, distribute to both ./test and ./dist
-  /*grunt.registerTask('gzip-scripts-browserify', ['concat:bootstrap','uglify:gzipBrowserifyDefault']);*/
-
-  /***** Copy Other Assets *****/
-
-  // Copy html/fonts/images from src to ./test
-  grunt.registerTask('copy-common', ['copy:common']);
-  // Copy html/fonts/images from src to ./test
-  grunt.registerTask('test-copy', ['copy:test']);
-  // Copy html/fonts/images from src to ./dist
-  grunt.registerTask('dist-copy', ['copy:dist']);
+  grunt.registerTask('gzip-scripts-browserify', ['concat:bootstrap','uglify:gzipBrowserifyDefault']);
 
   /***** Build Default *****/
 
   // Test build, builds ./test 
-  grunt.registerTask('test', ['clean:test', 'copy-common', 'test-styles', 'test-scripts', 'test-html', 'test-copy']);
+  grunt.registerTask('test', ['clean:test', 'copy:common', 'test-styles', 'test-scripts', 'test-html', 'copy:test']);
   // Production build, builds ./dist
-  grunt.registerTask('dist', ['clean:dist', 'copy-common', 'dist-styles', 'dist-scripts', 'dist-html', 'dist-copy']);
+  grunt.registerTask('dist', ['clean:dist', 'copy:common', 'dist-styles', 'dist-scripts', 'dist-html', 'copy:dist']);
   // Optimized build, builds ./dist with gzipped assets
-  grunt.registerTask('gzip', ['clean:dist', 'copy-common', 'dist-styles', 'gzip-scripts', 'dist-html', 'dist-copy']);
+  grunt.registerTask('gzip', ['clean:dist', 'copy:common', 'dist-styles', 'gzip-scripts', 'dist-html', 'copy:dist']);
 
   /***** Build Browserify *****/
 
   // Test build, builds ./test 
-  grunt.registerTask('test-browserify', ['clean:testBrowserify', 'copy-common', 'test-styles', 'test-scripts-browserify', 'test-html', 'copy:test']);
+  grunt.registerTask('test-browserify', ['clean:test', 'copy:common', 'test-styles', 'test-scripts-browserify', 'test-html', 'copy:test']);
   // Production build, builds ./dist
-  grunt.registerTask('dist-browserify', ['clean:distBrowserify', 'copy-common', 'dist-styles', 'dist-scripts-browserify', 'dist-html', 'copy:dist']);
+  grunt.registerTask('dist-browserify', ['clean:dist', 'copy:common', 'dist-styles', 'dist-scripts-browserify', 'dist-html', 'copy:dist']);
   // Optimized build, builds ./dist with gzipped assets
-  grunt.registerTask('gzip-browserify', ['clean:distBrowserify', 'copy-common', 'dist-styles', 'gzip-scripts-browserify', 'dist-html', 'copy:dist']);
+  grunt.registerTask('gzip-browserify', ['clean:dist', 'copy:common', 'dist-styles', 'gzip-scripts-browserify', 'dist-html', 'copy:dist']);
 
 };

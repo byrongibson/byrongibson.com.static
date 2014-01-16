@@ -3,14 +3,13 @@
 
 # TEAM
 
-   Byron Gibson -- Maker -- @byrongibson
+    <name> -- <role> -- <twitter>
 
 # THANKS
 
-    All FOSS and all FOSS contributors
+    <name>
 
 # TECHNOLOGY COLOPHON
 
-    HTML5 Boilerplate
-    Bootstrap 3
-    Modernizr, jQuery, Requirejs, React, D3.js, Gruntjs, Browserify
+    HTML5, CSS3
+    Normalize.css, jQuery, Modernizr
