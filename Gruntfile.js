@@ -31,14 +31,14 @@ module.exports = function(grunt) {
     jshint: {
       options: {
         jshintrc: 'src/scripts/.jshintrc'
-      },
-      gruntfile: {
+      }
+      ,gruntfile: {
         src: 'Gruntfile.js'
-      },
-      src: {
+      }
+      ,src: {
         src: ['src/scripts/*.js']
-      },
-      test: {
+      }
+      ,test: {
         src: ['src/scripts/tests/unit/*.js']
       }
     },
@@ -62,8 +62,8 @@ module.exports = function(grunt) {
           ,'bower_components/js/scrollspy.js'
           ,'bower_components/js/tab.js'
           ,'bower_components/js/affix.js'
-        ],
-        dest: 'build/scripts/lib/bootstrap.js'
+        ]
+        ,dest: 'build/scripts/lib/bootstrap.js'
       }
       ,html_index: {
         src: [
@@ -72,8 +72,8 @@ module.exports = function(grunt) {
           ,'src/html/partials/_index.html'
           ,'src/html/partials/_footer.html'
           ,'src/html/partials/_foot.html'
-        ],
-        dest: 'build/index.html'
+        ]
+        ,dest: 'build/index.html'
       }
       ,html_error: {
         src: [
@@ -82,8 +82,8 @@ module.exports = function(grunt) {
           ,'src/html/partials/_error.html'
           ,'src/html/partials/_footer.html'
           ,'src/html/partials/_foot.html'
-        ],
-        dest: 'build/error.html'
+        ]
+        ,dest: 'build/error.html'
       }
       ,lab_index: {
         src: [
@@ -92,8 +92,8 @@ module.exports = function(grunt) {
           ,'src/html/partials/lab/_index.html'
           ,'src/html/partials/_footer.html'
           ,'src/html/partials/_foot.html'
-        ],
-        dest: 'build/lab/index.html'
+        ]
+        ,dest: 'build/lab/index.html'
       }
       ,blog_index: {
         src: [
@@ -102,8 +102,8 @@ module.exports = function(grunt) {
           ,'src/html/partials/blog/_index.html'
           ,'src/html/partials/_footer.html'
           ,'src/html/partials/_foot.html'
-        ],
-        dest: 'build/blog/index.html'
+        ]
+        ,dest: 'build/blog/index.html'
       }
       ,work_index: {
         src: [
@@ -112,8 +112,8 @@ module.exports = function(grunt) {
           ,'src/html/partials/work/_index.html'
           ,'src/html/partials/_footer.html'
           ,'src/html/partials/_foot.html'
-        ],
-        dest: 'build/work/index.html'
+        ]
+        ,dest: 'build/work/index.html'
       }
       ,contact_index: {
         src: [
@@ -142,8 +142,8 @@ module.exports = function(grunt) {
           ,removeEmptyAttributes: true
           ,removeOptionalTags: false
           ,removeEmptyElements: false
-        },
-        files: { 
+        }
+        ,files: { 
           'test/index.html': 'build/index.html'
           ,'test/error.html': 'build/error.html'
           ,'test/lab/index.html': 'build/lab/index.html'
@@ -165,8 +165,8 @@ module.exports = function(grunt) {
           ,removeEmptyAttributes: true
           ,removeOptionalTags: false
           ,removeEmptyElements: false
-        },
-        files: { 
+        }
+        ,files: { 
           'dist/index.html': 'build/index.html' 
           ,'dist/error.html': 'build/error.html'
           ,'dist/lab/index.html': 'build/lab/index.html' 
@@ -174,7 +174,7 @@ module.exports = function(grunt) {
           ,'dist/work/index.html': 'build/work/index.html' 
           ,'dist/contact/index.html': 'build/contact/index.html' 
         }
-      },
+      }
     },
 
 
@@ -191,8 +191,8 @@ module.exports = function(grunt) {
           , prefixWhitespace: true        // Adds whitespace prefix to line up vender prefixed properties
           , strictPropertyOrder: true    // Complains if not strict property order
           , zeroUnits: true                // Doesn't complain if you add units to values of 0
-        },
-        files: {
+        }
+        ,files: {
           'build/styles/lib/bootstrap.css':'src/styles/less/bootstrap.less'
           ,'build/styles/lib/bootstrap-theme.css':'src/styles/less/theme.less'
           ,'build/styles/main.css':'src/styles/less/main.less'
@@ -210,8 +210,8 @@ module.exports = function(grunt) {
           , prefixWhitespace: false        // Adds whitespace prefix to line up vender prefixed properties
           , strictPropertyOrder: true    // Complains if not strict property order
           , zeroUnits: true                // Doesn't complain if you add units to values of 0
-        },
-        files: {
+        }
+        ,files: {
           'build/styles/lib/bootstrap.css':'src/styles/less/bootstrap.css'
           ,'build/styles/lib/bootstrap-theme.css':'src/styles/less/theme.css'
           ,'build/styles/main.css':'src/styles/less/main.css'
@@ -230,8 +230,8 @@ module.exports = function(grunt) {
           , sourceMap: 'test/scripts/source-map.js'
           , sourceMapRoot: 'src/scripts/'
           , preserveComments: true
-        },
-        files: {
+        }
+        ,files: {
           'build/scripts/lib/jquery.js':'bower_components/jquery/jquery.js'
           ,'build/scripts/lib/bootstrap.js':'<%= concat.bootstrap.dest %>'
           ,'build/scripts/lib/modernizr.js':'bower_components/modernizr/modernizr.js'
@@ -243,8 +243,8 @@ module.exports = function(grunt) {
           ,'build/scripts/main.js':'src/scripts/main.js'
           ,'build/scripts/plugins.js':'src/scripts/plugins.js'
         }
-      },
-      distDefault: {
+      }
+      ,distDefault: {
         options: {
           mangle: false //(only main.js, plugins.js)
           , compress: true
@@ -253,8 +253,8 @@ module.exports = function(grunt) {
           , sourceMap: 'dist/scripts/source-map.js'
           , sourceMapRoot: 'src/scripts/'
           , preserveComments: false
-        },
-        files: {
+        }
+        ,files: {
           'build/scripts/lib/jquery.js':'bower_components/jquery/jquery.js'
           ,'build/scripts/lib/bootstrap.js':'<%= concat.bootstrap.dest %>'
           ,'build/scripts/lib/modernizr.js':'bower_components/modernizr/modernizr.js'
@@ -266,8 +266,8 @@ module.exports = function(grunt) {
           ,'build/scripts/main.js':'src/scripts/main.js'
           ,'build/scripts/plugins.js':'src/scripts/plugins.js'
         }
-      },
-      gzipDefault: {
+      }
+      ,gzipDefault: {
         options: {
           mangle: false //(only main.js, plugins.js)
           , compress: true
@@ -276,8 +276,8 @@ module.exports = function(grunt) {
           , sourceMap: 'dist/scripts/source-map.js'
           , sourceMapRoot: 'src/scripts/'
           , preserveComments: false
-        },
-        files: {
+        }
+        ,files: {
           'build/scripts/lib/jquery.js':'bower_components/jquery/jquery.js'
           ,'build/scripts/lib/bootstrap.js':'<%= concat.bootstrap.dest %>'
           ,'build/scripts/lib/modernizr.js':'bower_components/modernizr/modernizr.js'
@@ -289,8 +289,8 @@ module.exports = function(grunt) {
           ,'build/scripts/main.js':'src/scripts/main.js'
           ,'build/scripts/plugins.js':'src/scripts/plugins.js'
         }
-      },
-      testBrowserify: {
+      }
+      ,testBrowserify: {
         options: {
           mangle: false
           , compress: false
@@ -301,19 +301,10 @@ module.exports = function(grunt) {
           , preserveComments: true
         },
         files: {
-          'build/scripts/lib/jquery.js':'bower_components/jquery/jquery.js'
-          ,'build/scripts/lib/bootstrap.js':'<%= concat.bootstrap.dest %>'
-          ,'build/scripts/lib/modernizr.js':'bower_components/modernizr/modernizr.js'
-          ,'build/scripts/lib/html5shiv.js':'bower_components/html5shiv/dist/html5shiv.js'
-          ,'build/scripts/lib/html5shiv-printshiv.js':'bower_components/html5shiv/dist/html5shiv-printshiv.js'
-          ,'build/scripts/lib/JSXTransformer.js':'bower_components/react/JSXTransformer.js'
-          ,'build/scripts/lib/react.js':'bower_components/react/react.js'
-          ,'build/scripts/lib/d3.js':'bower_components/d3/d3.js'
-          ,'build/scripts/main.js':'src/scripts/main.js'
-          ,'build/scripts/plugins.js':'src/scripts/plugins.js'
+          'test/scripts/modules.js':'build/scripts/modules.js'
         }
-      },
-      distBrowserify: {
+      }
+      ,distBrowserify: {
         options: {
           mangle: false //(only main.js, plugins.js)
           , compress: true
@@ -324,19 +315,10 @@ module.exports = function(grunt) {
           , preserveComments: false
         },
         files: {
-          'build/scripts/lib/jquery.js':'bower_components/jquery/jquery.js'
-          ,'build/scripts/lib/bootstrap.js':'<%= concat.bootstrap.dest %>'
-          ,'build/scripts/lib/modernizr.js':'bower_components/modernizr/modernizr.js'
-          ,'build/scripts/lib/html5shiv.js':'bower_components/html5shiv/dist/html5shiv.js'
-          ,'build/scripts/lib/html5shiv-printshiv.js':'bower_components/html5shiv/dist/html5shiv-printshiv.js'
-          ,'build/scripts/lib/JSXTransformer.js':'bower_components/react/JSXTransformer.js'
-          ,'build/scripts/lib/react.js':'bower_components/react/react.js'
-          ,'build/scripts/lib/d3.js':'bower_components/d3/d3.js'
-          ,'build/scripts/main.js':'src/scripts/main.js'
-          ,'build/scripts/plugins.js':'src/scripts/plugins.js'
+          'dist/scripts/modules.js':'build/scripts/modules.js'
         }
-      },
-      gzipBrowserifyDefault: {
+      }
+      ,gzipBrowserifyDefault: {
         options: {
           mangle: false //(only main.js, plugins.js)
           , compress: true
@@ -345,18 +327,9 @@ module.exports = function(grunt) {
           , sourceMap: 'dist/scripts/source-map.js'
           , sourceMapRoot: 'src/scripts/'
           , preserveComments: false
-        },
-        files: {
-          'build/scripts/lib/jquery.js':'bower_components/jquery/jquery.js'
-          ,'build/scripts/lib/bootstrap.js':'<%= concat.bootstrap.dest %>'
-          ,'build/scripts/lib/modernizr.js':'bower_components/modernizr/modernizr.js'
-          ,'build/scripts/lib/html5shiv.js':'bower_components/html5shiv/dist/html5shiv.js'
-          ,'build/scripts/lib/html5shiv-printshiv.js':'bower_components/html5shiv/dist/html5shiv-printshiv.js'
-          ,'build/scripts/lib/JSXTransformer.js':'bower_components/react/JSXTransformer.js'
-          ,'build/scripts/lib/react.js':'bower_components/react/react.js'
-          ,'build/scripts/lib/d3.js':'bower_components/d3/d3.js'
-          ,'build/scripts/main.js':'src/scripts/main.js'
-          ,'build/scripts/plugins.js':'src/scripts/plugins.js'
+        }
+        ,files: {
+          'dist/scripts/modules.js':'build/scripts/modules.js'
         }
       }
     },
@@ -381,8 +354,8 @@ module.exports = function(grunt) {
           debug: true // enable source map support
           ,shim: 
           ,postBundleCB: */
-        },
-        files: {
+        }
+        ,files: {
           'build/scripts/module.js': [
             'bower_components/jquery/jquery.js'
             ,'<%= concat.bootstrap.dest %>'
@@ -395,8 +368,8 @@ module.exports = function(grunt) {
             /*,'src/scripts/plugins.js'*/
           ]
         }
-      },
-      dist: {
+      }
+      ,dist: {
         options: {
           /*ignore:
           noParse: []  // better to shim libraries that don't need to be parsed for require() statement than to use noParse
