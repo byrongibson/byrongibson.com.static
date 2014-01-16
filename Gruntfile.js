@@ -26,9 +26,9 @@ module.exports = function(grunt) {
       build: ['build']
       ,test: ['test']
       ,dist: ['dist']
-    },
+    }
 
-    jshint: {
+    ,jshint: {
       options: {
         jshintrc: 'src/scripts/.jshintrc'
       }
@@ -41,10 +41,10 @@ module.exports = function(grunt) {
       ,test: {
         src: ['src/scripts/tests/unit/*.js']
       }
-    },
+    ,
 
 
-    concat: {
+    ,concat: {
       options: {
         stripBanners: true
       }
@@ -122,13 +122,13 @@ module.exports = function(grunt) {
           ,'src/html/partials/contact/_index.html'
           ,'src/html/partials/_footer.html'
           ,'src/html/partials/_foot.html'
-        ],
-        dest: 'build/contact/index.html'
+        ]
+        ,dest: 'build/contact/index.html'
       }
-    },
+    }
 
     
-    htmlmin: { 
+    ,htmlmin: { 
       test: { 
         options: { // Target options: https://github.com/gruntjs/grunt-contrib-htmlmin
           removeComments: false
@@ -175,10 +175,10 @@ module.exports = function(grunt) {
           ,'dist/contact/index.html': 'build/contact/index.html' 
         }
       }
-    },
+    }
 
 
-    recess: {
+    ,recess: {
       test: {
         options: {
           compile: true                 // Compiles CSS or LESS. Fixes white space and sort order.
@@ -217,10 +217,10 @@ module.exports = function(grunt) {
           ,'build/styles/main.css':'src/styles/less/main.css'
         }
       }
-    },
+    }
 
     
-    uglify: {
+    ,uglify: {
       testDefault: {
         options: {
           mangle: false
@@ -299,8 +299,8 @@ module.exports = function(grunt) {
           , sourceMap: 'test/scripts/source-map.js'
           , sourceMapRoot: 'src/scripts/'
           , preserveComments: true
-        },
-        files: {
+        }
+        ,files: {
           'test/scripts/modules.js':'build/scripts/modules.js'
         }
       }
@@ -332,17 +332,17 @@ module.exports = function(grunt) {
           'dist/scripts/modules.js':'build/scripts/modules.js'
         }
       }
-    },
+    }
 
     
-    jsx: {
+    ,jsx: {
       client: {
-        src: 'src/scripts/main.jsx',
-        dest: 'build/scripts/main.js'
+        src: 'src/scripts/main.jsx'
+        ,dest: 'build/scripts/main.js'
       }
-    }, 
+    }
 
-    browserify: {
+    ,browserify: {
       test: {
         options: {
           /*ignore: modernizr.js,html5shiv.js,html5printshiv.js,JSXTransformer.js
@@ -385,10 +385,10 @@ module.exports = function(grunt) {
           'build/scripts/module.js': ['src/scripts/**/*.js']
         }
       }
-    },
+    }
 
 
-    copy: {
+    ,copy: {
       common: {
         files: [ //copy these files from bower_components, run bower update [component_name] to keep them updated
           {expand: true, flatten: true, src: ["bower_components/html5-boilerplate/crossdomain.xml"], dest: 'src/html'}
@@ -446,23 +446,23 @@ module.exports = function(grunt) {
     validation: {
       options: {
         reset: true
-      },
-      files: {
+      }
+      ,files: {
         src: ["_gh_pages/**/*.html"]
       }
-    },
+    }
 
     
     /* TODO: Convert to byrongibson.com custom js tests */
-    qunit: {
+    ,qunit: {
       options: {
         inject: 'src/scripts/tests/unit/phantom.js'
-      },
-      files: ['src/scripts/tests/*.html']
-    },
+      }
+      ,files: ['src/scripts/tests/*.html']
+    }
 
     
-    connect: {
+    ,connect: {
       test: {
         options: {
           port: 3001
